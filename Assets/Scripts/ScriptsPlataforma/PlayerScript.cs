@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Header("Move and Jump")]
     [SerializeField]
     private float velocity = 5f;
     [SerializeField]
-    private float jumpForce = 4f;
+    private float jumpForce = 5f;
     [SerializeField]
     private Transform footTransform;
     [SerializeField]
@@ -39,7 +40,7 @@ public class PlayerScript : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle
             (footTransform.position, 0.2f, layerGround);
 
-        if (isGrounded && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)))
+        if (isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
@@ -51,6 +52,11 @@ public class PlayerScript : MonoBehaviour
         Vector3 escalaLocal = transform.localScale;
         escalaLocal.x *= -1;
         transform.localScale = escalaLocal;
+    }
+
+    public bool IsLookingRight()
+    {
+        return turnRight;
     }
 
     private void OnCollisionEnter2D(Collision2D col)
