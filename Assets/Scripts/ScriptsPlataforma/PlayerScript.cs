@@ -17,6 +17,18 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private bool turnRight = true;
 
+    [Header("WallJump")]
+    [SerializeField]
+    private Transform wallCheckTransform;
+    [SerializeField]
+    private float wallCheckRadius = 0.4f;
+    [SerializeField]
+    private float wallJumpXForce = 6f;
+    [SerializeField]
+    private float wallJumpYForce = 6F;
+
+    private bool isTouchingWall;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,6 +39,7 @@ public class PlayerScript : MonoBehaviour
     {
         Move();
         Jump();
+        WallJumpVerify();
     }
 
     void Move()
@@ -40,10 +53,33 @@ public class PlayerScript : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle
             (footTransform.position, 0.2f, layerGround);
 
-        if (isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if (isGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+            else if (isTouchingWall)
+            {
+                float wallDirection = turnRight ? -1f : 1f;
+                rb.velocity = new Vector2(wallJumpXForce * wallDirection, wallJumpYForce);
+                Flip();
+            }
         }
+    }
+
+    void WallJumpVerify()
+    {
+        Vector2 direction = turnRight ? Vector2.right : Vector2.left;
+        RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, wallCheckRadius, layerGround);
+        isTouchingWall = wallHit.collider != null;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Vector2 direction = turnRight ? Vector2.right : Vector2.left;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(direction * wallCheckRadius));
     }
 
     void Flip()
@@ -61,9 +97,31 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.CompareTag("Wall"))
+        if (((1 << col.gameObject.layer) & layerGround) != 0)
         {
-            Flip();
+            foreach (ContactPoint2D contact in col.contacts)
+            {
+                // Verifica se bateu na lateral (X grande, Y pequeno)
+                if (Mathf.Abs(contact.normal.x) > 0.9f)
+                {
+                    // Se bateu do lado esquerdo (normal.x positivo), então vira para a direita
+                    if (contact.normal.x > 0 && !turnRight)
+                    {
+                        Flip();
+                    }
+                    // Se bateu do lado direito (normal.x negativo), vira para a esquerda
+                    else if (contact.normal.x < 0 && turnRight)
+                    {
+                        Flip();
+                    }
+
+                    break; // Já virou, não precisa checar outros contatos
+                }
+            }
         }
     }
+
+
+
+
 }
