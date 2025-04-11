@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Header("Components")]
+    private Rigidbody2D rb;
+    private TrailRenderer tr;
+
     [Header("Move and Jump")]
     [SerializeField]
     private float velocity = 5f;
@@ -14,7 +18,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private LayerMask layerGround;
     private bool isGrounded;
-    private Rigidbody2D rb;
     private bool turnRight = true;
 
     [Header("WallJump")]
@@ -26,20 +29,38 @@ public class PlayerScript : MonoBehaviour
     private float wallJumpXForce = 6f;
     [SerializeField]
     private float wallJumpYForce = 6F;
-
     private bool isTouchingWall;
+
+    [Header("Dashing")]
+    [SerializeField]
+    private float dashingVelocity = 14f;
+    [SerializeField]
+    private float dashingTime = 0.66f;
+    private Vector2 dashingDirection;
+    private bool isDashing;
+    private bool canDash = true;
+
+    [Header("Fruits")]
+    private int countApples = 0;
+    private int countGuava = 0;
+    private int countPineapple = 0;
+    private int countMango = 0;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        tr = GetComponent<TrailRenderer>();
     }
 
 
     void Update()
     {
+        isGrounded = Physics2D.OverlapCircle(footTransform.position, 0.2f, layerGround);
+
         Move();
         Jump();
         WallJumpVerify();
+        Dash();
     }
 
     void Move()
@@ -50,8 +71,6 @@ public class PlayerScript : MonoBehaviour
 
     void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle
-            (footTransform.position, 0.2f, layerGround);
 
         if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
         {
@@ -75,13 +94,6 @@ public class PlayerScript : MonoBehaviour
         isTouchingWall = wallHit.collider != null;
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Vector2 direction = turnRight ? Vector2.right : Vector2.left;
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(direction * wallCheckRadius));
-    }
-
     void Flip()
     {
         turnRight = !turnRight;
@@ -93,6 +105,47 @@ public class PlayerScript : MonoBehaviour
     public bool IsLookingRight()
     {
         return turnRight;
+    }
+
+    private void Dash()
+    {
+        bool dashInput = Input.GetKeyDown(KeyCode.LeftShift);
+
+        if (dashInput && canDash)
+        {
+            isDashing = true;
+            canDash = false;
+            tr.emitting = true;
+
+            float direction = Mathf.Sign(transform.localScale.x);
+            dashingDirection = new Vector2(direction, 0);
+            StartCoroutine(StoppingDash());
+        }
+
+        if (isDashing)
+        {
+            rb.velocity = dashingDirection.normalized * dashingVelocity;
+            return;
+        }
+
+        if (isGrounded)
+        {
+            canDash = true;
+        }
+    }
+
+    IEnumerator StoppingDash()
+    {
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        isDashing = false;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Vector2 direction = turnRight ? Vector2.right : Vector2.left;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(direction * wallCheckRadius));
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -121,7 +174,26 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Apple"))
+        {
+            countApples += 1;
+        }
 
+        if (col.CompareTag("Guava"))
+        {
+            countGuava += 1;
+        }
 
+        if (col.CompareTag("Pineapple"))
+        {
+            countPineapple += 1;
+        }
 
+        if (col.CompareTag("Mango"))
+        {
+            countMango += 1;
+        }
+    }
 }
