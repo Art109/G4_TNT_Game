@@ -21,7 +21,7 @@ public class CameraFollowOffset : MonoBehaviour
 
     void Update()
     {
-        if (playerScript.IsLookingRight())
+        if (playerScript.isLookingCamera())
         {
             transposer.m_TrackedObjectOffset = new Vector3(offsetX, 0f, 0f);
         }

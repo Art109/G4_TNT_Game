@@ -33,18 +33,27 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Dashing")]
     [SerializeField]
-    private float dashingVelocity = 14f;
+    private float dashingVelocity = 8f;
     [SerializeField]
     private float dashingTime = 0.66f;
     private Vector2 dashingDirection;
     private bool isDashing;
     private bool canDash = true;
 
+    [Header("WallSlide")]
+    [SerializeField]
+    private float wallSlideSpeed = 1f;
+    private bool isWallSliding;
+
     [Header("Fruits")]
     private int countApples = 0;
     private int countGuava = 0;
     private int countPineapple = 0;
     private int countMango = 0;
+
+    [Header("Cinemachine")]
+    private bool flipCamera = false;
+
 
     void Start()
     {
@@ -60,6 +69,7 @@ public class PlayerScript : MonoBehaviour
         Move();
         Jump();
         WallJumpVerify();
+        HandleWallSlide();
         Dash();
     }
 
@@ -94,6 +104,39 @@ public class PlayerScript : MonoBehaviour
         isTouchingWall = wallHit.collider != null;
     }
 
+    void HandleWallSlide()
+    {
+        if (isTouchingWall && !isGrounded)
+        {
+            isWallSliding = true;
+            rb.velocity = new Vector2(0, -wallSlideSpeed);
+
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                wallSlideSpeed = 3.00f;
+            }
+            else
+            {
+                wallSlideSpeed = 0.20f;
+            }
+
+            if (Physics2D.Raycast(transform.position, Vector2.right, wallCheckRadius, layerGround))
+            {
+                flipCamera = false;
+            }
+            else if (Physics2D.Raycast(transform.position, Vector2.left, wallCheckRadius, layerGround))
+            {
+                flipCamera = true;
+            }
+        }
+        else
+        {
+            isWallSliding = false;
+            flipCamera = turnRight;
+        }
+    }
+
+
     void Flip()
     {
         turnRight = !turnRight;
@@ -105,6 +148,11 @@ public class PlayerScript : MonoBehaviour
     public bool IsLookingRight()
     {
         return turnRight;
+    }
+
+    public bool isLookingCamera()
+    {
+        return flipCamera;
     }
 
     private void Dash()
@@ -158,16 +206,18 @@ public class PlayerScript : MonoBehaviour
                 if (Mathf.Abs(contact.normal.x) > 0.9f)
                 {
                     // Se bateu do lado esquerdo (normal.x positivo), então vira para a direita
-                    if (contact.normal.x > 0 && !turnRight)
+                    if (!isWallSliding)
                     {
-                        Flip();
+                        if (contact.normal.x > 0 && !turnRight)
+                        {
+                            Flip();
+                        }
+                        // Se bateu do lado direito (normal.x negativo), vira para a esquerda
+                        else if (contact.normal.x < 0 && turnRight)
+                        {
+                            Flip();
+                        }
                     }
-                    // Se bateu do lado direito (normal.x negativo), vira para a esquerda
-                    else if (contact.normal.x < 0 && turnRight)
-                    {
-                        Flip();
-                    }
-
                     break; // Já virou, não precisa checar outros contatos
                 }
             }

@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - Apple
+  - Guava
+  - Pineapple
+  - Mango
   layers:
   - Default
   - TransparentFX
