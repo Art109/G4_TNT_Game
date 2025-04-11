@@ -179,21 +179,29 @@ public class PlayerScript : MonoBehaviour
         if (col.CompareTag("Apple"))
         {
             countApples += 1;
+            Debug.Log($"\nMaçã: {countApples}");
+            Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Guava"))
         {
             countGuava += 1;
+            Debug.Log($"\nGoiaba: {countGuava}");
+            Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Pineapple"))
         {
             countPineapple += 1;
+            Debug.Log($"\nAbacaxi: {countPineapple}");
+            Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Mango"))
         {
             countMango += 1;
+            Debug.Log($"\nManga: {countMango}");
+            Destroy(col.gameObject);
         }
     }
 }
