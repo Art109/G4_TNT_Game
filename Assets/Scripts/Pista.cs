@@ -13,7 +13,6 @@ public class Pista : MonoBehaviour
     {
         
     }
-
     
     void Update()
     {
@@ -29,9 +28,7 @@ public class Pista : MonoBehaviour
             velocidadeAtual = velocidadeNormal;
         }
 
-        transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
-
-        
+        transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);        
 
         if (transform.position.y < limiteInferiorY)
         {
