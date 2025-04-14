@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class PlayerScript : MonoBehaviour
         Jump();
         WallJumpVerify();
         HandleWallSlide();
-        Dash();
+        //Dash();
     }
 
     void Move()
@@ -82,7 +83,7 @@ public class PlayerScript : MonoBehaviour
     void Jump()
     {
 
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
             if (isGrounded)
             {
@@ -252,6 +253,12 @@ public class PlayerScript : MonoBehaviour
             countMango += 1;
             Debug.Log($"\nManga: {countMango}");
             Destroy(col.gameObject);
+        }
+
+        if (col.CompareTag("Death"))
+        {
+            // Temporário
+            SceneManager.LoadScene("PlataformaPrototipo");
         }
     }
 }
