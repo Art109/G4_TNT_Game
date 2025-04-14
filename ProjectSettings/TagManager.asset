@@ -3,18 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - finger
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - StartButton
   - Water
   - UI
   - RedTNT
   - BluTNT
   - PrpTNT
-  - 
+  - ExitButton
   - 
   - 
   - 

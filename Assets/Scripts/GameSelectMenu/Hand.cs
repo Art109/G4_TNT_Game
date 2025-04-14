@@ -1,13 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Hand : MonoBehaviour
 {
+    public Transform pontoA;
+    public Transform pontoB;
     public float HandVelocity = 5f;
     private Rigidbody2D HandRB;
+    public Transform CameraMenu;
+    public Transform CameraMachine;
     private bool inPurple;
     private bool inRed;
     private bool inBlue;
@@ -15,21 +23,42 @@ public class Hand : MonoBehaviour
     public LayerMask BluTNT;
     public LayerMask PrpTNT;
     public Transform Finger;
-    public string Lata;
+    private string Lata;
     public RawImage LogoTNT;
+    private bool inButtonS;
+    private bool inButtonE;
+    public LayerMask StartButton;
+    public GameObject Exit;
+    public LayerMask EndButton;
+    public Vector3 moveCPosition;
+    public Vector3 backCPosition;
+    public bool start;
+    public GameObject Machine;
     void Start()
     {
+        
         HandRB = GetComponent<Rigidbody2D>();
+
+        
     }
 
 
     void Update()
     {
         GameSelect();
+        
+        StartGame();
+
+        
         float eixoX = Input.GetAxisRaw("Horizontal") * HandVelocity;
         float eixoY = Input.GetAxisRaw("Vertical") * HandVelocity;
-
+        //Vector2 pos;
+        //pos = Input.mousePosition;
+        //transform.position = Camera.main.ScreenToWorldPoint(pos);
         HandRB.velocity = new Vector2(eixoX, eixoY);
+
+
+
         if (Lata != "")
         {
             LogoTNT.transform.position = new Vector3(840f, 260f);
@@ -38,48 +67,101 @@ public class Hand : MonoBehaviour
         {
             LogoTNT.transform.position = new Vector3(-160f, -40f);
         }
+        inButtonE = Physics2D.OverlapCircle(Finger.position, 0.2f, EndButton);
+
+        if (inButtonE && Input.GetKeyUp(KeyCode.Space))
+        {
+            End();
+        }
+
     }
-    public void GameSelect()
+    private void StartGame()
     {
+        inButtonS = Physics2D.OverlapCircle(Finger.position, 0.2f, StartButton);
         
+
+        if (inButtonS && Input.GetKeyUp(KeyCode.Space))
+        {
+            Debug.Log("Start");
+            start = true;
+            Exit.SetActive(false); 
+
+            Debug.Log("Camera Move");
+            Machine.SetActive(false);
+            Machine.transform.position = new Vector3(pontoA.transform.position.x, pontoA.transform.position.y, CameraMenu.transform.position.z);
+            CameraMenu.position = Machine.transform.position;
+            Machine.SetActive(true);
+        }
+        if (start == true && Input.GetKeyUp(KeyCode.Escape))
+        {
+            Debug.Log("Return");
+            start = false;
+            Exit.SetActive(true);
+
+            Machine.SetActive(false);
+            Machine.transform.position = new Vector3(pontoB.transform.position.x, pontoB.transform.position.y, CameraMenu.transform.position.z);
+            CameraMenu.position = Machine.transform.position;
+            Machine.SetActive(true);
+        }
+
+    }
+    private void GameSelect()
+    {
+
         inRed = Physics2D.OverlapCircle(Finger.position, 0.2f, RedTNT);
         inBlue = Physics2D.OverlapCircle(Finger.position, 0.2f, BluTNT);
         inPurple = Physics2D.OverlapCircle(Finger.position, 0.2f, PrpTNT);
-        
+
         if (inRed)
         {
             Lata = "Energy";
 
-            if (inRed && Input.GetKeyDown(KeyCode.Space))
+            if (inRed && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Energy");
-                //SceneManager.LoadScene(1);
+                SceneManager.LoadScene(1);
             }
         }
         else if (inBlue)
         {
             Lata = "Nutrition";
 
-            if (inBlue && Input.GetKeyDown(KeyCode.Space))
+            if (inBlue && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Nutrition");
-                //SceneManager.LoadScene(2);
+                SceneManager.LoadScene(2);
             }
         }
         else if (inPurple)
         {
             Lata = "Focus";
 
-            if (inPurple && Input.GetKeyDown(KeyCode.Space))
+            if (inPurple && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Focus");
-                //SceneManager.LoadScene(3);
+                SceneManager.LoadScene(3);
             }
         }
         else
         {
             Lata = "";
         }
+
+    }
+    private void End()
+    {
+
+            Debug.Log("Exit");
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBGL
+        Aplication.OpenURL("https://tntenergydrink.com.br/");
+#else
+            Application.Quit();
+#endif
+        
+
+
     }
 }
 
