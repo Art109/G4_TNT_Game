@@ -71,7 +71,7 @@ public class PlayerScript : MonoBehaviour
         Jump();
         WallJumpVerify();
         HandleWallSlide();
-        //Dash();
+        Dash();
     }
 
     void Move()
