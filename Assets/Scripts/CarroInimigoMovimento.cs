@@ -11,7 +11,7 @@ public class CarroInimigoMovimento : MonoBehaviour
 
     public List<float> posicoesXDasFaixas = new List<float>();
 
-    public float espacamentoMinimoY = 1.5f;
+    public float espacamentoMinimoY = 4.0f;
 
     public string tagOutroInimigo = "Inimigo";
 
@@ -78,7 +78,6 @@ public class CarroInimigoMovimento : MonoBehaviour
 
         if (yMaisAltoOcupado > -Mathf.Infinity)
         {
-            // Calcula a nova posição Y empurrando para cima do carro mais alto + espaçamento
             tentativaNovaPosicaoY = yMaisAltoOcupado + espacamentoMinimoY;
         }
 

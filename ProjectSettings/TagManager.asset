@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Obstacle
   - Inimigo
+  - Coletavel
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Coletaveis
   - Water
   - UI
   - 
