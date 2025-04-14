@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     [Header("Components")]
     private Rigidbody2D rb;
     private TrailRenderer tr;
+    private Animator animator;
 
     [Header("Move and Jump")]
     [SerializeField]
@@ -55,11 +56,15 @@ public class PlayerScript : MonoBehaviour
     [Header("Cinemachine")]
     private bool flipCamera = false;
 
+    [Header("LifeController")]
+    private bool isDead = false;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -67,11 +72,27 @@ public class PlayerScript : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(footTransform.position, 0.2f, layerGround);
 
+        if (isDead)
+        {
+            Dead();
+            return;
+        }
         Move();
         Jump();
         WallJumpVerify();
         HandleWallSlide();
-        //Dash();
+        Dash();
+    }
+
+    void Dead()
+    {
+        animator.Play("dead");
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            // Temporario
+            SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
+        }
     }
 
     void Move()
@@ -82,6 +103,21 @@ public class PlayerScript : MonoBehaviour
 
     void Jump()
     {
+        if (!isGrounded && !isTouchingWall && !isDead)
+        {
+            if (rb.velocity.y > 0.1f)
+            {
+                animator.Play("rising");
+            }
+            else if (rb.velocity.y < -0.1f)
+            {
+                animator.Play("falling");
+            }
+        }
+        else if(isGrounded && !isTouchingWall && !isDead)
+        {
+            animator.Play("run");
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
@@ -107,8 +143,9 @@ public class PlayerScript : MonoBehaviour
 
     void HandleWallSlide()
     {
-        if (isTouchingWall && !isGrounded)
+        if (isTouchingWall && !isGrounded && !isDead)
         {
+            animator.Play("crouch");
             isWallSliding = true;
             rb.velocity = new Vector2(0, -wallSlideSpeed);
 
@@ -230,35 +267,30 @@ public class PlayerScript : MonoBehaviour
         if (col.CompareTag("Apple"))
         {
             countApples += 1;
-            Debug.Log($"\nMaçã: {countApples}");
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Guava"))
         {
             countGuava += 1;
-            Debug.Log($"\nGoiaba: {countGuava}");
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Pineapple"))
         {
             countPineapple += 1;
-            Debug.Log($"\nAbacaxi: {countPineapple}");
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Mango"))
         {
             countMango += 1;
-            Debug.Log($"\nManga: {countMango}");
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Death"))
         {
-            // Temporário
-            SceneManager.LoadScene("PlataformaPrototipo");
+            isDead = true;
         }
     }
 }
