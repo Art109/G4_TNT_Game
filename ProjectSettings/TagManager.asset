@@ -9,6 +9,7 @@ TagManager:
   - Guava
   - Pineapple
   - Mango
+  - Death
   layers:
   - Default
   - TransparentFX
