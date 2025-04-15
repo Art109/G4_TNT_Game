@@ -10,12 +10,9 @@ using UnityEngine.UIElements;
 
 public class Hand : MonoBehaviour
 {
-    public Transform pontoA;
-    public Transform pontoB;
+    
     public float HandVelocity = 5f;
     private Rigidbody2D HandRB;
-    public Transform CameraMenu;
-    public Transform CameraMachine;
     private bool inPurple;
     private bool inRed;
     private bool inBlue;
@@ -30,8 +27,6 @@ public class Hand : MonoBehaviour
     public LayerMask StartButton;
     public GameObject Exit;
     public LayerMask EndButton;
-    public Vector3 moveCPosition;
-    public Vector3 backCPosition;
     public bool start;
     public GameObject Machine;
     void Start()
@@ -57,7 +52,7 @@ public class Hand : MonoBehaviour
         //transform.position = Camera.main.ScreenToWorldPoint(pos);
         HandRB.velocity = new Vector2(eixoX, eixoY);
 
-
+        
 
         if (Lata != "")
         {
@@ -87,10 +82,9 @@ public class Hand : MonoBehaviour
             Exit.SetActive(false); 
 
             Debug.Log("Camera Move");
-            Machine.SetActive(false);
-            Machine.transform.position = new Vector3(pontoA.transform.position.x, pontoA.transform.position.y, CameraMenu.transform.position.z);
-            CameraMenu.position = Machine.transform.position;
-            Machine.SetActive(true);
+            Machine.transform.position = new Vector3(25, 0,-10);
+
+
         }
         if (start == true && Input.GetKeyUp(KeyCode.Escape))
         {
@@ -98,10 +92,7 @@ public class Hand : MonoBehaviour
             start = false;
             Exit.SetActive(true);
 
-            Machine.SetActive(false);
-            Machine.transform.position = new Vector3(pontoB.transform.position.x, pontoB.transform.position.y, CameraMenu.transform.position.z);
-            CameraMenu.position = Machine.transform.position;
-            Machine.SetActive(true);
+            Machine.transform.position = new Vector3(0, 0, -10);
         }
 
     }
