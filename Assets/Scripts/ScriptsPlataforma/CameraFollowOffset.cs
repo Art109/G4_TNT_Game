@@ -7,8 +7,7 @@ public class CameraFollowOffset : MonoBehaviour
 {
     [SerializeField]
     private CinemachineVirtualCamera virtualCam;
-    [SerializeField]
-    private float offsetX = 3f;
+    public float offsetX = 3f;
     [SerializeField]
     private PlayerScript playerScript;
 

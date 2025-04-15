@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -9,6 +12,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private TrailRenderer tr;
     private Animator animator;
+    private CinemachineImpulseSource impulseSource;
 
     [Header("Move and Jump")]
     [SerializeField]
@@ -47,17 +51,39 @@ public class PlayerScript : MonoBehaviour
     private float wallSlideSpeed = 1f;
     private bool isWallSliding;
 
-    [Header("Fruits")]
-    private int countApples = 0;
-    private int countGuava = 0;
-    private int countPineapple = 0;
-    private int countMango = 0;
+    [Header("FruitsObjects and Count")]
+    [SerializeField]
+    [Tooltip("Quando chegar a 4 frutas, você vence")]
+    private int fruitsCount = 0;
+    [SerializeField]
+    private GameObject guavaObject;
+    [SerializeField]
+    private GameObject mangoObject;
+    [SerializeField]
+    private GameObject appleObject;
+    [SerializeField]
+    private GameObject pineappleObject;
+
 
     [Header("Cinemachine")]
+    [SerializeField]
+    private CameraFollowOffset cameraFollowOffsetScript;
     private bool flipCamera = false;
 
     [Header("LifeController")]
     private bool isDead = false;
+
+    [Header("Timer")]
+    [SerializeField]
+    private TextMeshProUGUI timerText;
+    [SerializeField]
+    [Tooltip("Tempo em Segundos")]
+    private float time = 300f;
+    private bool timeStop = false;
+    private bool timerIsOver = false;
+
+    [Header("Condition Victory")]
+    private bool contactCauldron = false;
 
 
     void Start()
@@ -65,18 +91,32 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
-
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(footTransform.position, 0.2f, layerGround);
+
+        if (contactCauldron)
+        {
+            Victory();
+            return;
+        }
 
         if (isDead)
         {
             Dead();
             return;
         }
+
+        if (timerIsOver)
+        {
+            TimeIsOver();
+            return;
+        }
+
+        Timer();
         Move();
         Jump();
         WallJumpVerify();
@@ -84,13 +124,76 @@ public class PlayerScript : MonoBehaviour
         Dash();
     }
 
+    void Victory()
+    {
+        cameraFollowOffsetScript.offsetX = 1f;
+        rb.velocity = Vector2.zero;
+        if (fruitsCount >= 4)
+        {
+            
+        }
+        else
+        {
+            animator.Play("angry");
+        }
+    }
+
     void Dead()
     {
+        cameraFollowOffsetScript.offsetX = 0f;
+        rb.velocity = Vector3.zero;
         animator.Play("dead");
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            // Temporario
+            // Temporário
+            SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
+        }
+    }
+
+    void Timer()
+    {
+        if (time > 0 && !timeStop && fruitsCount < 4)
+        {
+            time -= Time.deltaTime;
+            int minutes = Mathf.FloorToInt(time / 60);
+            int seconds = Mathf.FloorToInt(time % 60);
+
+            timerText.text = $"{minutes:00}:{seconds:00}";
+
+            if (time <= 0)
+            {
+                timeStop = true;
+            }
+        }
+        else if (timeStop)
+        {
+            timerText.text = "0:00";
+            timerIsOver = true;
+        }
+    }
+
+    void TimeIsOver()
+    {
+        
+        if (isTouchingWall)
+        {
+            cameraFollowOffsetScript.offsetX = 0f;
+            rb.gravityScale = 0f;
+            rb.velocity = Vector3.zero;
+            animator.Play("angry");
+        }
+
+        if (rb.velocity.y == 0)
+        {
+            cameraFollowOffsetScript.offsetX = 0f;
+            animator.Play("angry");
+            rb.velocity = Vector3.zero;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            // Temporário
             SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
         }
     }
@@ -103,6 +206,9 @@ public class PlayerScript : MonoBehaviour
 
     void Jump()
     {
+        if (isDashing || isDead)
+            return;
+
         if (!isGrounded && !isTouchingWall && !isDead)
         {
             if (rb.velocity.y > 0.1f)
@@ -143,6 +249,9 @@ public class PlayerScript : MonoBehaviour
 
     void HandleWallSlide()
     {
+        if (isDashing || isDead)
+            return;
+
         if (isTouchingWall && !isGrounded && !isDead)
         {
             animator.Play("crouch");
@@ -198,6 +307,7 @@ public class PlayerScript : MonoBehaviour
 
         if (dashInput && canDash && !isTouchingWall)
         {
+            animator.Play("roll");
             isDashing = true;
             canDash = false;
             tr.emitting = true;
@@ -265,31 +375,46 @@ public class PlayerScript : MonoBehaviour
     {
         if (col.CompareTag("Apple"))
         {
-            countApples += 1;
+           
+            impulseSource.GenerateImpulse();
+            fruitsCount += 1;
+            appleObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Guava"))
         {
-            countGuava += 1;
+            impulseSource.GenerateImpulse();
+            fruitsCount += 1;
+            guavaObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Pineapple"))
         {
-            countPineapple += 1;
+            impulseSource.GenerateImpulse();
+            fruitsCount += 1;
+            pineappleObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Mango"))
         {
-            countMango += 1;
+            impulseSource.GenerateImpulse();
+            fruitsCount += 1;
+            mangoObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Death"))
         {
+            impulseSource.GenerateImpulse();
             isDead = true;
+        }
+
+        if (col.CompareTag("Cauldron"))
+        {
+            contactCauldron = true;
         }
     }
 }
