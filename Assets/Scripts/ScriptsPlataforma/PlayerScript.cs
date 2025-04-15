@@ -174,7 +174,6 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-
     void Flip()
     {
         turnRight = !turnRight;
@@ -197,7 +196,7 @@ public class PlayerScript : MonoBehaviour
     {
         bool dashInput = Input.GetKeyDown(KeyCode.LeftShift);
 
-        if (dashInput && canDash)
+        if (dashInput && canDash && !isTouchingWall)
         {
             isDashing = true;
             canDash = false;
