@@ -6,6 +6,7 @@ public class ColetavelPonto : MonoBehaviour
     
     public float velocidadeNormal = 5f;
     public float velocidadeBoost = 10f;
+    public float velocidadeFreio = 2f;
 
     public float limiteInferiorY = -10f;
 
@@ -50,7 +51,12 @@ public class ColetavelPonto : MonoBehaviour
     void MoverColetavel()
     {
         float velocidadeAtual;
-        if (Input.GetKey(KeyCode.Space))
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            velocidadeAtual = velocidadeFreio;
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
         {
             velocidadeAtual = velocidadeBoost;
         }
@@ -58,6 +64,7 @@ public class ColetavelPonto : MonoBehaviour
         {
             velocidadeAtual = velocidadeNormal;
         }
+
         transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
     }
 

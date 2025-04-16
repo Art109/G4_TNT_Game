@@ -54,8 +54,16 @@ public class UIManager : MonoBehaviour
         if (textoVelocidade == null) return;
 
         float velocidadeAtualExibida;
-        
-        if (Input.GetKey(KeyCode.Space))
+
+        if (Input.GetKey(KeyCode.LeftControl)) // <<< ADICIONA VERIFICAÇÃO DO FREIO
+        {
+            // Precisa ter acesso à velocidade de freio base
+            // Adicione uma variável pública no UIManager se necessário:
+            // public float velocidadeFreioBase = 2f;
+            // velocidadeAtualExibida = velocidadeFreioBase;
+            velocidadeAtualExibida = 2f; // Ou coloque o valor diretamente se preferir não ter outra variável pública
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
         {
             velocidadeAtualExibida = velocidadeBoostBase;
         }

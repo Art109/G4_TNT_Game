@@ -6,6 +6,7 @@ public class Pista : MonoBehaviour
 {
     public float velocidadeNormal = 5f;
     public float velocidadeBoost = 10f;
+    public float velocidadeFreio = 2f;
     public float alturaSegmento;
     public float limiteInferiorY;
 
@@ -19,7 +20,11 @@ public class Pista : MonoBehaviour
 
         float velocidadeAtual;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            velocidadeAtual = velocidadeFreio;
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
         {
             velocidadeAtual = velocidadeBoost;
         }

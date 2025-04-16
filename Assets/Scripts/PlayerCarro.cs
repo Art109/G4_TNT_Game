@@ -4,9 +4,9 @@ using System.Collections;
 
 public class PlayerCarro : MonoBehaviour
 {
-    public float velocidade = 8f;
-    public float limiteEsquerdoX = -3.5f;
-    public float limiteDireitoX = 3.5f;
+    public float velocidade = 5f;
+    public float limiteEsquerdoX = -2.3f;
+    public float limiteDireitoX = 2.3f;
     
 
     public static int pontuacaoAtual = 0;

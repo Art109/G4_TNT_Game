@@ -4,6 +4,7 @@ public class LinhaChegada : MonoBehaviour
 {
     public float velocidadeNormal = 5f;
     public float velocidadeBoost = 10f;
+    public float velocidadeFreio = 2f;
 
     public float pontoDeVitoriaY = -5f;
 
@@ -32,7 +33,12 @@ public class LinhaChegada : MonoBehaviour
     void MoverLinhaChegada()
     {
         float velocidadeAtual;
-        if (Input.GetKey(KeyCode.Space))
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            velocidadeAtual = velocidadeFreio;
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
         {
             velocidadeAtual = velocidadeBoost;
         }
@@ -40,6 +46,7 @@ public class LinhaChegada : MonoBehaviour
         {
             velocidadeAtual = velocidadeNormal;
         }
+
         transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
     }
 
