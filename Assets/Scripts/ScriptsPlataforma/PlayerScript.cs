@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class PlayerScript : MonoBehaviour
     private LayerMask layerGround;
     private bool isGrounded;
     private bool turnRight = true;
+    private bool isGroundedNoWallJump;
+    [SerializeField]
+    private LayerMask groundNoWallJumpLayer;
 
     [Header("WallJump")]
     [SerializeField]
@@ -95,6 +99,9 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
@@ -104,6 +111,10 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(footTransform.position, 0.2f, layerGround);
+
+        isGroundedNoWallJump = Physics2D.OverlapCircle(footTransform.position, 0.2f, groundNoWallJumpLayer);
+
+
 
         if (contactCauldron)
         {
@@ -123,6 +134,7 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
+
         Timer();
         Move();
         Jump();
@@ -134,7 +146,9 @@ public class PlayerScript : MonoBehaviour
     void Victory()
     {
         cameraFollowOffsetScript.offsetX = 1f;
-        rb.velocity = Vector2.zero;
+        cameraFollowOffsetScript.zooming = true;
+        rb.gravityScale = 2f;
+        rb.velocity = new Vector2(0, rb.velocity.y);
         if (fruitsCount >= 4)
         {
             animator.Play("idle");
@@ -202,6 +216,8 @@ public class PlayerScript : MonoBehaviour
 
     void Dead()
     {
+        cameraFollowOffsetScript.zooming = true;
+        cameraFollowOffsetScript.targetZoom = 5f;
         cameraFollowOffsetScript.offsetX = 0f;
         rb.velocity = Vector3.zero;
         animator.Play("dead");
@@ -271,9 +287,13 @@ public class PlayerScript : MonoBehaviour
         if (isDashing || isDead)
             return;
 
-        if (!isGrounded && !isTouchingWall && !isDead)
+        if ((!isGrounded || !isGroundedNoWallJump) && !isTouchingWall && !isDead)
         {
-            if (rb.velocity.y > 0.1f)
+            if (rb.velocity.y == 0)
+            {
+                animator.Play("run");
+            }
+            else if (rb.velocity.y > 0.1f)
             {
                 animator.Play("rising");
             }
@@ -282,14 +302,10 @@ public class PlayerScript : MonoBehaviour
                 animator.Play("falling");
             }
         }
-        else if(isGrounded && !isTouchingWall && !isDead)
-        {
-            animator.Play("run");
-        }
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
-            if (isGrounded)
+            if (isGrounded || isGroundedNoWallJump)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
@@ -385,7 +401,7 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        if (isGrounded)
+        if (isGrounded || isGroundedNoWallJump)
         {
             canDash = true;
         }
@@ -407,7 +423,9 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (((1 << col.gameObject.layer) & layerGround) != 0)
+        int layer = col.gameObject.layer;
+
+        if (((1 << layer) & layerGround) != 0 || ((1 << layer) & groundNoWallJumpLayer) != 0)
         {
             foreach (ContactPoint2D contact in col.contacts)
             {

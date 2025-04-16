@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 138347457}
   - component: {fileID: 138347459}
   - component: {fileID: 138347458}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 405406123}
   - component: {fileID: 405406125}
   - component: {fileID: 405406124}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 545935311}
   - component: {fileID: 545935313}
   - component: {fileID: 545935312}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1406,8 +1406,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 1596573436}
-  offsetX: 3
   playerScript: {fileID: 1503770153}
+  offsetX: 3
+  targetZoom: 4
+  zoomSpeed: 3
+  zooming: 0
 --- !u!1 &582106404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,8 +1784,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -198.4, y: 13.394}
-  m_SizeDelta: {x: 35.972, y: 35.973}
+  m_AnchoredPosition: {x: -197.4, y: 10.4}
+  m_SizeDelta: {x: 43.0668, y: 43.068}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741344754
 MonoBehaviour:
@@ -1804,7 +1807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1696974923, guid: 9ec887040263a6342b90e4928ceb8c1c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dbffd3b3e01d1be499f1ee1cc420ba0d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1833,7 +1836,7 @@ GameObject:
   - component: {fileID: 837401774}
   - component: {fileID: 837401773}
   - component: {fileID: 837401775}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2246,8 +2249,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -273.5, y: 10.089}
-  m_SizeDelta: {x: 35.4352, y: 35.435}
+  m_AnchoredPosition: {x: -267.7, y: 12.415}
+  m_SizeDelta: {x: 48.9197, y: 48.919}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &917154671
 MonoBehaviour:
@@ -2269,7 +2272,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6fb244d8f14b42a45aa43e4eb6b85975, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b93505aa5368ca8498278033993ab54e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2321,8 +2324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -343.4, y: 8.7397}
-  m_SizeDelta: {x: 34.981, y: 34.981}
+  m_AnchoredPosition: {x: -348.2, y: 16.2}
+  m_SizeDelta: {x: 64.3069, y: 64.3069}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &934183071
 MonoBehaviour:
@@ -2344,7 +2347,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 133880185, guid: 9ec887040263a6342b90e4928ceb8c1c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2695085b806545a41a189b8a7d21bdd3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3014,7 +3017,7 @@ GameObject:
   - component: {fileID: 1234764303}
   - component: {fileID: 1234764305}
   - component: {fileID: 1234764304}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3527,8 +3530,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 16.272888, y: 30.134943}
-      - {x: -15.836474, y: 29.995756}
+    - - {x: 16.603039, y: 40.83213}
+      - {x: -15.836474, y: 40.692947}
       - {x: -15.809594, y: -3.2478704}
       - {x: 16.497972, y: -3.43943}
       - {x: 16.5244, y: 3.4954262}
@@ -4049,19 +4052,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 3.78, z: 0}
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 0
+  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_LookaheadTime: 0.1
+  m_LookaheadSmoothing: 2
   m_LookaheadIgnoreY: 0
-  m_XDamping: 1
+  m_XDamping: 0.75
   m_YDamping: 0
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.81999993
   m_CameraDistance: 10
   m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0.38
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 2
@@ -4209,7 +4212,7 @@ Transform:
   m_GameObject: {fileID: 1503770148}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.56, y: 2.82, z: 0}
+  m_LocalPosition: {x: 29.22, y: 2.86, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4233,7 +4236,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9bb5cbab8455c6641b74ae34f964b5e8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4256,12 +4259,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f99b0c1db734d4cae1e514489e291c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animatorCauldron: {fileID: 1888595189}
   velocity: 5
   jumpForce: 5
   footTransform: {fileID: 1895414764}
   layerGround:
     serializedVersion: 2
     m_Bits: 64
+  groundNoWallJumpLayer:
+    serializedVersion: 2
+    m_Bits: 128
   wallCheckTransform: {fileID: 1230197861}
   wallCheckRadius: 0.78
   wallJumpXForce: 6
@@ -4568,7 +4575,7 @@ Transform:
   m_GameObject: {fileID: 1596573435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.56, y: 6.6, z: -10}
+  m_LocalPosition: {x: 29.22, y: 7.291849, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4657,7 +4664,7 @@ GameObject:
   - component: {fileID: 1663021107}
   - component: {fileID: 1663021109}
   - component: {fileID: 1663021108}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4787,7 +4794,7 @@ GameObject:
   - component: {fileID: 1701548483}
   - component: {fileID: 1701548485}
   - component: {fileID: 1701548484}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5073,7 +5080,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.17411889, g: 0.21353386, b: 0.2754717, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -5123,7 +5130,7 @@ Transform:
   m_GameObject: {fileID: 1805863826}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.573833, y: 6.70047, z: -10}
+  m_LocalPosition: {x: 29.57483, y: 7.29247, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5845,7 +5852,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10939874, y: 0.082369894}
+  m_Offset: {x: -0.08964035, y: 0.082369894}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5856,7 +5863,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7147393, y: 0.6447396}
+  m_Size: {x: 0.67522246, y: 0.6447396}
   m_EdgeRadius: 0
 --- !u!1 &1895414763
 GameObject:
@@ -6110,7 +6117,7 @@ GameObject:
   - component: {fileID: 2027250187}
   - component: {fileID: 2027250189}
   - component: {fileID: 2027250188}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Obstacle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6256,8 +6263,8 @@ Transform:
   m_GameObject: {fileID: 2031241322}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.72, y: 20.7003, z: 0.2324}
-  m_LocalScale: {x: 0.7961338, y: 2.677828, z: 0.24264126}
+  m_LocalPosition: {x: 38.72, y: 20.9264, z: 0.2324}
+  m_LocalScale: {x: 0.7961338, y: 2.225354, z: 0.24264126}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 323695853}
@@ -6523,8 +6530,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -124.8, y: 17.485}
-  m_SizeDelta: {x: 44.155, y: 44.155}
+  m_AnchoredPosition: {x: -122.7, y: 13.311}
+  m_SizeDelta: {x: 48.8892, y: 48.889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2034504128
 MonoBehaviour:
@@ -6546,7 +6553,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1294504615, guid: 9ec887040263a6342b90e4928ceb8c1c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26ad63db2ac50ee4d89276c0d130cd86, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6575,7 +6582,7 @@ GameObject:
   - component: {fileID: 2045696398}
   - component: {fileID: 2045696400}
   - component: {fileID: 2045696399}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Obstacle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7030,6 +7037,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7561912435619618108, guid: 0012be36f07429b4898fd0c08c9ff284, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561912435619618108, guid: 0012be36f07429b4898fd0c08c9ff284, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7561912435619618108, guid: 0012be36f07429b4898fd0c08c9ff284, type: 3}
       propertyPath: m_LocalPosition.x
       value: 51.97
