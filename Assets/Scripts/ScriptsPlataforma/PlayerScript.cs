@@ -13,6 +13,9 @@ public class PlayerScript : MonoBehaviour
     private TrailRenderer tr;
     private Animator animator;
     private CinemachineImpulseSource impulseSource;
+    [Tooltip("Animator do Caldeirão")]
+    [SerializeField]
+    private Animator animatorCauldron;
 
     [Header("Move and Jump")]
     [SerializeField]
@@ -53,7 +56,6 @@ public class PlayerScript : MonoBehaviour
 
     [Header("FruitsObjects and Count")]
     [SerializeField]
-    [Tooltip("Quando chegar a 4 frutas, você vence")]
     private int fruitsCount = 0;
     [SerializeField]
     private GameObject guavaObject;
@@ -84,6 +86,11 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Condition Victory")]
     private bool contactCauldron = false;
+    [SerializeField]
+    private Transform cauldronTransfrom;
+    [SerializeField]
+    private GameObject[] fruitsPrefab;
+    private bool oneC = true;
 
 
     void Start()
@@ -130,11 +137,66 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = Vector2.zero;
         if (fruitsCount >= 4)
         {
-            
+            animator.Play("idle");
+            if (oneC)
+            {
+                oneC = false;
+                StartCoroutine(FruitDrop());
+            }
         }
         else
         {
             animator.Play("angry");
+        }
+    }
+
+    IEnumerator FruitDrop()
+    {
+        for (int i = 0; i < fruitsCount; i++)
+        {
+            GameObject fruit = Instantiate(fruitsPrefab[Random.Range(0, fruitsPrefab.Length)], transform.position, Quaternion.identity);
+            Vector3 start = transform.position;
+            Vector3 end = cauldronTransfrom.position;
+
+            impulseSource.GenerateImpulse();
+            if (i == 0)
+            {
+                guavaObject.SetActive(false);
+            }
+            else if (i == 1)
+            {
+                mangoObject.SetActive(false);
+            }
+            else if (i == 2)
+            {
+                appleObject.SetActive(false);
+            }
+            else if (i == 3)
+            {
+                pineappleObject.SetActive(false);
+            }
+
+            float t = 0f;
+            float duration = 0.5f;
+
+            while (t < 1f)
+            {
+                if (fruit == null)
+                    yield break;
+
+                t += Time.deltaTime / duration;
+                Vector3 pos = Vector3.Lerp(start, end, t);
+                pos.y += Mathf.Sin(t * Mathf.PI) * 1.0f; 
+                fruit.transform.position = pos;
+
+                yield return null;
+            }
+
+            animatorCauldron.SetTrigger("Smoke");
+            if (fruit != null)
+                Destroy(fruit);
+
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -153,7 +215,7 @@ public class PlayerScript : MonoBehaviour
 
     void Timer()
     {
-        if (time > 0 && !timeStop && fruitsCount < 4)
+        if (time > 0 && !timeStop && !contactCauldron)
         {
             time -= Time.deltaTime;
             int minutes = Mathf.FloorToInt(time / 60);
