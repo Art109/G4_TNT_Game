@@ -11,6 +11,11 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI textoTempo;
     public TextMeshProUGUI textoLatas;
 
+    [Header("Cores Indicadoras de Velocidade")]
+    public Color corVelocidadeNormal = Color.yellow;
+    public Color corVelocidadeBoost = Color.blue;
+    public Color corVelocidadeFreio = Color.red;
+
     [Header("Elementos de UI Fim de Corrida")]
     public GameObject painelPontuacaoFinal;
     public TextMeshProUGUI textoPontuacaoFinal;
@@ -22,14 +27,13 @@ public class UIManager : MonoBehaviour
 
     public float velocidadeNormalBase = 5f;
     public float velocidadeBoostBase = 10f;
+    public float velocidadeFreioBase = 2f;
 
     void Start()
     {
-        // Garante que ambos os painéis finais comecem escondidos
         if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
-        if (painelGameOver != null) painelGameOver.SetActive(false); // <<< GARANTIR QUE ESTEJA DESATIVADO
+        if (painelGameOver != null) painelGameOver.SetActive(false);
 
-        // Opcional: reativar UI da corrida caso esteja reiniciando a cena
         if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(true);
         if (textoTempo != null) textoTempo.gameObject.SetActive(true);
         if (textoLatas != null) textoLatas.gameObject.SetActive(true);
@@ -39,7 +43,6 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        // Só atualiza a UI da corrida se nenhum painel final estiver ativo
         if ((painelPontuacaoFinal == null || !painelPontuacaoFinal.activeSelf) &&
             (painelGameOver == null || !painelGameOver.activeSelf))
         {
@@ -55,24 +58,26 @@ public class UIManager : MonoBehaviour
 
         float velocidadeAtualExibida;
 
-        if (Input.GetKey(KeyCode.LeftControl)) // <<< ADICIONA VERIFICAÇÃO DO FREIO
+        Color corAtual = corVelocidadeNormal;
+
+        if (Input.GetKey(KeyCode.LeftControl))
         {
-            // Precisa ter acesso à velocidade de freio base
-            // Adicione uma variável pública no UIManager se necessário:
-            // public float velocidadeFreioBase = 2f;
-            // velocidadeAtualExibida = velocidadeFreioBase;
-            velocidadeAtualExibida = 2f; // Ou coloque o valor diretamente se preferir não ter outra variável pública
+            velocidadeAtualExibida = velocidadeFreioBase;
+            corAtual = corVelocidadeFreio;
         }
         else if (Input.GetKey(KeyCode.LeftShift))
         {
             velocidadeAtualExibida = velocidadeBoostBase;
+            corAtual = corVelocidadeBoost;
         }
         else
         {
             velocidadeAtualExibida = velocidadeNormalBase;
+            corAtual = corVelocidadeNormal;
         }
 
         textoVelocidade.text = $"Velocidade: {velocidadeAtualExibida.ToString("F0")} km/h";
+        textoVelocidade.color = corAtual;
     }
 
     void AtualizarTempoUI()
@@ -112,36 +117,30 @@ public class UIManager : MonoBehaviour
         return tempoDecorrido;
     }
 
-    // Método modificado para incluir "VOCÊ VENCEU"
     public void MostrarPontuacaoFinal(int pontuacaoMapeada)
     {
         PararCronometro();
-        EsconderUIDaCorrida(); // Esconde UI da corrida
+        EsconderUIDaCorrida();
 
-        // Garante que o outro painel esteja escondido
         if (painelGameOver != null) painelGameOver.SetActive(false);
 
         if (painelPontuacaoFinal != null && textoPontuacaoFinal != null)
         {
-            // <<< TEXTO DE VITÓRIA ATUALIZADO >>>
             textoPontuacaoFinal.text = $"VOCÊ VENCEU!\nPontuação: {pontuacaoMapeada} / 20";
             painelPontuacaoFinal.SetActive(true);
         }
     }
 
-    // <<< NOVO MÉTODO para mostrar Game Over >>>
     public void MostrarGameOver()
     {
         PararCronometro();
-        EsconderUIDaCorrida(); // Esconde UI da corrida
+        EsconderUIDaCorrida();
 
-        // Garante que o outro painel esteja escondido
         if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
 
         if (painelGameOver != null)
         {
             painelGameOver.SetActive(true);
-            // O texto já está definido no editor, então só precisamos ativar o painel.
         }
     }
 
