@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 using TMPro;
 
@@ -10,6 +7,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI textoVelocidade;
     public TextMeshProUGUI textoTempo;
     public TextMeshProUGUI textoLatas;
+    
 
     [Header("Cores Indicadoras de Velocidade")]
     public Color corVelocidadeNormal = Color.yellow;
@@ -21,45 +19,58 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI textoPontuacaoFinal;
     public GameObject painelGameOver;
 
-
+    
     private float tempoDecorrido = 0f;
     private bool cronometroAtivo = false;
 
+    
     public float velocidadeNormalBase = 5f;
     public float velocidadeBoostBase = 10f;
     public float velocidadeFreioBase = 2f;
 
     void Start()
     {
+        
         if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
         if (painelGameOver != null) painelGameOver.SetActive(false);
 
+        
         if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(true);
         if (textoTempo != null) textoTempo.gameObject.SetActive(true);
         if (textoLatas != null) textoLatas.gameObject.SetActive(true);
+        
 
         IniciarCronometro();
     }
 
     void Update()
     {
-        if ((painelPontuacaoFinal == null || !painelPontuacaoFinal.activeSelf) &&
-            (painelGameOver == null || !painelGameOver.activeSelf))
+        
+        bool fimDeJogoAtivo = (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf) ||
+                              (painelGameOver != null && painelGameOver.activeSelf);
+
+        if (!fimDeJogoAtivo)
         {
             AtualizarVelocidadeUI();
             AtualizarTempoUI();
             AtualizarLatasUI();
         }
+        else if (cronometroAtivo)
+        {
+            PararCronometro();
+        }
     }
+
+    
 
     void AtualizarVelocidadeUI()
     {
         if (textoVelocidade == null) return;
 
         float velocidadeAtualExibida;
-
         Color corAtual = corVelocidadeNormal;
 
+        
         if (Input.GetKey(KeyCode.LeftControl))
         {
             velocidadeAtualExibida = velocidadeFreioBase;
@@ -76,8 +87,10 @@ public class UIManager : MonoBehaviour
             corAtual = corVelocidadeNormal;
         }
 
+        
         textoVelocidade.text = $"Velocidade: {velocidadeAtualExibida.ToString("F0")} km/h";
         textoVelocidade.color = corAtual;
+
     }
 
     void AtualizarTempoUI()
@@ -89,17 +102,22 @@ public class UIManager : MonoBehaviour
             tempoDecorrido += Time.deltaTime;
         }
 
+        
         int minutos = Mathf.FloorToInt(tempoDecorrido / 60F);
         int segundos = Mathf.FloorToInt(tempoDecorrido - minutos * 60);
+        
+        minutos = Mathf.Max(0, minutos);
+        segundos = Mathf.Max(0, segundos);
         textoTempo.text = $"Tempo: {minutos:00}:{segundos:00}";
     }
 
     void AtualizarLatasUI()
     {
         if (textoLatas == null) return;
-
         textoLatas.text = $"Latas: {PlayerCarro.latasColetadas}";
     }
+
+    
 
     public void IniciarCronometro()
     {
@@ -114,12 +132,13 @@ public class UIManager : MonoBehaviour
 
     public float GetTempoFinal()
     {
+        
+        PararCronometro();
         return tempoDecorrido;
     }
 
     public void MostrarPontuacaoFinal(int pontuacaoMapeada)
     {
-        PararCronometro();
         EsconderUIDaCorrida();
 
         if (painelGameOver != null) painelGameOver.SetActive(false);
@@ -133,13 +152,13 @@ public class UIManager : MonoBehaviour
 
     public void MostrarGameOver()
     {
-        PararCronometro();
         EsconderUIDaCorrida();
 
         if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
 
         if (painelGameOver != null)
         {
+            
             painelGameOver.SetActive(true);
         }
     }
@@ -149,5 +168,6 @@ public class UIManager : MonoBehaviour
         if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(false);
         if (textoTempo != null) textoTempo.gameObject.SetActive(false);
         if (textoLatas != null) textoLatas.gameObject.SetActive(false);
+        
     }
 }
