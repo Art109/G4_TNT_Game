@@ -100,7 +100,7 @@ public class PlayerCarro : MonoBehaviour
             int pontuacaoOriginal = CalcularPontuacaoFinal(tempoFinal, latasColetadas);
 
             
-            const int maxScoreOriginalEstimado = 6000;
+            const int maxScoreOriginalEstimado = 7000;
 
             
             int pontuacaoFinalMapeada = 0;
