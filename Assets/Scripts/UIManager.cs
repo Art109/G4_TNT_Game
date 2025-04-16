@@ -19,14 +19,21 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI textoPontuacaoFinal;
     public GameObject painelGameOver;
 
-    
-    private float tempoDecorrido = 0f;
-    private bool cronometroAtivo = false;
+    [Header("Tela de Instruções")]
+    public GameObject painelInstrucoes;
 
-    
+    [Header("Valores Base para UI")]
     public float velocidadeNormalBase = 5f;
     public float velocidadeBoostBase = 10f;
     public float velocidadeFreioBase = 2f;
+
+    public KeyCode teclaFreio = KeyCode.LeftControl;
+    public KeyCode teclaBoost = KeyCode.LeftShift;
+    public KeyCode teclaIniciarJogo = KeyCode.Space;
+
+    private float tempoDecorrido = 0f;
+    private bool cronometroAtivo = false;
+    private bool instrucoesAtivas = false;
 
     void Start()
     {
