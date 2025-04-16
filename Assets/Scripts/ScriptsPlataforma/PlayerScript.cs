@@ -401,7 +401,7 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        if (isGrounded)
+        if (isGrounded || isGroundedNoWallJump)
         {
             canDash = true;
         }
