@@ -134,6 +134,7 @@ public class PlayerScript : MonoBehaviour
     void Victory()
     {
         cameraFollowOffsetScript.offsetX = 1f;
+        cameraFollowOffsetScript.zooming = true;
         rb.velocity = Vector2.zero;
         if (fruitsCount >= 4)
         {
