@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< HEAD
   - Wall
   - Apple
   - Guava
@@ -12,11 +11,11 @@ TagManager:
   - Mango
   - Death
   - Cauldron
-=======
   - Obstacle
   - Inimigo
   - Coletavel
->>>>>>> f869bb4c973a47abcf845c3a3534a566787bd16e
+  - finger
+
   layers:
   - Default
   - TransparentFX
@@ -28,6 +27,13 @@ TagManager:
   - 
   - 
   - 
+  - StartButton
+  - Water
+  - UI
+  - RedTNT
+  - BluTNT
+  - PrpTNT
+  - ExitButton
   - 
   - 
   - 

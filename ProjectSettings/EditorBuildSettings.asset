@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototipo_corrida.unity
+    path: Assets/Scenes/LobbyScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/PlataformaPrototipo.unity
-    guid: f864248029ffebf4fbcb78e1e32279f0
+    path: Assets/Scenes/TestEnergy.unity
+    guid: 595ef8d415ab95b48848c7344d0f9c71
+  - enabled: 1
+    path: Assets/Scenes/TestFocus.unity
+    guid: c00f662ab91dfe24f93dd66bbc6bfda8
+  - enabled: 1
+    path: Assets/Scenes/TestNutrition.unity
+    guid: 94a7548fc7bee1142b213afad27bb986
   m_configObjects: {}

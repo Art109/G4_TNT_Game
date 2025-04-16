@@ -252,6 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -495,6 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -641,6 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixas:
@@ -893,6 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -1131,6 +1135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixas:
@@ -1557,6 +1562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -1800,6 +1806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -2043,6 +2050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -2189,6 +2197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixas:
@@ -2311,6 +2320,62 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1021247, y: 9.588911}
   m_EdgeRadius: 0
+--- !u!1 &1327056544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1327056545}
+  - component: {fileID: 1327056546}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1327056545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327056544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4870378, y: -1.8342748, z: 0.006144918}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1327056546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327056544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a9118c15a806e49a0237421fb85143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textoVelocidade: {fileID: 0}
+  textoTempo: {fileID: 0}
+  textoLatas: {fileID: 0}
+  corVelocidadeNormal: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  corVelocidadeBoost: {r: 0, g: 0, b: 1, a: 1}
+  corVelocidadeFreio: {r: 1, g: 0, b: 0, a: 1}
+  painelPontuacaoFinal: {fileID: 0}
+  textoPontuacaoFinal: {fileID: 0}
+  painelGameOver: {fileID: 0}
+  velocidadeNormalBase: 5
+  velocidadeBoostBase: 10
+  velocidadeFreioBase: 2
 --- !u!1 &1485881725
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,6 +2408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   pontoDeVitoriaY: -2.3
 --- !u!212 &1485881727
 SpriteRenderer:
@@ -2541,6 +2607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -2784,6 +2851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -2996,6 +3064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   alturaSegmento: 20
   limiteInferiorY: -15
 --- !u!1 &1976525263
@@ -3128,6 +3197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
@@ -3340,6 +3410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
+  velocidadeFreio: 2
   alturaSegmento: 20
   limiteInferiorY: -15
 --- !u!1660057539 &9223372036854775807
@@ -3363,3 +3434,4 @@ SceneRoots:
   - {fileID: 1091929761}
   - {fileID: 122214401}
   - {fileID: 1485881728}
+  - {fileID: 1327056545}
