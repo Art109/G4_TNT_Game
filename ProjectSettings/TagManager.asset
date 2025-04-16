@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - Wall
   - Apple
   - Guava
@@ -11,11 +12,16 @@ TagManager:
   - Mango
   - Death
   - Cauldron
+=======
+  - Obstacle
+  - Inimigo
+  - Coletavel
+>>>>>>> f869bb4c973a47abcf845c3a3534a566787bd16e
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Coletaveis
   - Water
   - UI
   - Ground
