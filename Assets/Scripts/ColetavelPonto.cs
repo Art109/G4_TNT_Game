@@ -80,9 +80,12 @@ public class ColetavelPonto : MonoBehaviour
     void Coletar()
     {
         PlayerCarro.pontuacaoAtual += pontosPorColeta;
-        Debug.Log("Coletou! Pontuação atual: " + PlayerCarro.pontuacaoAtual);
 
-        if (somColeta != null)
+        PlayerCarro.latasColetadas++;
+
+        Debug.Log($"Coletou! Latas: {PlayerCarro.latasColetadas}, Pontos Atuais: {PlayerCarro.pontuacaoAtual}");
+
+        if (somColeta != null && somColeta.clip != null)
         {
             AudioSource.PlayClipAtPoint(somColeta.clip, transform.position, somColeta.volume);
         }

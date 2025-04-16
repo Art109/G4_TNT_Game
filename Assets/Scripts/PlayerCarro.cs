@@ -7,14 +7,27 @@ public class PlayerCarro : MonoBehaviour
     public float velocidade = 8f;
     public float limiteEsquerdoX = -3.5f;
     public float limiteDireitoX = 3.5f;
-
     private bool jogoTerminou = false;
+
     public static int pontuacaoAtual = 0;
+
+    public static int latasColetadas = 0;
+
+    private UIManager uiManager;
 
     void Start()
     {
         pontuacaoAtual = 0;
+        latasColetadas = 0;
+        jogoTerminou = false;
+
         Time.timeScale = 1f;
+
+        uiManager = FindObjectOfType<UIManager>();
+        if (uiManager == null)
+        {
+            Debug.LogError("UIManager não encontrado na cena!");
+        }
     }
 
     void Update()
@@ -36,7 +49,7 @@ public class PlayerCarro : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!jogoTerminou && other.CompareTag("Inimigo"))
+        if (other.CompareTag("Inimigo"))
         {
             IniciarGameOver();
         }
@@ -47,10 +60,15 @@ public class PlayerCarro : MonoBehaviour
         if (jogoTerminou) return;
 
         jogoTerminou = true;
+
         Debug.Log("Colisão! Fim de Jogo!");
+
         Debug.Log("Pontuação Final: " + pontuacaoAtual);
 
         Time.timeScale = 0f;
+
+        if (uiManager != null) uiManager.PararCronometro();
+
         StartCoroutine(ReiniciarAposDelay(2.0f));
     }
 
@@ -71,9 +89,48 @@ public class PlayerCarro : MonoBehaviour
         if (jogoTerminou) return;
 
         jogoTerminou = true;
+
         Debug.Log("Você Venceu!");
-        Debug.Log("Pontuação Final: " + pontuacaoAtual);
 
         Time.timeScale = 0f;
+
+        if (uiManager != null)
+        {
+            float tempoFinal = uiManager.GetTempoFinal();
+
+            int pontuacaoOriginal = CalcularPontuacaoFinal(tempoFinal, latasColetadas);
+
+            const int maxScoreOriginalEstimado = 2000;
+
+            int pontuacaoFinalMapeada = 0;
+            if (maxScoreOriginalEstimado > 0)
+            {
+                float proporcao = Mathf.Clamp01((float)Mathf.Max(0, pontuacaoOriginal) / maxScoreOriginalEstimado);
+                pontuacaoFinalMapeada = Mathf.RoundToInt(proporcao * 20f);
+            }
+
+            Debug.Log($"Tempo Final: {tempoFinal:F2}s, Latas: {latasColetadas}, Pontuação Original: {pontuacaoOriginal}, Pontuação Mapeada (0-20): {pontuacaoFinalMapeada}");
+
+            //Debug.Log($"Tempo Final: {tempoFinal:F2}s, Latas: {latasColetadas}, Pontuação Calculada: {pontuacaoCalculada}");
+
+            uiManager.MostrarPontuacaoFinal(pontuacaoFinalMapeada);
+        }
+        else
+        {
+            Debug.LogError("Não foi possível mostrar pontuação final, UIManager não encontrado!");
+        }
+    }
+
+    int CalcularPontuacaoFinal(float tempo, int latas)
+    {
+        int pontosBasePorLata = 100;
+        float fatorTempo = 10000f;
+        int bonusBase = 500;
+
+        if (tempo < 0.1f) tempo = 0.1f;
+
+        int pontuacao = bonusBase + (latas * pontosBasePorLata) + (int)(fatorTempo / tempo);
+
+        return Mathf.Max(0, pontuacao);
     }
 }

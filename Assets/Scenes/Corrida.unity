@@ -255,11 +255,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.25
-  - -6.25
-  - 6.25
-  - 1.25
-  espacamentoMinimoYLatas: 3
+  - -2
+  - -0.75
+  - 0.75
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -360,7 +360,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.2, y: 19.1, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -498,11 +498,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.25
-  - -6.25
-  - 6.25
-  - 1.25
-  espacamentoMinimoYLatas: 3
+  - -2
+  - -0.75
+  - 0.75
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -603,7 +603,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.3, y: 15.7, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -697,7 +697,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.3125, y: 13.40625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -713,7 +713,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.74, y: 8.2, z: 0}
-  m_LocalScale: {x: 0.39949962, y: 0.39949962, z: 0.39949962}
+  m_LocalScale: {x: 0.17115363, y: 0.17115363, z: 0.17115363}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -750,18 +750,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.015370488, y: 0.00000071525574}
+  m_Offset: {x: 0.0733701, y: -0.14790154}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.34, y: 4.29}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 7.3125, y: 13.40625}
+    newSize: {x: 7.3125, y: 13.40625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0018551, y: 3.7366729}
+  m_Size: {x: 2.8892624, y: 9.356911}
   m_EdgeRadius: 0
 --- !u!1 &696715643
 GameObject:
@@ -896,11 +896,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.25
-  - -6.25
-  - 6.25
-  - 1.25
-  espacamentoMinimoYLatas: 3
+  - -2
+  - -0.75
+  - 0.75
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -1001,7 +1001,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.8, y: 25.6, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1187,7 +1187,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.3125, y: 13.40625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1202,8 +1202,8 @@ Transform:
   m_GameObject: {fileID: 736043477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.8, z: 0}
-  m_LocalScale: {x: 0.39949962, y: 0.39949962, z: 0.39949962}
+  m_LocalPosition: {x: 0, y: 12.9, z: 0}
+  m_LocalScale: {x: 0.17115363, y: 0.17115363, z: 0.17115363}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1240,18 +1240,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.015370548, y: 0.00000023841858}
+  m_Offset: {x: 0.043789983, y: -0.3549652}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.34, y: 4.29}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 7.3125, y: 13.40625}
+    newSize: {x: 7.3125, y: 13.40625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0018554, y: 3.7981534}
+  m_Size: {x: 3.1850636, y: 9.714193}
   m_EdgeRadius: 0
 --- !u!1 &972657535
 GameObject:
@@ -1319,7 +1319,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.3125, y: 13.40625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1335,7 +1335,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.11, y: -2.7, z: 0}
-  m_LocalScale: {x: 0.39949962, y: 0.39949962, z: 0.39949962}
+  m_LocalScale: {x: 0.17115363, y: 0.17115363, z: 0.17115363}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1372,18 +1372,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.031774282, y: 0.09289211}
+  m_Offset: {x: 0.002196014, y: -0.46913147}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.34, y: 4.29}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 7.3125, y: 13.40625}
+    newSize: {x: 7.3125, y: 13.40625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8222468, y: 3.5489364}
+  m_Size: {x: 3.0646133, y: 9.405819}
   m_EdgeRadius: 0
 --- !u!50 &972657540
 Rigidbody2D:
@@ -1560,11 +1560,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.25
-  - -6.25
-  - 6.25
-  - 1.25
-  espacamentoMinimoYLatas: 3
+  - -2
+  - -0.75
+  - 0.75
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -1665,7 +1665,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.9, y: 31, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1803,11 +1803,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.25
-  - -6.25
-  - 6.25
-  - 1.25
-  espacamentoMinimoYLatas: 3
+  - -2
+  - -0.75
+  - 0.75
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -1908,7 +1908,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8, y: 19.1, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2046,10 +2046,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
+  - -2
   - -0.75
   - 0.75
-  - 1.5
-  espacamentoMinimoYLatas: 3
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -2150,7 +2151,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.25, y: 23.9, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2244,7 +2245,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.3125, y: 13.40625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2260,7 +2261,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.74, y: 7.6, z: 0}
-  m_LocalScale: {x: 0.39949962, y: 0.39949962, z: 0.39949962}
+  m_LocalScale: {x: 0.17115363, y: 0.17115363, z: 0.17115363}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2297,18 +2298,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03074032, y: 0.0000015497208}
+  m_Offset: {x: 0.028420985, y: -0.14789867}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.34, y: 4.29}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 7.3125, y: 13.40625}
+    newSize: {x: 7.3125, y: 13.40625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.1555586, y: 3.6137106}
+  m_Size: {x: 3.1021247, y: 9.588911}
   m_EdgeRadius: 0
 --- !u!1 &1485881725
 GameObject:
@@ -2342,7 +2343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeNormal: 5
   velocidadeBoost: 10
-  pontoDeVitoriaY: -4
+  pontoDeVitoriaY: -2.3
 --- !u!212 &1485881727
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2543,11 +2544,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.25
-  - -6.25
-  - 6.25
-  - 1.25
-  espacamentoMinimoYLatas: 3
+  - -2
+  - -0.75
+  - 0.75
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -2648,7 +2649,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1, y: 34, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2786,11 +2787,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.25
-  - -0.625
-  - 0.625
-  - 1.25
-  espacamentoMinimoYLatas: 3
+  - -2
+  - -0.75
+  - 0.75
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -2891,7 +2892,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.25, y: 13.5, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3130,11 +3131,11 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.25
-  - -6.25
-  - 6.25
-  - 1.25
-  espacamentoMinimoYLatas: 3
+  - -2
+  - -0.75
+  - 0.75
+  - 2
+  espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
   somColeta: {fileID: 122214397}
@@ -3235,7 +3236,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.25, y: 31, z: 0}
-  m_LocalScale: {x: 0.41663, y: 0.41663, z: 0.41663}
+  m_LocalScale: {x: 0.24477845, y: 0.24477845, z: 0.24477845}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
