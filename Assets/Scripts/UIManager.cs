@@ -14,8 +14,9 @@ public class UIManager : MonoBehaviour
     [Header("Elementos de UI Fim de Corrida")]
     public GameObject painelPontuacaoFinal;
     public TextMeshProUGUI textoPontuacaoFinal;
+    public GameObject painelGameOver;
 
-    
+
     private float tempoDecorrido = 0f;
     private bool cronometroAtivo = false;
 
@@ -24,19 +25,28 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        if (painelPontuacaoFinal != null)
-        {
-            painelPontuacaoFinal.SetActive(false);
-        }
-        
+        // Garante que ambos os painéis finais comecem escondidos
+        if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
+        if (painelGameOver != null) painelGameOver.SetActive(false); // <<< GARANTIR QUE ESTEJA DESATIVADO
+
+        // Opcional: reativar UI da corrida caso esteja reiniciando a cena
+        if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(true);
+        if (textoTempo != null) textoTempo.gameObject.SetActive(true);
+        if (textoLatas != null) textoLatas.gameObject.SetActive(true);
+
         IniciarCronometro();
     }
 
     void Update()
     {
-        AtualizarVelocidadeUI();
-        AtualizarTempoUI();
-        AtualizarLatasUI();
+        // Só atualiza a UI da corrida se nenhum painel final estiver ativo
+        if ((painelPontuacaoFinal == null || !painelPontuacaoFinal.activeSelf) &&
+            (painelGameOver == null || !painelGameOver.activeSelf))
+        {
+            AtualizarVelocidadeUI();
+            AtualizarTempoUI();
+            AtualizarLatasUI();
+        }
     }
 
     void AtualizarVelocidadeUI()
@@ -94,16 +104,41 @@ public class UIManager : MonoBehaviour
         return tempoDecorrido;
     }
 
-    public void MostrarPontuacaoFinal(int pontuacao)
+    // Método modificado para incluir "VOCÊ VENCEU"
+    public void MostrarPontuacaoFinal(int pontuacaoMapeada)
     {
         PararCronometro();
+        EsconderUIDaCorrida(); // Esconde UI da corrida
+
+        // Garante que o outro painel esteja escondido
+        if (painelGameOver != null) painelGameOver.SetActive(false);
 
         if (painelPontuacaoFinal != null && textoPontuacaoFinal != null)
         {
-            textoPontuacaoFinal.text = $"Pontuação Final:\n{pontuacao}";
+            // <<< TEXTO DE VITÓRIA ATUALIZADO >>>
+            textoPontuacaoFinal.text = $"VOCÊ VENCEU!\nPontuação: {pontuacaoMapeada} / 20";
             painelPontuacaoFinal.SetActive(true);
         }
-        
+    }
+
+    // <<< NOVO MÉTODO para mostrar Game Over >>>
+    public void MostrarGameOver()
+    {
+        PararCronometro();
+        EsconderUIDaCorrida(); // Esconde UI da corrida
+
+        // Garante que o outro painel esteja escondido
+        if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
+
+        if (painelGameOver != null)
+        {
+            painelGameOver.SetActive(true);
+            // O texto já está definido no editor, então só precisamos ativar o painel.
+        }
+    }
+
+    private void EsconderUIDaCorrida()
+    {
         if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(false);
         if (textoTempo != null) textoTempo.gameObject.SetActive(false);
         if (textoLatas != null) textoLatas.gameObject.SetActive(false);

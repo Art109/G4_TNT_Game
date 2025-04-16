@@ -7,7 +7,7 @@ public class PlayerCarro : MonoBehaviour
     public float velocidade = 8f;
     public float limiteEsquerdoX = -3.5f;
     public float limiteDireitoX = 3.5f;
-    private bool jogoTerminou = false;
+    
 
     public static int pontuacaoAtual = 0;
 
@@ -15,15 +15,16 @@ public class PlayerCarro : MonoBehaviour
 
     private UIManager uiManager;
 
+    private bool jogoTerminou = false;
+
     void Start()
     {
         pontuacaoAtual = 0;
         latasColetadas = 0;
         jogoTerminou = false;
-
         Time.timeScale = 1f;
-
         uiManager = FindObjectOfType<UIManager>();
+
         if (uiManager == null)
         {
             Debug.LogError("UIManager não encontrado na cena!");
@@ -61,13 +62,16 @@ public class PlayerCarro : MonoBehaviour
 
         jogoTerminou = true;
 
-        Debug.Log("Colisão! Fim de Jogo!");
+        //Debug.Log("Colisão! Fim de Jogo!");
 
-        Debug.Log("Pontuação Final: " + pontuacaoAtual);
+        //Debug.Log("Pontuação Final: " + pontuacaoAtual);
 
         Time.timeScale = 0f;
 
-        if (uiManager != null) uiManager.PararCronometro();
+        if (uiManager != null)
+        {
+            uiManager.MostrarGameOver();
+        }
 
         StartCoroutine(ReiniciarAposDelay(2.0f));
     }
@@ -90,7 +94,7 @@ public class PlayerCarro : MonoBehaviour
 
         jogoTerminou = true;
 
-        Debug.Log("Você Venceu!");
+        //Debug.Log("Você Venceu!");
 
         Time.timeScale = 0f;
 
@@ -100,9 +104,10 @@ public class PlayerCarro : MonoBehaviour
 
             int pontuacaoOriginal = CalcularPontuacaoFinal(tempoFinal, latasColetadas);
 
-            const int maxScoreOriginalEstimado = 2000;
+            const int maxScoreOriginalEstimado = 5000;
 
             int pontuacaoFinalMapeada = 0;
+
             if (maxScoreOriginalEstimado > 0)
             {
                 float proporcao = Mathf.Clamp01((float)Mathf.Max(0, pontuacaoOriginal) / maxScoreOriginalEstimado);
