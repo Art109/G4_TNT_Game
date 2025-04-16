@@ -126,12 +126,12 @@ public class GameManager : MonoBehaviour
                         rankVal = "B";
                         ranksText.color = Color.yellow;
                     }
-                    if (score >= 12000)
+                    if (score >= 15000)
                     {
                         rankVal = "A";
                         ranksText.color = Color.magenta;
                     }
-                    if (score >= 15000)
+                    if (score >= 20000)
                     {
                         rankVal = "S";
                         ranksText.color = Color.red;
