@@ -17,7 +17,7 @@ public class CameraFollowOffset : MonoBehaviour
 
     [Header("Zoom")]
     [SerializeField]
-    private float targetZoom = 4f;
+    public float targetZoom = 4f;
     [SerializeField]
     private float zoomSpeed = 3f;
     public bool zooming = false;
