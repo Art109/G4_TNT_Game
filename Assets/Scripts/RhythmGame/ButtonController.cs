@@ -7,6 +7,7 @@ public class ButtonController : MonoBehaviour
     private SpriteRenderer SR;
     public Sprite defaultImage;
     public Sprite pressedImage;
+    public GameObject buttons;
 
     public KeyCode keyToPress;
 
@@ -18,13 +19,20 @@ public class ButtonController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(keyToPress))
+        if (GameManager.instance.startplaying)
         {
-            SR.sprite = pressedImage;
-        }
-        if (Input.GetKeyUp(keyToPress))
-        {
-            SR.sprite = defaultImage;
+            buttons.SetActive(true);
+   
+
+            if (Input.GetKeyDown(keyToPress))
+            {
+                SR.sprite = pressedImage;
+            }
+            if (Input.GetKeyUp(keyToPress))
+            {
+                SR.sprite = defaultImage;
+            }
         }
     }
+
 }
