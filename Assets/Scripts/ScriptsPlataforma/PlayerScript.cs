@@ -515,7 +515,7 @@ public class PlayerScript : MonoBehaviour
                 // Verifica se bateu na lateral (X grande, Y pequeno)
                 if (Mathf.Abs(contact.normal.x) > 0.9f)
                 {
-                    // Se bateu do lado esquerdo (normal.x positivo), então vira para a direita
+                    // Se bateu do lado esquerdo (normal.x positivo), entï¿½o vira para a direita
                     if (!isWallSliding)
                     {
                         if (contact.normal.x > 0 && !turnRight)
@@ -528,7 +528,7 @@ public class PlayerScript : MonoBehaviour
                             Flip();
                         }
                     }
-                    break; // Já virou, não precisa checar outros contatos
+                    break; // Jï¿½ virou, nï¿½o precisa checar outros contatos
                 }
             }
         }
