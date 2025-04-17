@@ -14,6 +14,8 @@ public class PlayerScript : MonoBehaviour
     private TrailRenderer tr;
     private Animator animator;
     private CinemachineImpulseSource impulseSource;
+    private SpriteRenderer sr;
+
     [Tooltip("Animator do Caldeirão")]
     [SerializeField]
     private Animator animatorCauldron;
@@ -96,6 +98,14 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject[] fruitsPrefab;
     private bool oneC = true;
+    [SerializeField]
+    private GameObject tntObject;
+    [SerializeField]
+    private GameObject smokePrefab;
+    [SerializeField]
+    private Transform launchSmoke;
+    [SerializeField]
+    private GameObject returnMenu;
 
     [Header("Canvas Pause and Controls")]
     [SerializeField]
@@ -108,6 +118,7 @@ public class PlayerScript : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
@@ -144,16 +155,13 @@ public class PlayerScript : MonoBehaviour
         {
             if (paused)
             {
-                paused = false;
                 Resume();
             }
             else
             {
-                paused = true;
                 Pause();
             }
         }
-
 
         Timer();
         Move();
@@ -169,6 +177,12 @@ public class PlayerScript : MonoBehaviour
         cameraFollowOffsetScript.zooming = true;
         rb.gravityScale = 2f;
         rb.velocity = new Vector2(0, rb.velocity.y);
+
+        if (returnMenu.activeInHierarchy && Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene(0);
+        }
+
         if (fruitsCount >= 4)
         {
             animator.Play("idle");
@@ -180,6 +194,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            returnMenu.SetActive(true);
             animator.Play("angry");
         }
     }
@@ -232,6 +247,13 @@ public class PlayerScript : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
+        
+        GameObject smoke = Instantiate(smokePrefab, launchSmoke.position, Quaternion.identity);
+
+        Destroy(smoke, 0.9f);
+        tntObject.SetActive(true);
+
+        returnMenu.SetActive(true);
     }
 
     void Dead()
@@ -258,7 +280,7 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         animator.Play("decomposing");
         yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        sr.enabled = false;
     }
 
     void Timer()
@@ -308,16 +330,33 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void Pause()
+    public void Pause()
     {
+        paused = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         pauseObejct.SetActive(true);
     }
 
-    void Resume()
+    public void Resume()
     {
+        paused = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         pauseObejct.SetActive(false);
+    }
+
+    public void ResetLevel()
+    {
+        // Temporário
+        SceneManager.LoadScene("PlataformaPrototipo");
+    }
+
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void Move()
