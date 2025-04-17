@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -9,6 +13,10 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private TrailRenderer tr;
     private Animator animator;
+    private CinemachineImpulseSource impulseSource;
+    [Tooltip("Animator do Caldeirão")]
+    [SerializeField]
+    private Animator animatorCauldron;
 
     [Header("Move and Jump")]
     [SerializeField]
@@ -21,6 +29,9 @@ public class PlayerScript : MonoBehaviour
     private LayerMask layerGround;
     private bool isGrounded;
     private bool turnRight = true;
+    private bool isGroundedNoWallJump;
+    [SerializeField]
+    private LayerMask groundNoWallJumpLayer;
 
     [Header("WallJump")]
     [SerializeField]
@@ -47,36 +58,84 @@ public class PlayerScript : MonoBehaviour
     private float wallSlideSpeed = 1f;
     private bool isWallSliding;
 
-    [Header("Fruits")]
-    private int countApples = 0;
-    private int countGuava = 0;
-    private int countPineapple = 0;
-    private int countMango = 0;
+    [Header("FruitsObjects and Count")]
+    [SerializeField]
+    private int fruitsCount = 0;
+    [SerializeField]
+    private GameObject guavaObject;
+    [SerializeField]
+    private GameObject mangoObject;
+    [SerializeField]
+    private GameObject appleObject;
+    [SerializeField]
+    private GameObject pineappleObject;
+
 
     [Header("Cinemachine")]
+    [SerializeField]
+    private CameraFollowOffset cameraFollowOffsetScript;
     private bool flipCamera = false;
 
     [Header("LifeController")]
     private bool isDead = false;
 
+    [Header("Timer")]
+    [SerializeField]
+    private TextMeshProUGUI timerText;
+    [SerializeField]
+    [Tooltip("Tempo em Segundos")]
+    private float time = 300f;
+    private bool timeStop = false;
+    private bool timerIsOver = false;
+
+    [Header("Condition Victory")]
+    private bool contactCauldron = false;
+    [SerializeField]
+    private Transform cauldronTransfrom;
+    [SerializeField]
+    private GameObject[] fruitsPrefab;
+    private bool oneC = true;
+
 
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
-
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(footTransform.position, 0.2f, layerGround);
+
+        isGroundedNoWallJump = Physics2D.OverlapCircle(footTransform.position, 0.2f, groundNoWallJumpLayer);
+
+
+
+        if (contactCauldron)
+        {
+            Victory();
+            return;
+        }
 
         if (isDead)
         {
             Dead();
             return;
         }
+
+        if (timerIsOver)
+        {
+            TimeIsOver();
+            return;
+        }
+
+
+        Timer();
         Move();
         Jump();
         WallJumpVerify();
@@ -84,13 +143,135 @@ public class PlayerScript : MonoBehaviour
         Dash();
     }
 
+    void Victory()
+    {
+        cameraFollowOffsetScript.offsetX = 1f;
+        cameraFollowOffsetScript.zooming = true;
+        rb.gravityScale = 2f;
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        if (fruitsCount >= 4)
+        {
+            animator.Play("idle");
+            if (oneC)
+            {
+                oneC = false;
+                StartCoroutine(FruitDrop());
+            }
+        }
+        else
+        {
+            animator.Play("angry");
+        }
+    }
+
+    IEnumerator FruitDrop()
+    {
+        for (int i = 0; i < fruitsCount; i++)
+        {
+            GameObject fruit = Instantiate(fruitsPrefab[Random.Range(0, fruitsPrefab.Length)], transform.position, Quaternion.identity);
+            Vector3 start = transform.position;
+            Vector3 end = cauldronTransfrom.position;
+
+            impulseSource.GenerateImpulse();
+            if (i == 0)
+            {
+                guavaObject.SetActive(false);
+            }
+            else if (i == 1)
+            {
+                mangoObject.SetActive(false);
+            }
+            else if (i == 2)
+            {
+                appleObject.SetActive(false);
+            }
+            else if (i == 3)
+            {
+                pineappleObject.SetActive(false);
+            }
+
+            float t = 0f;
+            float duration = 0.5f;
+
+            while (t < 1f)
+            {
+                if (fruit == null)
+                    yield break;
+
+                t += Time.deltaTime / duration;
+                Vector3 pos = Vector3.Lerp(start, end, t);
+                pos.y += Mathf.Sin(t * Mathf.PI) * 1.0f; 
+                fruit.transform.position = pos;
+
+                yield return null;
+            }
+
+            animatorCauldron.SetTrigger("Smoke");
+            if (fruit != null)
+                Destroy(fruit);
+
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
     void Dead()
     {
+        cameraFollowOffsetScript.zooming = true;
+        cameraFollowOffsetScript.targetZoom = 5f;
+        cameraFollowOffsetScript.offsetX = 0f;
+        rb.velocity = Vector3.zero;
         animator.Play("dead");
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            // Temporario
+            // Temporário
+            SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
+        }
+    }
+
+    void Timer()
+    {
+        if (time > 0 && !timeStop && !contactCauldron)
+        {
+            time -= Time.deltaTime;
+            int minutes = Mathf.FloorToInt(time / 60);
+            int seconds = Mathf.FloorToInt(time % 60);
+
+            timerText.text = $"{minutes:00}:{seconds:00}";
+
+            if (time <= 0)
+            {
+                timeStop = true;
+            }
+        }
+        else if (timeStop)
+        {
+            timerText.text = "0:00";
+            timerIsOver = true;
+        }
+    }
+
+    void TimeIsOver()
+    {
+        
+        if (isTouchingWall)
+        {
+            cameraFollowOffsetScript.offsetX = 0f;
+            rb.gravityScale = 0f;
+            rb.velocity = Vector3.zero;
+            animator.Play("angry");
+        }
+
+        if (rb.velocity.y == 0)
+        {
+            cameraFollowOffsetScript.offsetX = 0f;
+            animator.Play("angry");
+            rb.velocity = Vector3.zero;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            // Temporário
             SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
         }
     }
@@ -103,9 +284,16 @@ public class PlayerScript : MonoBehaviour
 
     void Jump()
     {
-        if (!isGrounded && !isTouchingWall && !isDead)
+        if (isDashing || isDead)
+            return;
+
+        if ((!isGrounded || !isGroundedNoWallJump) && !isTouchingWall && !isDead)
         {
-            if (rb.velocity.y > 0.1f)
+            if (rb.velocity.y == 0)
+            {
+                animator.Play("run");
+            }
+            else if (rb.velocity.y > 0.1f)
             {
                 animator.Play("rising");
             }
@@ -114,14 +302,10 @@ public class PlayerScript : MonoBehaviour
                 animator.Play("falling");
             }
         }
-        else if(isGrounded && !isTouchingWall && !isDead)
-        {
-            animator.Play("run");
-        }
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
-            if (isGrounded)
+            if (isGrounded || isGroundedNoWallJump)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
@@ -143,6 +327,9 @@ public class PlayerScript : MonoBehaviour
 
     void HandleWallSlide()
     {
+        if (isDashing || isDead)
+            return;
+
         if (isTouchingWall && !isGrounded && !isDead)
         {
             animator.Play("crouch");
@@ -198,6 +385,7 @@ public class PlayerScript : MonoBehaviour
 
         if (dashInput && canDash && !isTouchingWall)
         {
+            animator.Play("roll");
             isDashing = true;
             canDash = false;
             tr.emitting = true;
@@ -213,7 +401,7 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        if (isGrounded)
+        if (isGrounded || isGroundedNoWallJump)
         {
             canDash = true;
         }
@@ -235,7 +423,9 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (((1 << col.gameObject.layer) & layerGround) != 0)
+        int layer = col.gameObject.layer;
+
+        if (((1 << layer) & layerGround) != 0 || ((1 << layer) & groundNoWallJumpLayer) != 0)
         {
             foreach (ContactPoint2D contact in col.contacts)
             {
@@ -265,31 +455,46 @@ public class PlayerScript : MonoBehaviour
     {
         if (col.CompareTag("Apple"))
         {
-            countApples += 1;
+           
+            impulseSource.GenerateImpulse();
+            fruitsCount += 1;
+            appleObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Guava"))
         {
-            countGuava += 1;
+            impulseSource.GenerateImpulse();
+            fruitsCount += 1;
+            guavaObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Pineapple"))
         {
-            countPineapple += 1;
+            impulseSource.GenerateImpulse();
+            fruitsCount += 1;
+            pineappleObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Mango"))
         {
-            countMango += 1;
+            impulseSource.GenerateImpulse();
+            fruitsCount += 1;
+            mangoObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Death"))
         {
+            impulseSource.GenerateImpulse();
             isDead = true;
+        }
+
+        if (col.CompareTag("Cauldron"))
+        {
+            contactCauldron = true;
         }
     }
 }
