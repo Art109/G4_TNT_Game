@@ -14,6 +14,8 @@ public class PlayerScript : MonoBehaviour
     private TrailRenderer tr;
     private Animator animator;
     private CinemachineImpulseSource impulseSource;
+    private SpriteRenderer sr;
+
     [Tooltip("Animator do Caldeirão")]
     [SerializeField]
     private Animator animatorCauldron;
@@ -108,6 +110,7 @@ public class PlayerScript : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
@@ -258,7 +261,7 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         animator.Play("decomposing");
         yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        sr.enabled = false;
     }
 
     void Timer()
