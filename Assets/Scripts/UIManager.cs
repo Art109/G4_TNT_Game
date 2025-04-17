@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -35,9 +36,18 @@ public class UIManager : MonoBehaviour
     private bool cronometroAtivo = false;
     private bool instrucoesAtivas = false;
 
+    private SceneLoader sceneLoader;
+
+    public KeyCode teclaVoltarMenu = KeyCode.Return;
+
     void Start()
     {
-        
+        sceneLoader = FindObjectOfType<SceneLoader>();
+        if (sceneLoader == null)
+        {
+            Debug.LogWarning("SceneLoader não encontrado na cena pelo UIManager. Funcionalidade de voltar ao menu por tecla pode não funcionar.");
+        }
+
         if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
         if (painelGameOver != null) painelGameOver.SetActive(false);
 
@@ -75,16 +85,55 @@ public class UIManager : MonoBehaviour
             return;
         }
 
+        if (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf)
+        {
+            
+            if (Input.GetKeyDown(teclaVoltarMenu))
+            {
+                Debug.Log("Tecla Voltar Menu pressionada na tela de vitória.");
+                
+                if (sceneLoader != null)
+                {
+                    sceneLoader.CarregarCenaPorIndice(0);
+                }
+                else
+                {
+                    Debug.LogError("SceneLoader não encontrado, não é possível voltar ao menu por tecla!");
+                }
+                
+            }
+        }
+
+        
+        if (painelGameOver != null && painelGameOver.activeSelf)
+        {
+            
+            {
+                Debug.Log("Tecla Espaço pressionada na tela de Game Over. Reiniciando...");
+                if (sceneLoader != null)
+                {
+                    sceneLoader.ReiniciarCenaAtual();
+                }
+                else
+                {
+                    Debug.LogError("SceneLoader não encontrado, não é possível reiniciar por tecla!");
+                }
+            }
+            
+        }
+
+
+
         bool fimDeJogoAtivo = (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf) ||
                               (painelGameOver != null && painelGameOver.activeSelf);
 
-        if (!fimDeJogoAtivo)
+        if (!fimDeJogoAtivo && !instrucoesAtivas)
         {
             AtualizarVelocidadeUI();
             AtualizarTempoUI();
             AtualizarLatasUI();
         }
-        else if (cronometroAtivo)
+        else if (cronometroAtivo && fimDeJogoAtivo)
         {
             PararCronometro();
         }
