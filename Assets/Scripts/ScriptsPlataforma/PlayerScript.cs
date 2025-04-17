@@ -78,6 +78,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("LifeController")]
     private bool isDead = false;
+    private bool isDecomposing = false;
 
     [Header("Timer")]
     [SerializeField]
@@ -95,6 +96,11 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject[] fruitsPrefab;
     private bool oneC = true;
+
+    [Header("Canvas Pause and Controls")]
+    [SerializeField]
+    private GameObject pauseObejct;
+    private bool paused = false;
 
 
     void Start()
@@ -114,7 +120,7 @@ public class PlayerScript : MonoBehaviour
 
         isGroundedNoWallJump = Physics2D.OverlapCircle(footTransform.position, 0.2f, groundNoWallJumpLayer);
 
-
+        
 
         if (contactCauldron)
         {
@@ -132,6 +138,20 @@ public class PlayerScript : MonoBehaviour
         {
             TimeIsOver();
             return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (paused)
+            {
+                paused = false;
+                Resume();
+            }
+            else
+            {
+                paused = true;
+                Pause();
+            }
         }
 
 
@@ -220,13 +240,25 @@ public class PlayerScript : MonoBehaviour
         cameraFollowOffsetScript.targetZoom = 5f;
         cameraFollowOffsetScript.offsetX = 0f;
         rb.velocity = Vector3.zero;
-        animator.Play("dead");
-
+        if (!isDecomposing)
+        {
+            isDecomposing = true;
+            StartCoroutine(Decomposing());
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             // Temporário
             SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
         }
+    }
+
+    IEnumerator Decomposing()
+    {
+        animator.Play("dead");
+        yield return new WaitForSeconds(0.5f);
+        animator.Play("decomposing");
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 
     void Timer()
@@ -253,10 +285,11 @@ public class PlayerScript : MonoBehaviour
 
     void TimeIsOver()
     {
-        
+        cameraFollowOffsetScript.targetZoom = 5f;
+        cameraFollowOffsetScript.zooming = true;
+        cameraFollowOffsetScript.offsetX = 0f;
         if (isTouchingWall)
         {
-            cameraFollowOffsetScript.offsetX = 0f;
             rb.gravityScale = 0f;
             rb.velocity = Vector3.zero;
             animator.Play("angry");
@@ -264,7 +297,6 @@ public class PlayerScript : MonoBehaviour
 
         if (rb.velocity.y == 0)
         {
-            cameraFollowOffsetScript.offsetX = 0f;
             animator.Play("angry");
             rb.velocity = Vector3.zero;
         }
@@ -274,6 +306,18 @@ public class PlayerScript : MonoBehaviour
             // Temporário
             SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
         }
+    }
+
+    void Pause()
+    {
+        Time.timeScale = 0f;
+        pauseObejct.SetActive(true);
+    }
+
+    void Resume()
+    {
+        Time.timeScale = 1f;
+        pauseObejct.SetActive(false);
     }
 
     void Move()
@@ -383,7 +427,7 @@ public class PlayerScript : MonoBehaviour
     {
         bool dashInput = Input.GetKeyDown(KeyCode.LeftShift);
 
-        if (dashInput && canDash && !isTouchingWall)
+        if (dashInput && canDash && !isTouchingWall && !paused)
         {
             animator.Play("roll");
             isDashing = true;

@@ -2,7 +2,7 @@
 - Project name: G4_TNT_Game
 - Unity version: Unity 2022.3.57f1
 - Active game object:
-  - Name: Obstacle
+  - Name: Character
   - Tag: Untagged
-  - Layer: GroundNoWallJump
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
