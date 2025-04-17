@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -19,9 +20,14 @@ public class Hand : MonoBehaviour
     public LayerMask RedTNT;
     public LayerMask BluTNT;
     public LayerMask PrpTNT;
+    public GameObject RedMachine;
+    public GameObject BluMachine;
+    public GameObject PrpMachine;
+    public Renderer Preview1;
+    public Renderer Preview2;
     public Transform Finger;
-    private string Lata;
-    public RawImage LogoTNT;
+    public string Lata;
+    public GameObject LogoTNT;
     private bool inButtonS;
     private bool inButtonE;
     public LayerMask StartButton;
@@ -29,11 +35,12 @@ public class Hand : MonoBehaviour
     public LayerMask EndButton;
     public bool start;
     public GameObject Machine;
+    public float size;
+    public GameObject Popup;
     void Start()
     {
         
         HandRB = GetComponent<Rigidbody2D>();
-
         
     }
 
@@ -54,15 +61,33 @@ public class Hand : MonoBehaviour
 
         
 
-        if (Lata != "")
+        if (Lata == "")
         {
-            LogoTNT.transform.position = new Vector3(840f, 260f);
+
+            Popup.transform.position = new Vector3(32, -9, 0);
         }
         else
         {
-            LogoTNT.transform.position = new Vector3(-160f, -40f);
+            if (Lata == "Energy")
+            {
+                Preview1.material.color = Color.red;
+                Preview2.material.color = Color.red;
+                Popup.transform.position = new Vector3(27, -4, 0);
+            }
+            if (Lata == "Nutrition")
+            {
+                Preview1.material.color = Color.cyan;
+                Preview2.material.color = Color.cyan;
+                Popup.transform.position = new Vector3(27, -4, 0);
+            }
+            if (Lata == "Focus")
+            {
+                Preview1.material.color = new Color(0.6745098f, 0.02352941f, 0.7686275f, 1f);
+                Preview2.material.color = new Color(0.6745098f, 0.02352941f, 0.7686275f, 1f);
+                Popup.transform.position = new Vector3(27, -4, 0);
+            }
         }
-        inButtonE = Physics2D.OverlapCircle(Finger.position, 0.2f, EndButton);
+        inButtonE = Physics2D.OverlapCircle(Finger.position, 0f, EndButton);
 
         if (inButtonE && Input.GetKeyUp(KeyCode.Space))
         {
@@ -72,7 +97,7 @@ public class Hand : MonoBehaviour
     }
     private void StartGame()
     {
-        inButtonS = Physics2D.OverlapCircle(Finger.position, 0.2f, StartButton);
+        inButtonS = Physics2D.OverlapCircle(Finger.position, 0f, StartButton);
         
 
         if (inButtonS && Input.GetKeyUp(KeyCode.Space))
@@ -99,14 +124,15 @@ public class Hand : MonoBehaviour
     private void GameSelect()
     {
 
-        inRed = Physics2D.OverlapCircle(Finger.position, 0.2f, RedTNT);
-        inBlue = Physics2D.OverlapCircle(Finger.position, 0.2f, BluTNT);
-        inPurple = Physics2D.OverlapCircle(Finger.position, 0.2f, PrpTNT);
+        inRed = Physics2D.OverlapCircle(Finger.position, 0.01f, RedTNT);
+        inBlue = Physics2D.OverlapCircle(Finger.position, 0.01f, BluTNT);
+        inPurple = Physics2D.OverlapCircle(Finger.position, 0.01f, PrpTNT);
 
         if (inRed)
         {
             Lata = "Energy";
-
+            
+            RedMachine.SetActive(true);
             if (inRed && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Energy");
@@ -116,7 +142,8 @@ public class Hand : MonoBehaviour
         else if (inBlue)
         {
             Lata = "Nutrition";
-
+            
+            BluMachine.SetActive(true);
             if (inBlue && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Nutrition");
@@ -126,7 +153,8 @@ public class Hand : MonoBehaviour
         else if (inPurple)
         {
             Lata = "Focus";
-
+            
+            PrpMachine.SetActive(true);
             if (inPurple && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Focus");
@@ -136,8 +164,16 @@ public class Hand : MonoBehaviour
         else
         {
             Lata = "";
+            RedMachine.SetActive(false);
+            BluMachine.SetActive(false);
+            PrpMachine.SetActive(false);
         }
 
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color= Color.red;
+        Gizmos.DrawWireSphere(Finger.position, size);
     }
     private void End()
     {

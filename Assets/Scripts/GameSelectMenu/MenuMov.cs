@@ -10,6 +10,7 @@ public class MenuMov : MonoBehaviour
     public float velocidade = 5f;
     int proximoPonto = 0;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
