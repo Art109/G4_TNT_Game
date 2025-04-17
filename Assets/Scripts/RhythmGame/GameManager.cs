@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
 
     public void NoteHit()
     {
-
+        if(gameOver) return;
         if (multiplier - 1 < multiplierThresholds.Length)
         {
             multiplierTracker++;
@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
     }
     public void BadHit()
     {
+        if (gameOver) return;
         score += scorePerBadHit * multiplier;
         healthBar.value = playerHealth;
         Heal();
@@ -180,6 +181,7 @@ public class GameManager : MonoBehaviour
     }
     public void GoodHit()
     {
+        if (gameOver) return;
         score += scorePerGoodHit * multiplier;
         Heal();
         healthBar.value = playerHealth;
@@ -188,6 +190,7 @@ public class GameManager : MonoBehaviour
     }
     public void PerfectHit()
     {
+        if (gameOver) return;
         score += scorePerPerfectHit * multiplier;
         NoteHit();
         Heal();
@@ -196,6 +199,7 @@ public class GameManager : MonoBehaviour
     }
     public void NoteMiss()
     {
+        if (gameOver) return;
         Debug.Log("Note Miss");
         multiplier = 1;
         multiplierTracker = 0;
