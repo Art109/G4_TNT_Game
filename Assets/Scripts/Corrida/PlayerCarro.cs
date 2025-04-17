@@ -4,17 +4,14 @@ using System.Collections;
 
 public class PlayerCarro : MonoBehaviour
 {
-    public float velocidade = 5f;
-    public float limiteEsquerdoX = -2.3f;
-    public float limiteDireitoX = 2.3f;
-    
+    public float velocidade = 8f;
+    public float limiteEsquerdoX = -3.5f;
+    public float limiteDireitoX = 3.5f;
 
     public static int pontuacaoAtual = 0;
-
     public static int latasColetadas = 0;
 
     private UIManager uiManager;
-
     private bool jogoTerminou = false;
 
     void Start()
@@ -23,11 +20,12 @@ public class PlayerCarro : MonoBehaviour
         latasColetadas = 0;
         jogoTerminou = false;
         Time.timeScale = 1f;
-        uiManager = FindObjectOfType<UIManager>();
 
+        
+        uiManager = FindObjectOfType<UIManager>();
         if (uiManager == null)
         {
-            Debug.LogError("UIManager não encontrado na cena!");
+            Debug.LogError("UIManager não encontrado na cena! Verifique se o GameObject está ativo e com o script anexado.");
         }
     }
 
@@ -50,22 +48,21 @@ public class PlayerCarro : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Inimigo"))
+        
+        if (!jogoTerminou)
         {
-            IniciarGameOver();
+            if (other.CompareTag("Inimigo"))
+            {
+                IniciarGameOver();
+            }
+            
         }
     }
 
     void IniciarGameOver()
     {
         if (jogoTerminou) return;
-
         jogoTerminou = true;
-
-        //Debug.Log("Colisão! Fim de Jogo!");
-
-        //Debug.Log("Pontuação Final: " + pontuacaoAtual);
-
         Time.timeScale = 0f;
 
         if (uiManager != null)
@@ -78,6 +75,7 @@ public class PlayerCarro : MonoBehaviour
 
     IEnumerator ReiniciarAposDelay(float delay)
     {
+        
         float tempoEsperado = Time.realtimeSinceStartup + delay;
         while (Time.realtimeSinceStartup < tempoEsperado)
         {
@@ -87,27 +85,25 @@ public class PlayerCarro : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    
+
     public void IniciarVitoria()
     {
         if (jogoTerminou) return;
-
         jogoTerminou = true;
-
-        //Debug.Log("Você Venceu!");
-
         Time.timeScale = 0f;
 
         if (uiManager != null)
         {
             float tempoFinal = uiManager.GetTempoFinal();
 
+            
             int pontuacaoOriginal = CalcularPontuacaoFinal(tempoFinal, latasColetadas);
 
-            const int maxScoreOriginalEstimado = 4000;
+            
+            const int maxScoreOriginalEstimado = 16000;
 
+            
             int pontuacaoFinalMapeada = 0;
-
             if (maxScoreOriginalEstimado > 0)
             {
                 float proporcao = Mathf.Clamp01((float)Mathf.Max(0, pontuacaoOriginal) / maxScoreOriginalEstimado);
@@ -116,8 +112,7 @@ public class PlayerCarro : MonoBehaviour
 
             Debug.Log($"Tempo Final: {tempoFinal:F2}s, Latas: {latasColetadas}, Pontuação Original: {pontuacaoOriginal}, Pontuação Mapeada (0-20): {pontuacaoFinalMapeada}");
 
-            //Debug.Log($"Tempo Final: {tempoFinal:F2}s, Latas: {latasColetadas}, Pontuação Calculada: {pontuacaoCalculada}");
-
+            
             uiManager.MostrarPontuacaoFinal(pontuacaoFinalMapeada);
         }
         else
@@ -126,6 +121,7 @@ public class PlayerCarro : MonoBehaviour
         }
     }
 
+    
     int CalcularPontuacaoFinal(float tempo, int latas)
     {
         int pontosBasePorLata = 100;
@@ -133,9 +129,7 @@ public class PlayerCarro : MonoBehaviour
         int bonusBase = 500;
 
         if (tempo < 0.1f) tempo = 0.1f;
-
         int pontuacao = bonusBase + (latas * pontosBasePorLata) + (int)(fatorTempo / tempo);
-
         return Mathf.Max(0, pontuacao);
     }
 }
