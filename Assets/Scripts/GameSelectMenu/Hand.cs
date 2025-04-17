@@ -37,11 +37,14 @@ public class Hand : MonoBehaviour
     public GameObject Machine;
     public float size;
     public GameObject Popup;
+    public GameObject spin;
+    private int LataID;
+
     void Start()
     {
         
         HandRB = GetComponent<Rigidbody2D>();
-        
+        LataID = 0;
     }
 
 
@@ -136,7 +139,10 @@ public class Hand : MonoBehaviour
             if (inRed && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Energy");
-                SceneManager.LoadScene(1);
+                spin.transform.eulerAngles = new Vector3(0, 0, 20);
+                RedMachine.transform.localScale = new Vector3(3, 3, 1);
+                LataID = 1;
+                StartCoroutine(Wait());
             }
         }
         else if (inBlue)
@@ -147,7 +153,10 @@ public class Hand : MonoBehaviour
             if (inBlue && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Nutrition");
-                SceneManager.LoadScene(2);
+                spin.transform.eulerAngles = new Vector3(0, 0, 20);
+                BluMachine.transform.localScale = new Vector3(3, 3, 1);
+                LataID = 2;
+                StartCoroutine(Wait());
             }
         }
         else if (inPurple)
@@ -158,12 +167,17 @@ public class Hand : MonoBehaviour
             if (inPurple && Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("Focus");
-                SceneManager.LoadScene(3);
+                spin.transform.eulerAngles = new Vector3(0, 0, 20);
+                PrpMachine.transform.localScale = new Vector3(3, 3, 1);
+                LataID = 3;
+                StartCoroutine(Wait());
+
             }
         }
         else
         {
             Lata = "";
+            spin.transform.eulerAngles = new Vector3(0, 0, 1);
             RedMachine.SetActive(false);
             BluMachine.SetActive(false);
             PrpMachine.SetActive(false);
@@ -172,8 +186,13 @@ public class Hand : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color= Color.red;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(Finger.position, size);
+    }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.8f);
+        SceneManager.LoadScene(LataID);
     }
     private void End()
     {
