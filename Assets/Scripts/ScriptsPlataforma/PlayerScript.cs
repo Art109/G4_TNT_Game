@@ -147,16 +147,13 @@ public class PlayerScript : MonoBehaviour
         {
             if (paused)
             {
-                paused = false;
                 Resume();
             }
             else
             {
-                paused = true;
                 Pause();
             }
         }
-
 
         Timer();
         Move();
@@ -311,16 +308,33 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void Pause()
+    public void Pause()
     {
+        paused = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         pauseObejct.SetActive(true);
     }
 
-    void Resume()
+    public void Resume()
     {
+        paused = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         pauseObejct.SetActive(false);
+    }
+
+    public void ResetLevel()
+    {
+        // Temporário
+        SceneManager.LoadScene("PlataformaPrototipo");
+    }
+
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void Move()
