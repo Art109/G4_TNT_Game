@@ -98,6 +98,14 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject[] fruitsPrefab;
     private bool oneC = true;
+    [SerializeField]
+    private GameObject tntObject;
+    [SerializeField]
+    private GameObject smokePrefab;
+    [SerializeField]
+    private Transform launchSmoke;
+    [SerializeField]
+    private GameObject returnMenu;
 
     [Header("Canvas Pause and Controls")]
     [SerializeField]
@@ -169,6 +177,12 @@ public class PlayerScript : MonoBehaviour
         cameraFollowOffsetScript.zooming = true;
         rb.gravityScale = 2f;
         rb.velocity = new Vector2(0, rb.velocity.y);
+
+        if (returnMenu.activeInHierarchy && Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene(0);
+        }
+
         if (fruitsCount >= 4)
         {
             animator.Play("idle");
@@ -180,6 +194,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            returnMenu.SetActive(true);
             animator.Play("angry");
         }
     }
@@ -232,6 +247,13 @@ public class PlayerScript : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
+        
+        GameObject smoke = Instantiate(smokePrefab, launchSmoke.position, Quaternion.identity);
+
+        Destroy(smoke, 0.9f);
+        tntObject.SetActive(true);
+
+        returnMenu.SetActive(true);
     }
 
     void Dead()
