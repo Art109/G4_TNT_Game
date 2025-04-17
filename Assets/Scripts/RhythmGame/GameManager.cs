@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject buttons;
     public GameObject UI;
+    public GameObject Tutorial;
    
 
     void Start()
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                Tutorial.SetActive(false);
                 winSrc.Play();
                 startplaying = true;
                 noteScroll.hasStarted = true;
