@@ -100,7 +100,7 @@ public class PlayerCarro : MonoBehaviour
             int pontuacaoOriginal = CalcularPontuacaoFinal(tempoFinal, latasColetadas);
 
             
-            const int maxScoreOriginalEstimado = 16000;
+            const int maxScoreOriginalEstimado = 7000;
 
             
             int pontuacaoFinalMapeada = 0;
@@ -110,7 +110,7 @@ public class PlayerCarro : MonoBehaviour
                 pontuacaoFinalMapeada = Mathf.RoundToInt(proporcao * 20f);
             }
 
-            Debug.Log($"Tempo Final: {tempoFinal:F2}s, Latas: {latasColetadas}, Pontuação Original: {pontuacaoOriginal}, Pontuação Mapeada (0-20): {pontuacaoFinalMapeada}");
+            //Debug.Log($"Tempo Final: {tempoFinal:F2}s, Latas: {latasColetadas}, Pontuação Original: {pontuacaoOriginal}, Pontuação Mapeada (0-20): {pontuacaoFinalMapeada}");
 
             
             uiManager.MostrarPontuacaoFinal(pontuacaoFinalMapeada);

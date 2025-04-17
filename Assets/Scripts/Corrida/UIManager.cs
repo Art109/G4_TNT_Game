@@ -19,14 +19,21 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI textoPontuacaoFinal;
     public GameObject painelGameOver;
 
-    
-    private float tempoDecorrido = 0f;
-    private bool cronometroAtivo = false;
+    [Header("Tela de Instruções")]
+    public GameObject painelInstrucoes;
 
-    
+    [Header("Valores Base para UI")]
     public float velocidadeNormalBase = 5f;
     public float velocidadeBoostBase = 10f;
     public float velocidadeFreioBase = 2f;
+
+    public KeyCode teclaFreio = KeyCode.LeftControl;
+    public KeyCode teclaBoost = KeyCode.LeftShift;
+    public KeyCode teclaIniciarJogo = KeyCode.Space;
+
+    private float tempoDecorrido = 0f;
+    private bool cronometroAtivo = false;
+    private bool instrucoesAtivas = false;
 
     void Start()
     {
@@ -35,17 +42,39 @@ public class UIManager : MonoBehaviour
         if (painelGameOver != null) painelGameOver.SetActive(false);
 
         
-        if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(true);
-        if (textoTempo != null) textoTempo.gameObject.SetActive(true);
-        if (textoLatas != null) textoLatas.gameObject.SetActive(true);
-        
-
-        IniciarCronometro();
+        if (painelInstrucoes != null && painelInstrucoes.activeSelf)
+        {
+            instrucoesAtivas = true;
+            Time.timeScale = 0f;
+            EsconderUIDaCorrida();
+            
+        }
+        else
+        {
+            
+            instrucoesAtivas = false;
+            Time.timeScale = 1f;
+            MostrarUIDaCorrida();
+            IniciarCronometro();
+            
+        }
     }
 
     void Update()
     {
-        
+
+        if (instrucoesAtivas)
+        {
+            
+            if (Input.GetKeyDown(teclaIniciarJogo))
+            {
+                
+                FecharInstrucoesEIniciarJogo();
+            }
+            
+            return;
+        }
+
         bool fimDeJogoAtivo = (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf) ||
                               (painelGameOver != null && painelGameOver.activeSelf);
 
@@ -62,6 +91,19 @@ public class UIManager : MonoBehaviour
     }
 
     
+    void FecharInstrucoesEIniciarJogo()
+    {
+        if (painelInstrucoes != null)
+        {
+            painelInstrucoes.SetActive(false);
+        }
+        instrucoesAtivas = false;
+        Time.timeScale = 1f;
+        MostrarUIDaCorrida();
+        IniciarCronometro();
+    }
+
+
 
     void AtualizarVelocidadeUI()
     {
@@ -168,6 +210,14 @@ public class UIManager : MonoBehaviour
         if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(false);
         if (textoTempo != null) textoTempo.gameObject.SetActive(false);
         if (textoLatas != null) textoLatas.gameObject.SetActive(false);
+        
+    }
+
+    private void MostrarUIDaCorrida()
+    {
+        if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(true);
+        if (textoTempo != null) textoTempo.gameObject.SetActive(true);
+        if (textoLatas != null) textoLatas.gameObject.SetActive(true);
         
     }
 }
