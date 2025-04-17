@@ -5,6 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+<<<<<<< HEAD
   - enabled: 1
     path: Assets/Scenes/LobbyScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -17,4 +18,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestNutrition.unity
     guid: 94a7548fc7bee1142b213afad27bb986
+=======
+  - enabled: 0
+    path: Assets/Scenes/Prototipo_corrida.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MenuPlaceholder.unity
+    guid: 74ee28b488e34204d87bd8b953da6a15
+  - enabled: 1
+    path: Assets/Scenes/Corrida.unity
+    guid: db4ca46f5e8304c48ac195413dc25aee
+>>>>>>> 24b35a40f063966e7bc78dd683409f8af7713853
   m_configObjects: {}
