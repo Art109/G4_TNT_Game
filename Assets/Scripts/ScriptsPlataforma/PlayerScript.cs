@@ -14,6 +14,8 @@ public class PlayerScript : MonoBehaviour
     private TrailRenderer tr;
     private Animator animator;
     private CinemachineImpulseSource impulseSource;
+    private SpriteRenderer sr;
+
     [Tooltip("Animator do Caldeirão")]
     [SerializeField]
     private Animator animatorCauldron;
@@ -78,6 +80,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("LifeController")]
     private bool isDead = false;
+    private bool isDecomposing = false;
 
     [Header("Timer")]
     [SerializeField]
@@ -95,6 +98,19 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject[] fruitsPrefab;
     private bool oneC = true;
+    [SerializeField]
+    private GameObject tntObject;
+    [SerializeField]
+    private GameObject smokePrefab;
+    [SerializeField]
+    private Transform launchSmoke;
+    [SerializeField]
+    private GameObject returnMenu;
+
+    [Header("Canvas Pause and Controls")]
+    [SerializeField]
+    private GameObject pauseObejct;
+    private bool paused = false;
 
 
     void Start()
@@ -102,6 +118,7 @@ public class PlayerScript : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
@@ -114,7 +131,7 @@ public class PlayerScript : MonoBehaviour
 
         isGroundedNoWallJump = Physics2D.OverlapCircle(footTransform.position, 0.2f, groundNoWallJumpLayer);
 
-
+        
 
         if (contactCauldron)
         {
@@ -134,6 +151,17 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (paused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
 
         Timer();
         Move();
@@ -149,6 +177,12 @@ public class PlayerScript : MonoBehaviour
         cameraFollowOffsetScript.zooming = true;
         rb.gravityScale = 2f;
         rb.velocity = new Vector2(0, rb.velocity.y);
+
+        if (returnMenu.activeInHierarchy && Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene(0);
+        }
+
         if (fruitsCount >= 4)
         {
             animator.Play("idle");
@@ -160,6 +194,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            returnMenu.SetActive(true);
             animator.Play("angry");
         }
     }
@@ -212,6 +247,13 @@ public class PlayerScript : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
+        
+        GameObject smoke = Instantiate(smokePrefab, launchSmoke.position, Quaternion.identity);
+
+        Destroy(smoke, 0.9f);
+        tntObject.SetActive(true);
+
+        returnMenu.SetActive(true);
     }
 
     void Dead()
@@ -220,13 +262,25 @@ public class PlayerScript : MonoBehaviour
         cameraFollowOffsetScript.targetZoom = 5f;
         cameraFollowOffsetScript.offsetX = 0f;
         rb.velocity = Vector3.zero;
-        animator.Play("dead");
-
+        if (!isDecomposing)
+        {
+            isDecomposing = true;
+            StartCoroutine(Decomposing());
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             // Temporário
             SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
         }
+    }
+
+    IEnumerator Decomposing()
+    {
+        animator.Play("dead");
+        yield return new WaitForSeconds(0.5f);
+        animator.Play("decomposing");
+        yield return new WaitForSeconds(0.5f);
+        sr.enabled = false;
     }
 
     void Timer()
@@ -253,10 +307,11 @@ public class PlayerScript : MonoBehaviour
 
     void TimeIsOver()
     {
-        
+        cameraFollowOffsetScript.targetZoom = 5f;
+        cameraFollowOffsetScript.zooming = true;
+        cameraFollowOffsetScript.offsetX = 0f;
         if (isTouchingWall)
         {
-            cameraFollowOffsetScript.offsetX = 0f;
             rb.gravityScale = 0f;
             rb.velocity = Vector3.zero;
             animator.Play("angry");
@@ -264,7 +319,6 @@ public class PlayerScript : MonoBehaviour
 
         if (rb.velocity.y == 0)
         {
-            cameraFollowOffsetScript.offsetX = 0f;
             animator.Play("angry");
             rb.velocity = Vector3.zero;
         }
@@ -274,6 +328,35 @@ public class PlayerScript : MonoBehaviour
             // Temporário
             SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
         }
+    }
+
+    public void Pause()
+    {
+        paused = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
+        pauseObejct.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        paused = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+        pauseObejct.SetActive(false);
+    }
+
+    public void ResetLevel()
+    {
+        // Temporário
+        SceneManager.LoadScene("PlataformaPrototipo");
+    }
+
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void Move()
@@ -383,7 +466,7 @@ public class PlayerScript : MonoBehaviour
     {
         bool dashInput = Input.GetKeyDown(KeyCode.LeftShift);
 
-        if (dashInput && canDash && !isTouchingWall)
+        if (dashInput && canDash && !isTouchingWall && !paused)
         {
             animator.Play("roll");
             isDashing = true;
