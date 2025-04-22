@@ -72,7 +72,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject pineappleObject;
 
-
     [Header("Cinemachine")]
     [SerializeField]
     private CameraFollowOffset cameraFollowOffsetScript;
@@ -91,6 +90,13 @@ public class PlayerScript : MonoBehaviour
     private bool timeStop = false;
     private bool timerIsOver = false;
 
+    [Header("UI Face")]
+    [SerializeField]
+    private Image imageField;
+    // Normal 0; Happy 1; Angry 2; Empty 3;
+    [SerializeField]
+    private Sprite[] facesUI;
+
     [Header("Condition Victory")]
     private bool contactCauldron = false;
     [SerializeField]
@@ -107,9 +113,11 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject returnMenu;
 
-    [Header("Canvas Pause and Controls")]
+    [Header("Canvas Pause, Death and Controls")]
     [SerializeField]
     private GameObject pauseObejct;
+    [SerializeField]
+    private GameObject deadObject;
     private bool paused = false;
 
 
@@ -186,6 +194,7 @@ public class PlayerScript : MonoBehaviour
         if (fruitsCount >= 4)
         {
             animator.Play("idle");
+            imageField.sprite = facesUI[1];
             if (oneC)
             {
                 oneC = false;
@@ -196,6 +205,7 @@ public class PlayerScript : MonoBehaviour
         {
             returnMenu.SetActive(true);
             animator.Play("angry");
+            imageField.sprite = facesUI[2];
         }
     }
 
@@ -258,6 +268,10 @@ public class PlayerScript : MonoBehaviour
 
     void Dead()
     {
+        imageField.sprite = facesUI[3];
+        deadObject.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         cameraFollowOffsetScript.zooming = true;
         cameraFollowOffsetScript.targetZoom = 5f;
         cameraFollowOffsetScript.offsetX = 0f;
@@ -266,11 +280,6 @@ public class PlayerScript : MonoBehaviour
         {
             isDecomposing = true;
             StartCoroutine(Decomposing());
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            // Temporário
-            SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
         }
     }
 
@@ -315,10 +324,12 @@ public class PlayerScript : MonoBehaviour
             rb.gravityScale = 0f;
             rb.velocity = Vector3.zero;
             animator.Play("angry");
+            imageField.sprite = facesUI[2];
         }
 
         if (rb.velocity.y == 0)
         {
+            imageField.sprite = facesUI[2];
             animator.Play("angry");
             rb.velocity = Vector3.zero;
         }
@@ -536,35 +547,33 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Apple"))
+        if (col.CompareTag("Apple") || col.CompareTag("Guava") || col.CompareTag("Pineapple") || col.CompareTag("Mango"))
         {
-           
+            StartCoroutine(ChangeFace());
             impulseSource.GenerateImpulse();
             fruitsCount += 1;
+        }
+
+        if (col.CompareTag("Apple"))
+        {
             appleObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Guava"))
         {
-            impulseSource.GenerateImpulse();
-            fruitsCount += 1;
             guavaObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Pineapple"))
         {
-            impulseSource.GenerateImpulse();
-            fruitsCount += 1;
             pineappleObject.SetActive(true);
             Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Mango"))
         {
-            impulseSource.GenerateImpulse();
-            fruitsCount += 1;
             mangoObject.SetActive(true);
             Destroy(col.gameObject);
         }
@@ -579,5 +588,12 @@ public class PlayerScript : MonoBehaviour
         {
             contactCauldron = true;
         }
+    }
+
+    IEnumerator ChangeFace()
+    {
+        imageField.sprite = facesUI[1];
+        yield return new WaitForSeconds(2);
+        imageField.sprite = facesUI[0];
     }
 }
