@@ -83,6 +83,8 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Timer")]
     [SerializeField]
+    private GameObject timerObject;
+    [SerializeField]
     private TextMeshProUGUI timerText;
     [SerializeField]
     [Tooltip("Tempo em Segundos")]
@@ -110,15 +112,27 @@ public class PlayerScript : MonoBehaviour
     private GameObject smokePrefab;
     [SerializeField]
     private Transform launchSmoke;
+
+    [Header("Book End")]
     [SerializeField]
-    private GameObject returnMenu;
+    private GameObject endMenu;
+    [SerializeField]
+    private TextMeshProUGUI textVictoryOrDefeat;
+    [SerializeField]
+    private TextMeshProUGUI timeRemaining;
+    [SerializeField]
+    private TextMeshProUGUI fruitsRemaining;
+    [SerializeField]
+    private GameObject tntUI;
 
     [Header("Canvas Pause, Death and Controls")]
     [SerializeField]
     private GameObject pauseObejct;
+    private bool paused = false;
     [SerializeField]
     private GameObject deadObject;
-    private bool paused = false;
+    [SerializeField]
+    private Image faceField;
 
 
     void Start()
@@ -186,15 +200,21 @@ public class PlayerScript : MonoBehaviour
         rb.gravityScale = 2f;
         rb.velocity = new Vector2(0, rb.velocity.y);
 
-        if (returnMenu.activeInHierarchy && Input.GetKeyDown(KeyCode.E))
+        timeRemaining.text = timerText.text;
+        fruitsRemaining.text = $"{fruitsCount}/4";
+
+        if (endMenu.activeInHierarchy && Input.GetKeyDown(KeyCode.E))
         {
             SceneManager.LoadScene(0);
         }
 
         if (fruitsCount >= 4)
         {
+            tntUI.SetActive(true);
+            textVictoryOrDefeat.text = "SUCESSO!";
             animator.Play("idle");
             imageField.sprite = facesUI[1];
+            faceField.sprite = facesUI[1];
             if (oneC)
             {
                 oneC = false;
@@ -203,9 +223,16 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            returnMenu.SetActive(true);
+            tntUI.SetActive(false);
+            textVictoryOrDefeat.text = "INGREDIENTES FALTANDO";
+            timerObject.SetActive(false);
+            faceField.sprite = facesUI[2];
+            endMenu.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             animator.Play("angry");
             imageField.sprite = facesUI[2];
+      
         }
     }
 
@@ -213,7 +240,7 @@ public class PlayerScript : MonoBehaviour
     {
         for (int i = 0; i < fruitsCount; i++)
         {
-            GameObject fruit = Instantiate(fruitsPrefab[Random.Range(0, fruitsPrefab.Length)], transform.position, Quaternion.identity);
+            GameObject fruit = Instantiate(fruitsPrefab[i], transform.position, Quaternion.identity);
             Vector3 start = transform.position;
             Vector3 end = cauldronTransfrom.position;
 
@@ -263,7 +290,10 @@ public class PlayerScript : MonoBehaviour
         Destroy(smoke, 0.9f);
         tntObject.SetActive(true);
 
-        returnMenu.SetActive(true);
+        timerObject.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        endMenu.SetActive(true);
     }
 
     void Dead()
