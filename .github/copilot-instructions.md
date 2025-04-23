@@ -2,7 +2,7 @@
 - Project name: G4_TNT_Game
 - Unity version: Unity 2022.3.57f1
 - Active game object:
-  - Name: Global Volume
+  - Name: background_0
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
