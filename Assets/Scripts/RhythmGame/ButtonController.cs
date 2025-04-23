@@ -19,7 +19,7 @@ public class ButtonController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.startplaying)
+        if (GameManager.instance.startplaying && GameManager.instance.menuPause == false)
         {
             buttons.SetActive(true);
    
