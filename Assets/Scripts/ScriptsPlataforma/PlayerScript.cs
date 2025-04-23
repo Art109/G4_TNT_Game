@@ -203,7 +203,7 @@ public class PlayerScript : MonoBehaviour
     {
         for (int i = 0; i < fruitsCount; i++)
         {
-            GameObject fruit = Instantiate(fruitsPrefab[Random.Range(0, fruitsPrefab.Length)], transform.position, Quaternion.identity);
+            GameObject fruit = Instantiate(fruitsPrefab[i], transform.position, Quaternion.identity);
             Vector3 start = transform.position;
             Vector3 end = cauldronTransfrom.position;
 
