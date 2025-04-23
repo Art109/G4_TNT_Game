@@ -39,7 +39,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private Transform wallCheckTransform;
     [SerializeField]
-    private float wallCheckRadius = 0.78f;
+    private float wallCheckRadius = 0.68f;
     [SerializeField]
     private float wallJumpXForce = 6f;
     [SerializeField]
