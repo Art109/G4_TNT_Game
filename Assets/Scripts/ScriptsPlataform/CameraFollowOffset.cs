@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
@@ -21,6 +19,8 @@ public class CameraFollowOffset : MonoBehaviour
     [SerializeField]
     private float zoomSpeed = 3f;
     public bool zooming = false;
+    [SerializeField]
+    private float offsetY = 0f;
 
     void Start()
     {
@@ -31,16 +31,17 @@ public class CameraFollowOffset : MonoBehaviour
     {
         if (playerScript.isLookingCamera())
         {
-            transposer.m_TrackedObjectOffset = new Vector3(offsetX, 0f, 0f);
+            transposer.m_TrackedObjectOffset = new Vector3(offsetX, offsetY, 0f);
         }
         else
         {
-            transposer.m_TrackedObjectOffset = new Vector3(-offsetX, 0f, 0f);
+            transposer.m_TrackedObjectOffset = new Vector3(-offsetX, offsetY, 0f);
         }
 
         if (zooming)
         {
             Zoom();
+            offsetY = 0.5f;
         }
     }
 
