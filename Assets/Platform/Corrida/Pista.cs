@@ -17,7 +17,8 @@ public class Pista : MonoBehaviour
 
     void Update()
     {
-        
+        if (Time.timeScale == 0f) return;
+
         float velocidadeAtual = CalcularVelocidadeAtual();
 
         
