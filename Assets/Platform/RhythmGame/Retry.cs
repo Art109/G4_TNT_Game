@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Retry : MonoBehaviour
 {
     public GameObject fadeOut;
-    public GameObject gameOver, retry;
+    public GameObject gameOver, retry, giveUp;
     public AudioSource music;
     public AudioSource select;
     private bool isRetrying = false;
@@ -25,8 +25,20 @@ public class Retry : MonoBehaviour
             isRetrying = true;
             music.Stop();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            select.Play();
+            fadeOut.SetActive(true);
+            Invoke("GiveUpAfterDelay", 3f);
+            isRetrying = true;
+            music.Stop();
+        }
     }
     void RetryAfterDelay()
+    {
+        SceneManager.LoadScene(4);
+    }
+    void GiveUpAfterDelay()
     {
         SceneManager.LoadScene(0);
     }
@@ -45,5 +57,6 @@ public class Retry : MonoBehaviour
     {
         gameOver.SetActive(true);
         retry.SetActive(true);
+        giveUp.SetActive(true);
     }
 }

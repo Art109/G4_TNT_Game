@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public bool startplaying;
     public NoteScroll noteScroll;
     public static GameManager instance;
+    public bool menuPause = false;
+
 
     // Scores
     public int scorePerBadHit = 100;
@@ -34,9 +36,9 @@ public class GameManager : MonoBehaviour
     public int damagePerMiss = 10;
     public int healingPerHit = 15;
     public Slider healthBar;
+    public bool missed = false;
 
     // Results
-
     public float totalNotes;
     public float totalBadHits;
     public float totalGoodHits;
@@ -48,9 +50,12 @@ public class GameManager : MonoBehaviour
     private float goodweight = 0.75f;
     private float perfectweight = 1.0f;
     public bool gameOver = false;
+    public bool canContinue = false;
+    public bool isContinuing = false;
 
     // Text Results
-
+    public GameObject continueCanva;
+    public GameObject transiction;
     public GameObject resultScreen;
     public Text missText, badsText, goodsText, perfectsText, percentsText, ranksText, finalScoresText;
 
@@ -59,6 +64,8 @@ public class GameManager : MonoBehaviour
     public GameObject buttons;
     public GameObject UI;
     public GameObject Tutorial;
+    public GameObject pauseMenu;
+    public GameObject L2, L1, R1, R2;
    
 
     void Start()
@@ -77,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+
 
         if (!startplaying)
         {
@@ -85,19 +92,29 @@ public class GameManager : MonoBehaviour
             {
                 Tutorial.SetActive(false);
                 winSrc.Play();
+                audSrc.Play();
                 startplaying = true;
                 noteScroll.hasStarted = true;
-                audSrc.Play();
                 Time.timeScale = 1f;
+                L2.gameObject.SetActive(true);
+                L1.gameObject.SetActive(true);
+                R1.gameObject.SetActive(true);
+                R2.gameObject.SetActive(true);
             }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(0);
+            }
+            
             return;
         }
         else
         {
-            if (!audSrc.isPlaying && !resultScreen.activeInHierarchy)
+            if (!audSrc.isPlaying && !resultScreen.activeInHierarchy && menuPause == false && isContinuing == false)
             {
-                resultScreen.SetActive(true);
                 winSrc.Play();
+                transiction.SetActive(true);
+                Invoke("ResultsAfterDelay", 1.3f);
                 badsText.text = "" + totalBadHits;
                 goodsText.text = totalGoodHits.ToString();
                 perfectsText.text = totalPerfectHits.ToString();
@@ -107,10 +124,11 @@ public class GameManager : MonoBehaviour
                 totalPercentHit = (totalHits / totalNotes) * 100;
 
                 percentsText.text = totalPercentHit.ToString("F1") + "%";
-
+                
                 buttons.SetActive(false);
                 UI.SetActive(false);
-
+                StartCoroutine (CanPressAfterDelay());
+                
                 string rankVal = "F";
 
 
@@ -145,7 +163,34 @@ public class GameManager : MonoBehaviour
             }
 
         }
-    }
+
+            if (Input.GetKeyDown(KeyCode.Escape) && menuPause == false)
+            {
+          
+                menuPause = true;
+                Time.timeScale = 0f;
+                pauseMenu.SetActive(true);
+                audSrc.Pause();
+              
+        }
+            else if(Input.GetKeyDown(KeyCode.Escape) && menuPause == true)
+            {
+                menuPause = false;
+                Time.timeScale = 1f;
+                audSrc.Play();
+                pauseMenu.SetActive(false);
+            }
+            if (canContinue == true && Input.GetKeyDown(KeyCode.Space))
+            {
+            continueCanva.SetActive(true);
+            resultScreen.SetActive(false);
+            isContinuing = true;
+            }
+
+       
+}
+    
+
 
 
     public void NoteHit()
@@ -165,8 +210,6 @@ public class GameManager : MonoBehaviour
         }
 
         multiText.text = "Multiplier: x" + multiplier;
-
-
         scoreText.text = "Score: " + score;
     }
     public void BadHit()
@@ -199,6 +242,7 @@ public class GameManager : MonoBehaviour
     }
     public void NoteMiss()
     {
+        
         if (gameOver) return;
         Debug.Log("Note Miss");
         multiplier = 1;
@@ -207,6 +251,7 @@ public class GameManager : MonoBehaviour
         score -= scorePerMissHit;
         scoreText.text = "Score: " + score;
         totalMissHits++;
+        
 
     }
     public void Punishment()
@@ -218,6 +263,7 @@ public class GameManager : MonoBehaviour
         healthBar.value = playerHealth;
         scoreText.text = "Score: " + score;
         missSrc.Play();
+        
 
         if (playerHealth <= 0)
         {
@@ -245,6 +291,29 @@ public class GameManager : MonoBehaviour
     void LoadSceneAfterDelay()
     {
         SceneManager.LoadScene(1);
+    }
+    public void Resume()
+    {
+        menuPause = false;
+        Time.timeScale = 1f;
+        audSrc.Play();
+        pauseMenu.SetActive(false);
+
+    }
+    public void Home()
+    {
+        SceneManager.LoadScene(0);
+    }
+    void ResultsAfterDelay()
+    {
+        resultScreen.SetActive(true);
+    }
+    IEnumerator CanPressAfterDelay()
+    {
+        yield return new WaitForSeconds(9);
+
+        canContinue = true;
+
     }
 }
 

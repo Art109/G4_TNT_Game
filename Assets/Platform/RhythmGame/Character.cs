@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.startplaying)
+        if (GameManager.instance.startplaying && GameManager.instance.menuPause == false)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -32,6 +32,11 @@ public class Character : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 PlayAnimation("Right");
+            }
+            if(GameManager.instance.missed)
+            {
+                PlayAnimation("Hurt");
+                GameManager.instance.missed = false;
             }
         }
 

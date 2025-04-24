@@ -5,8 +5,10 @@ using static UnityEditor.PlayerSettings;
 
 public class NoteObject : MonoBehaviour
 {
+    public bool missed = false;
     public bool canBePressed;
     public KeyCode keyToBePressed;
+  
 
     // Effects
     public GameObject hitEffect, goodHitEffect, perfectHitEffect, missHitEffect;
@@ -60,6 +62,7 @@ public class NoteObject : MonoBehaviour
         {
             if (other.tag == "Activator")
             {
+                GameManager.instance.missed = true;
                 GameManager.instance.NoteMiss();
                 GameManager.instance.Punishment();
                 canBePressed = false;
