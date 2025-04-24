@@ -138,7 +138,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Audios")]
     [SerializeField]
-    private AudioSource jump, dropFruit;
+    private AudioSource jump, dropFruit, magicExplosion;
     [SerializeField]
     private AudioSource[] footsteps;
 
@@ -298,7 +298,9 @@ public class PlayerScript : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
-        
+
+        magicExplosion.Play();
+        yield return new WaitForSeconds(0.5f);
         GameObject smoke = Instantiate(smokePrefab, launchSmoke.position, Quaternion.identity);
 
         Destroy(smoke, 0.9f);
