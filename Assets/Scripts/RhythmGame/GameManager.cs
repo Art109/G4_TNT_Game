@@ -50,9 +50,12 @@ public class GameManager : MonoBehaviour
     private float goodweight = 0.75f;
     private float perfectweight = 1.0f;
     public bool gameOver = false;
+    public bool canContinue = false;
+    public bool isContinuing = false;
 
     // Text Results
-
+    public GameObject continueCanva;
+    public GameObject transiction;
     public GameObject resultScreen;
     public Text missText, badsText, goodsText, perfectsText, percentsText, ranksText, finalScoresText;
 
@@ -107,10 +110,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (!audSrc.isPlaying && !resultScreen.activeInHierarchy && menuPause == false)
+            if (!audSrc.isPlaying && !resultScreen.activeInHierarchy && menuPause == false && isContinuing == false)
             {
-                resultScreen.SetActive(true);
                 winSrc.Play();
+                transiction.SetActive(true);
+                Invoke("ResultsAfterDelay", 1.3f);
                 badsText.text = "" + totalBadHits;
                 goodsText.text = totalGoodHits.ToString();
                 perfectsText.text = totalPerfectHits.ToString();
@@ -120,10 +124,11 @@ public class GameManager : MonoBehaviour
                 totalPercentHit = (totalHits / totalNotes) * 100;
 
                 percentsText.text = totalPercentHit.ToString("F1") + "%";
-
+                
                 buttons.SetActive(false);
                 UI.SetActive(false);
-
+                StartCoroutine (CanPressAfterDelay());
+                
                 string rankVal = "F";
 
 
@@ -175,7 +180,15 @@ public class GameManager : MonoBehaviour
                 audSrc.Play();
                 pauseMenu.SetActive(false);
             }
-        }
+            if (canContinue == true && Input.GetKeyDown(KeyCode.Space))
+            {
+            continueCanva.SetActive(true);
+            resultScreen.SetActive(false);
+            isContinuing = true;
+            }
+
+       
+}
     
 
 
@@ -290,6 +303,17 @@ public class GameManager : MonoBehaviour
     public void Home()
     {
         SceneManager.LoadScene(0);
+    }
+    void ResultsAfterDelay()
+    {
+        resultScreen.SetActive(true);
+    }
+    IEnumerator CanPressAfterDelay()
+    {
+        yield return new WaitForSeconds(9);
+
+        canContinue = true;
+
     }
 }
 
