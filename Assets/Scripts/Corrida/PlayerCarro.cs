@@ -8,8 +8,17 @@ public class PlayerCarro : MonoBehaviour
     public float limiteEsquerdoX = -3.5f;
     public float limiteDireitoX = 3.5f;
 
-    public static int pontuacaoAtual = 0;
-    public static int latasColetadas = 0;
+    // Renomeado para consistência e removido static se não for necessário globalmente
+    public static int pontuacaoAtual = 0; // Mantido static para ColetavelPonto acessar
+    public static int latasColetadas = 0; // Mantido static para ColetavelPonto acessar
+
+    // --- Adição: Tempo de exibição do Game Over ---
+    public float tempoExibicaoGameOver = 4.0f;
+    // -------------------------------------------
+
+    // Flag estática para parada de respawn (necessária para LinhaChegada/Gerenciador)
+    // Certifique-se que ela existe se a lógica de parada de respawn ainda for desejada
+    public static bool LinhaDeChegadaPassou = false;
 
     private UIManager uiManager;
     private bool jogoTerminou = false;
@@ -20,13 +29,15 @@ public class PlayerCarro : MonoBehaviour
         latasColetadas = 0;
         jogoTerminou = false;
         Time.timeScale = 1f;
+        LinhaDeChegadaPassou = false; // Reseta a flag
 
-        
         uiManager = FindObjectOfType<UIManager>();
         if (uiManager == null)
         {
             Debug.LogError("UIManager não encontrado na cena! Verifique se o GameObject está ativo e com o script anexado.");
         }
+        // Opcional: Chamar reset do UIManager aqui se necessário
+        // if (uiManager != null) uiManager.ResetUI();
     }
 
     void Update()
@@ -35,6 +46,8 @@ public class PlayerCarro : MonoBehaviour
         {
             MoverJogador();
         }
+        // Opcional: Atualizar HUD de pontuação/latas via UIManager se necessário
+        // if (uiManager != null && !jogoTerminou) uiManager.AtualizarHUD(pontuacaoAtual, latasColetadas);
     }
 
     void MoverJogador()
@@ -48,14 +61,13 @@ public class PlayerCarro : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
         if (!jogoTerminou)
         {
             if (other.CompareTag("Inimigo"))
             {
                 IniciarGameOver();
             }
-            
+            // A lógica de coletar latas deve estar no ColetavelPonto.cs, incrementando as variáveis estáticas
         }
     }
 
@@ -63,25 +75,36 @@ public class PlayerCarro : MonoBehaviour
     {
         if (jogoTerminou) return;
         jogoTerminou = true;
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // Pausa o jogo
 
+        Debug.Log("Colisão! Fim de Jogo! Pontuação Final: " + pontuacaoAtual); // Log interno
+
+        // --- Modificação: Passa a pontuação para o UIManager ---
         if (uiManager != null)
         {
-            uiManager.MostrarGameOver();
+            // Assumindo que MostrarGameOver agora aceita a pontuação
+            uiManager.MostrarGameOver(pontuacaoAtual);
         }
+        else
+        {
+            Debug.LogError("UIManager não encontrado para mostrar Game Over!");
+        }
+        // ------------------------------------------------------
 
-        StartCoroutine(ReiniciarAposDelay(2.0f));
+        // Inicia a rotina para reiniciar usando o tempo definido
+        StartCoroutine(ReiniciarAposDelay(tempoExibicaoGameOver));
     }
 
     IEnumerator ReiniciarAposDelay(float delay)
     {
-        
-        float tempoEsperado = Time.realtimeSinceStartup + delay;
-        while (Time.realtimeSinceStartup < tempoEsperado)
-        {
-            yield return null;
-        }
-        Time.timeScale = 1f;
+        // Usa WaitForSecondsRealtime para esperar mesmo com Time.timeScale = 0
+        yield return new WaitForSecondsRealtime(delay);
+
+        // Ações ANTES de recarregar a cena
+        Time.timeScale = 1f; // Restaura o tempo
+        LinhaDeChegadaPassou = false; // Reseta a flag
+
+        // Recarrega a cena
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -94,25 +117,16 @@ public class PlayerCarro : MonoBehaviour
 
         if (uiManager != null)
         {
-            float tempoFinal = uiManager.GetTempoFinal();
-
-            
+            float tempoFinal = uiManager.GetTempoFinal(); // Assume que UIManager controla o tempo
             int pontuacaoOriginal = CalcularPontuacaoFinal(tempoFinal, latasColetadas);
-
-            
-            const int maxScoreOriginalEstimado = 7000;
-
-            
+            const int maxScoreOriginalEstimado = 7000; // Mantido seu cálculo
             int pontuacaoFinalMapeada = 0;
             if (maxScoreOriginalEstimado > 0)
             {
                 float proporcao = Mathf.Clamp01((float)Mathf.Max(0, pontuacaoOriginal) / maxScoreOriginalEstimado);
                 pontuacaoFinalMapeada = Mathf.RoundToInt(proporcao * 20f);
             }
-
-            //Debug.Log($"Tempo Final: {tempoFinal:F2}s, Latas: {latasColetadas}, Pontuação Original: {pontuacaoOriginal}, Pontuação Mapeada (0-20): {pontuacaoFinalMapeada}");
-
-            
+            // Passa a pontuação mapeada para o UIManager mostrar
             uiManager.MostrarPontuacaoFinal(pontuacaoFinalMapeada);
         }
         else
@@ -121,13 +135,12 @@ public class PlayerCarro : MonoBehaviour
         }
     }
 
-    
+    // Cálculo de pontuação (mantido como estava)
     int CalcularPontuacaoFinal(float tempo, int latas)
     {
         int pontosBasePorLata = 100;
         float fatorTempo = 10000f;
         int bonusBase = 500;
-
         if (tempo < 0.1f) tempo = 0.1f;
         int pontuacao = bonusBase + (latas * pontosBasePorLata) + (int)(fatorTempo / tempo);
         return Mathf.Max(0, pontuacao);

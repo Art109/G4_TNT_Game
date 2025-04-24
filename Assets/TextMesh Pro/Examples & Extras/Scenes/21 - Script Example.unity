@@ -120,11 +120,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity
   - component: {fileID: 1079079957}
   - component: {fileID: 1079079956}
   - component: {fileID: 1079079953}
-========
   - component: {fileID: 319160673}
   - component: {fileID: 319160672}
   m_Layer: 0
