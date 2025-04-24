@@ -15,25 +15,17 @@ TagManager:
   - Inimigo
   - Coletavel
   - finger
-
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Coletaveis
+  - 
   - Water
   - UI
-  - Ground
-  - GroundNoWallJump
   - 
   - 
-  - StartButton
-  - Water
-  - UI
-  - RedTNT
-  - BluTNT
-  - PrpTNT
-  - ExitButton
+  - 
+  - 
   - 
   - 
   - 
