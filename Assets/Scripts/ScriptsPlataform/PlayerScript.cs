@@ -91,6 +91,8 @@ public class PlayerScript : MonoBehaviour
     private float time = 300f;
     private bool timeStop = false;
     private bool timerIsOver = false;
+    [SerializeField]
+    private GameObject timeIsOverObject;
 
     [Header("UI Face")]
     [SerializeField]
@@ -349,12 +351,17 @@ public class PlayerScript : MonoBehaviour
         cameraFollowOffsetScript.targetZoom = 5f;
         cameraFollowOffsetScript.zooming = true;
         cameraFollowOffsetScript.offsetX = 0f;
+
         if (isTouchingWall)
         {
             rb.gravityScale = 0f;
             rb.velocity = Vector3.zero;
             animator.Play("angry");
             imageField.sprite = facesUI[2];
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            timeIsOverObject.SetActive(true);
         }
 
         if (rb.velocity.y == 0)
@@ -362,13 +369,13 @@ public class PlayerScript : MonoBehaviour
             imageField.sprite = facesUI[2];
             animator.Play("angry");
             rb.velocity = Vector3.zero;
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            timeIsOverObject.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            // Temporário
-            SceneManager.LoadScene("Assets/Scenes/PlataformaPrototipo.unity");
-        }
+
     }
 
     public void Pause()
