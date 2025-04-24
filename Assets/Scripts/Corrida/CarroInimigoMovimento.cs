@@ -24,6 +24,8 @@ public class CarroInimigoMovimento : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0f) return;
+
         float velocidadeAtual;
         if (Input.GetKey(KeyCode.LeftControl)) { velocidadeAtual = velocidadeFreio; }
         else if (Input.GetKey(KeyCode.LeftShift)) { velocidadeAtual = velocidadeBoost; }

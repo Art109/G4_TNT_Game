@@ -31,12 +31,8 @@ public class ColetavelPonto : MonoBehaviour
 
     void Update()
     {
-        
-        if (Time.timeScale == 0f)
-        {
-            
-            return;
-        }
+
+        if (Time.timeScale == 0f) return;
 
         MoverColetavel();
         VerificarSaidaDaTela();
