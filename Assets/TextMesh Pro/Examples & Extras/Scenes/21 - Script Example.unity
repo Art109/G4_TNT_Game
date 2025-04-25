@@ -112,7 +112,15 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &1079079952
+=======
+<<<<<<< HEAD:Assets/Scenes/SampleScene.unity
+--- !u!1 &519420028
+=======
+--- !u!1 &1079079952
+>>>>>>> b9e09bbd86646cb4809cd9f630c36009dee1ba71:Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity
+>>>>>>> 244c2f0a3bf80d56b2bc6f188b50528e16d4ae2a
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,6 +128,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 1079079957}
   - component: {fileID: 1079079956}
   - component: {fileID: 1079079953}
@@ -211,6 +220,17 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
 >>>>>>>> 94f0e9e29c0fd27de124a76eac1cbc875f59861e:Assets/Scenes/Fail.unity
+=======
+<<<<<<< HEAD:Assets/Scenes/SampleScene.unity
+  - component: {fileID: 519420032}
+  - component: {fileID: 519420031}
+  - component: {fileID: 519420029}
+=======
+  - component: {fileID: 1079079957}
+  - component: {fileID: 1079079956}
+  - component: {fileID: 1079079953}
+>>>>>>> b9e09bbd86646cb4809cd9f630c36009dee1ba71:Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity
+>>>>>>> 244c2f0a3bf80d56b2bc6f188b50528e16d4ae2a
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -282,6 +302,74 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:Assets/Scenes/SampleScene.unity
+--- !u!1001 &8544307350426513597
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500649073767116951, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981961379603131702, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+      propertyPath: m_Name
+      value: Square
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5658597f57c052541b665d5f7d82e743, type: 3}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 519420032}
+  - {fileID: 8544307350426513597}
+=======
+>>>>>>> 244c2f0a3bf80d56b2bc6f188b50528e16d4ae2a
 --- !u!1 &1888731522
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,3 +413,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
+=======
+>>>>>>> b9e09bbd86646cb4809cd9f630c36009dee1ba71:Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity
+>>>>>>> 244c2f0a3bf80d56b2bc6f188b50528e16d4ae2a

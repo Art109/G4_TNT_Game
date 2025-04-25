@@ -11,11 +11,15 @@ TagManager:
   - Mango
   - Death
   - Cauldron
+<<<<<<< HEAD
   - Obstacle
   - Inimigo
   - Coletavel
   - finger
   - Activator
+=======
+  - finger
+>>>>>>> 244c2f0a3bf80d56b2bc6f188b50528e16d4ae2a
   layers:
   - Default
   - TransparentFX
@@ -23,10 +27,21 @@ TagManager:
   - 
   - Water
   - UI
+<<<<<<< HEAD
   - GroundWallJump
   - GroundNoWallJump
   - 
   - 
+=======
+  - Ground
+  - GroundNoWallJump
+  - 
+  - 
+  - RedTNT
+  - BluTNT
+  - PrpTNT
+  - ExitButton
+>>>>>>> 244c2f0a3bf80d56b2bc6f188b50528e16d4ae2a
   - 
   - 
   - 
