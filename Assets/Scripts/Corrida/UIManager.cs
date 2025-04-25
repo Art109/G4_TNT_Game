@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -18,81 +19,121 @@ public class UIManager : MonoBehaviour
     public GameObject painelPontuacaoFinal;
     public TextMeshProUGUI textoPontuacaoFinal;
     public GameObject painelGameOver;
-    
     public TextMeshProUGUI textoGameOverMensagem;
-    
 
     [Header("Tela de Instruções")]
     public GameObject painelInstrucoes;
 
-    public KeyCode teclaFreio = KeyCode.LeftControl;
-    public KeyCode teclaBoost = KeyCode.LeftShift;
-    public KeyCode teclaIniciarJogo = KeyCode.Space;
-    public KeyCode teclaVoltarMenu = KeyCode.Return;
-    public KeyCode teclaPause = KeyCode.Escape;
-
     [Header("Painel de Pause")]
     public GameObject painelPause;
 
+    [Header("Controles")]
+    public KeyCode teclaFreio = KeyCode.LeftControl;
+    public KeyCode teclaBoost = KeyCode.LeftShift;
+    public KeyCode teclaIniciarJogo = KeyCode.Space;
+    public KeyCode teclaPause = KeyCode.Escape;
+    public KeyCode teclaVoltarMenu = KeyCode.Return;
+
+    [Header("Contagem Regressiva")]
+    public TextMeshProUGUI textoContagemRegressiva;
+    public AudioClip somContagem;
+    public AudioClip somGo;
+    public float delayInicialContagem = 0.5f;
+    public float tempoEntreNumeros = 1.0f;
+
+    
+    private AudioSource audioSourceEfeitos;
+
+    
     private float tempoDecorrido = 0f;
     private bool cronometroAtivo = false;
     private bool instrucoesAtivas = false;
     private bool jogoPausado = false;
+    private bool jogoRealmenteIniciado = false;
 
     private SceneLoader sceneLoader;
 
+    
+    void Awake()
+    {
+        
+        audioSourceEfeitos = GetComponent<AudioSource>();
+        if (audioSourceEfeitos == null)
+        {
+            Debug.LogWarning("AudioSource não encontrado no UIManager. Adicionando um...");
+            audioSourceEfeitos = gameObject.AddComponent<AudioSource>();
+            audioSourceEfeitos.playOnAwake = false;
+            audioSourceEfeitos.spatialBlend = 0f;
+        }
+    }
 
     void Start()
     {
         sceneLoader = FindObjectOfType<SceneLoader>();
-        if (sceneLoader == null) { /* Log Warning */ }
+        
 
+        
         if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
         if (painelGameOver != null) painelGameOver.SetActive(false);
         if (painelPause != null) painelPause.SetActive(false);
 
+        
+        jogoRealmenteIniciado = false;
+        jogoPausado = false;
+        instrucoesAtivas = false;
+
+        
+        EsconderUIDaCorrida();
+        if (textoContagemRegressiva != null)
+        {
+            textoContagemRegressiva.text = "";
+            textoContagemRegressiva.gameObject.SetActive(false);
+        }
+
+        
         if (painelInstrucoes != null && painelInstrucoes.activeSelf)
         {
             instrucoesAtivas = true;
             Time.timeScale = 0f;
-            EsconderUIDaCorrida();
         }
         else
         {
             instrucoesAtivas = false;
-            Time.timeScale = 1f;
-            MostrarUIDaCorrida();
-            IniciarCronometro();
+            Time.timeScale = 0f;
+            StartCoroutine(RotinaContagemRegressiva());
         }
-        jogoPausado = false;
     }
 
+    
     void Update()
     {
-
-        if (!instrucoesAtivas)
+        
+        if (jogoRealmenteIniciado && Time.timeScale != 0f)
         {
             VerificarInputPause();
         }
-        
-        if (jogoPausado)
-        {
-            return;
-        }
 
+        
+        if (jogoPausado) { return; }
+
+        
         if (instrucoesAtivas)
         {
-            if (Input.GetKeyDown(teclaIniciarJogo)) { FecharInstrucoesEIniciarJogo(); }
+            if (Input.GetKeyDown(teclaIniciarJogo))
+            {
+                FecharInstrucoesEIniciarContagem();
+            }
             return;
         }
 
         
-        if (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf)
+        bool fimDeJogoAtivo = (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf) ||
+                              (painelGameOver != null && painelGameOver.activeSelf);
+        if (fimDeJogoAtivo)
         {
-            if (Input.GetKeyDown(teclaVoltarMenu))
+            if (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf && Input.GetKeyDown(teclaVoltarMenu))
             {
-                Debug.Log("Tecla Voltar Menu pressionada na tela de vitória.");
-                if (sceneLoader != null) { sceneLoader.CarregarCenaPorIndice(0); }
+                if (sceneLoader != null) { Time.timeScale = 1f; sceneLoader.CarregarCenaPorIndice(0); }
                 else { Debug.LogError("SceneLoader não encontrado!"); }
             }
             
@@ -100,27 +141,80 @@ public class UIManager : MonoBehaviour
         }
 
         
-        if (painelGameOver != null && painelGameOver.activeSelf)
+        if (jogoRealmenteIniciado)
         {
-            return;
+            AtualizarVelocidadeUI();
+            AtualizarTempoUI();
+            AtualizarLatasUI();
         }
+    }
 
-        AtualizarVelocidadeUI();
-        AtualizarTempoUI();
-        AtualizarLatasUI();
+    
+    IEnumerator RotinaContagemRegressiva()
+    {
+        EsconderUIDaCorrida();
+        if (textoContagemRegressiva != null) textoContagemRegressiva.gameObject.SetActive(true);
 
+        
+        yield return new WaitForSecondsRealtime(delayInicialContagem);
+
+        
+        if (textoContagemRegressiva != null) textoContagemRegressiva.text = "3";
+        TocarSom(somContagem);
+        yield return new WaitForSecondsRealtime(tempoEntreNumeros);
+
+        
+        if (textoContagemRegressiva != null) textoContagemRegressiva.text = "2";
+        TocarSom(somContagem);
+        yield return new WaitForSecondsRealtime(tempoEntreNumeros);
+
+        
+        if (textoContagemRegressiva != null) textoContagemRegressiva.text = "1";
+        TocarSom(somContagem);
+        yield return new WaitForSecondsRealtime(tempoEntreNumeros);
+
+        
+        if (textoContagemRegressiva != null) textoContagemRegressiva.text = "GO!";
+        TocarSom(somGo);
+
+        
+        Time.timeScale = 1f;
+        IniciarJogoDeVerdade();
+
+        
+        yield return new WaitForSecondsRealtime(0.7f);
+        if (textoContagemRegressiva != null) textoContagemRegressiva.gameObject.SetActive(false);
+    }
+
+    
+    void IniciarJogoDeVerdade()
+    {
+        jogoRealmenteIniciado = true;
+        
+        MostrarUIDaCorrida();
+        IniciarCronometro();
+        Debug.Log("Jogo Iniciado!");
+    }
+
+    void TocarSom(AudioClip clip)
+    {
+        if (audioSourceEfeitos != null && clip != null)
+        {
+            audioSourceEfeitos.PlayOneShot(clip);
+        }
     }
 
     void VerificarInputPause()
     {
-        bool fimDeJogoAtivo = (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf) ||
-                              (painelGameOver != null && painelGameOver.activeSelf);
-        if (fimDeJogoAtivo) return;
-
+        
         if (Input.GetKeyDown(teclaPause))
         {
+            
             if (jogoPausado) { DespausarJogo(); }
-            else { PausarJogo(); }
+            else if (Time.timeScale > 0f)
+            {
+                PausarJogo();
+            }
         }
     }
 
@@ -140,21 +234,22 @@ public class UIManager : MonoBehaviour
         Debug.Log("Jogo Despausado");
     }
 
-
-    void FecharInstrucoesEIniciarJogo()
+    void FecharInstrucoesEIniciarContagem()
     {
         if (painelInstrucoes != null) { painelInstrucoes.SetActive(false); }
         instrucoesAtivas = false;
-        Time.timeScale = 1f;
-        MostrarUIDaCorrida();
-        IniciarCronometro();
+        
+        Time.timeScale = 0f;
+        EsconderUIDaCorrida();
+        StartCoroutine(RotinaContagemRegressiva());
     }
 
 
+    
     void AtualizarVelocidadeUI()
     {
         if (textoVelocidade == null) return;
-        float velocidadeAtualExibida = 0f;
+        float velocidadeAtualExibida = 80;
         Color corAtual = corVelocidadeNormal;
 
         if (Input.GetKey(teclaFreio))
@@ -162,25 +257,23 @@ public class UIManager : MonoBehaviour
             velocidadeAtualExibida = 20;
             corAtual = corVelocidadeFreio;
         }
-        
         else if (Input.GetKey(teclaBoost))
         {
             velocidadeAtualExibida = 120;
             corAtual = corVelocidadeBoost;
         }
-        else
-        {
-            velocidadeAtualExibida = 80;
-            corAtual = corVelocidadeNormal;
-        }
-        textoVelocidade.text = $"Velocidade: {velocidadeAtualExibida.ToString("F0")} km/h";
+        textoVelocidade.text = $"Vel: {velocidadeAtualExibida:F0} km/h";
         textoVelocidade.color = corAtual;
     }
 
     void AtualizarTempoUI()
     {
         if (textoTempo == null) return;
-        if (cronometroAtivo) { tempoDecorrido += Time.deltaTime; }
+        
+        if (jogoRealmenteIniciado && cronometroAtivo)
+        {
+            tempoDecorrido += Time.deltaTime;
+        }
         int minutos = Mathf.FloorToInt(tempoDecorrido / 60F);
         int segundos = Mathf.FloorToInt(tempoDecorrido - minutos * 60);
         minutos = Mathf.Max(0, minutos);
@@ -195,6 +288,7 @@ public class UIManager : MonoBehaviour
     }
 
 
+    
     public void IniciarCronometro()
     {
         tempoDecorrido = 0f;
@@ -212,11 +306,13 @@ public class UIManager : MonoBehaviour
         return tempoDecorrido;
     }
 
+    
     public void MostrarPontuacaoFinal(int pontuacaoMapeada)
     {
         PararCronometro();
         EsconderUIDaCorrida();
         if (painelGameOver != null) painelGameOver.SetActive(false);
+        if (painelPause != null) painelPause.SetActive(false);
         if (painelPontuacaoFinal != null && textoPontuacaoFinal != null)
         {
             textoPontuacaoFinal.text = $"VOCÊ VENCEU!\nPontuação: {pontuacaoMapeada} / 20";
@@ -230,30 +326,22 @@ public class UIManager : MonoBehaviour
         PararCronometro();
         EsconderUIDaCorrida();
         if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
+        if (painelPause != null) painelPause.SetActive(false);
 
         if (painelGameOver != null)
         {
             if (textoGameOverMensagem != null)
             {
+                
                 textoGameOverMensagem.text = "VOCÊ BATEU!\nTENTE NOVAMENTE.\nPontuação: " + pontuacaoFinal;
             }
-            else
-            {
-                Debug.LogError("Referência textoGameOverMensagem não definida no UIManager!");
-                
-                var tmp = painelGameOver.GetComponentInChildren<TextMeshProUGUI>();
-                if (tmp != null) tmp.text = "VOCÊ BATEU!";
-            }
-            
+            else { /* Log Erro */ }
             painelGameOver.SetActive(true);
         }
-        else
-        {
-            Debug.LogError("Referência painelGameOver não definida no UIManager!");
-        }
+        else { /* Log Erro */ }
     }
-    
 
+    
     private void EsconderUIDaCorrida()
     {
         if (textoVelocidade != null) textoVelocidade.gameObject.SetActive(false);
