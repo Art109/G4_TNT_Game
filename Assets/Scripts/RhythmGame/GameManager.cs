@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         playerHealth = maxPlayerHealth;
-        scoreText.text = "Score: 0";
+        scoreText.text = "Pontos: 0";
         multiplier = 1;
         healthBar.maxValue = maxPlayerHealth;
         healthBar.value = playerHealth;
@@ -210,7 +210,7 @@ public class GameManager : MonoBehaviour
         }
 
         multiText.text = "Multiplier: x" + multiplier;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Pontos: " + score;
     }
     public void BadHit()
     {
@@ -249,7 +249,7 @@ public class GameManager : MonoBehaviour
         multiplierTracker = 0;
         multiText.text = "Multiplier: x" + multiplier;
         score -= scorePerMissHit;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Pontos: " + score;
         totalMissHits++;
         
 
@@ -261,7 +261,7 @@ public class GameManager : MonoBehaviour
         score -= scorePerMissHit;
         playerHealth -= damagePerMiss;
         healthBar.value = playerHealth;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Pontos: " + score;
         missSrc.Play();
         
 
