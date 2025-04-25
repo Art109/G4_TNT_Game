@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class GameManager : MonoBehaviour
     public AudioSource audSrc;
     public AudioSource missSrc;
     public AudioSource winSrc;
+    public AudioSource finSrc;
     public bool startplaying;
     public NoteScroll noteScroll;
     public static GameManager instance;
     public bool menuPause = false;
+    public bool finalContinue = false;
 
 
     // Scores
@@ -66,7 +69,7 @@ public class GameManager : MonoBehaviour
     public GameObject Tutorial;
     public GameObject pauseMenu;
     public GameObject L2, L1, R1, R2;
-   
+
 
     void Start()
     {
@@ -105,7 +108,7 @@ public class GameManager : MonoBehaviour
             {
                 SceneManager.LoadScene(0);
             }
-            
+
             return;
         }
         else
@@ -124,11 +127,11 @@ public class GameManager : MonoBehaviour
                 totalPercentHit = (totalHits / totalNotes) * 100;
 
                 percentsText.text = totalPercentHit.ToString("F1") + "%";
-                
+
                 buttons.SetActive(false);
                 UI.SetActive(false);
-                StartCoroutine (CanPressAfterDelay());
-                
+                StartCoroutine(CanPressAfterDelay());
+
                 string rankVal = "F";
 
 
@@ -164,38 +167,56 @@ public class GameManager : MonoBehaviour
 
         }
 
-            if (Input.GetKeyDown(KeyCode.Escape) && menuPause == false)
-            {
-          
-                menuPause = true;
-                Time.timeScale = 0f;
-                pauseMenu.SetActive(true);
-                audSrc.Pause();
-              
+        if (Input.GetKeyDown(KeyCode.Escape) && menuPause == false)
+        {
+
+            menuPause = true;
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+            audSrc.Pause();
+
         }
-            else if(Input.GetKeyDown(KeyCode.Escape) && menuPause == true)
-            {
-                menuPause = false;
-                Time.timeScale = 1f;
-                audSrc.Play();
-                pauseMenu.SetActive(false);
-            }
-            if (canContinue == true && Input.GetKeyDown(KeyCode.Space))
-            {
+        else if (Input.GetKeyDown(KeyCode.Escape) && menuPause == true)
+        {
+            menuPause = false;
+            Time.timeScale = 1f;
+            audSrc.Play();
+            pauseMenu.SetActive(false);
+        }
+        if (canContinue == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            finSrc.Play();
             continueCanva.SetActive(true);
             resultScreen.SetActive(false);
             isContinuing = true;
+            canContinue = false;
+            StartCoroutine(ContinueAfterDelay());
+
+        }
+        if (finalContinue == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+                SceneManager.LoadScene(4);
             }
 
-       
-}
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
     
+
+
+}
+
 
 
 
     public void NoteHit()
     {
-        if(gameOver) return;
+        if (gameOver) return;
         if (multiplier - 1 < multiplierThresholds.Length)
         {
             multiplierTracker++;
@@ -242,7 +263,7 @@ public class GameManager : MonoBehaviour
     }
     public void NoteMiss()
     {
-        
+
         if (gameOver) return;
         Debug.Log("Note Miss");
         multiplier = 1;
@@ -251,7 +272,7 @@ public class GameManager : MonoBehaviour
         score -= scorePerMissHit;
         scoreText.text = "Pontos: " + score;
         totalMissHits++;
-        
+
 
     }
     public void Punishment()
@@ -263,7 +284,7 @@ public class GameManager : MonoBehaviour
         healthBar.value = playerHealth;
         scoreText.text = "Pontos: " + score;
         missSrc.Play();
-        
+
 
         if (playerHealth <= 0)
         {
@@ -271,7 +292,7 @@ public class GameManager : MonoBehaviour
             Invoke("LoadSceneAfterDelay", 0.1f);
             return;
         }
-    
+
         if (playerHealth > 100)
         {
             Debug.Log("Tem algo errado aí patrão :/");
@@ -314,6 +335,11 @@ public class GameManager : MonoBehaviour
 
         canContinue = true;
 
+    }
+    IEnumerator ContinueAfterDelay()
+    {
+        yield return new WaitForSeconds(1);
+        finalContinue = true;
     }
 }
 
