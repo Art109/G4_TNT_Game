@@ -138,7 +138,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Audios")]
     [SerializeField]
-    private AudioSource jump, dropFruit, magicExplosion;
+    private AudioSource jump, dropFruit, magicExplosion, hurt, roll, whooshClothes;
     [SerializeField]
     private AudioSource[] footsteps;
 
@@ -554,6 +554,8 @@ public class PlayerScript : MonoBehaviour
 
         if (dashInput && canDash && !isTouchingWall && !paused)
         {
+            roll.Play();
+            whooshClothes.Play();
             animator.Play("roll");
             isDashing = true;
             canDash = false;
@@ -655,6 +657,8 @@ public class PlayerScript : MonoBehaviour
 
         if (col.CompareTag("Death"))
         {
+            if(!isDead)
+                hurt.Play();
             impulseSource.GenerateImpulse();
             isDead = true;
         }
