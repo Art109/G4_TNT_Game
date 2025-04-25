@@ -909,7 +909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &100142308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3939,7 +3939,7 @@ GameObject:
   - component: {fileID: 533121748}
   - component: {fileID: 533121747}
   m_Layer: 5
-  m_Name: Ball (1)
+  m_Name: 'Ball '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20071,7 +20071,7 @@ GameObject:
   - component: {fileID: 1448543627}
   - component: {fileID: 1448543626}
   m_Layer: 5
-  m_Name: Square (1)
+  m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
