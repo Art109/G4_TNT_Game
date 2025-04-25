@@ -37,14 +37,22 @@ public class UIManager : MonoBehaviour
     [Header("Contagem Regressiva")]
     public TextMeshProUGUI textoContagemRegressiva;
     public AudioClip somContagem;
-    public AudioClip somGo;
+    
     public float delayInicialContagem = 0.5f;
     public float tempoEntreNumeros = 1.0f;
 
-    
+    [Header("Sons Adicionais")]
+    public AudioClip somVitoria;
+    public AudioSource audioSourceMusicaFundo;
     private AudioSource audioSourceEfeitos;
 
-    
+
+    [Header("Configurações de Pitch")]
+    public float pitchNormalMusica = 1.0f;
+    public float pitchBoostMusica = 1.2f;
+    public float pitchFreioMusica = 0.8f;
+
+
     private float tempoDecorrido = 0f;
     private bool cronometroAtivo = false;
     private bool instrucoesAtivas = false;
@@ -58,6 +66,7 @@ public class UIManager : MonoBehaviour
     {
         
         audioSourceEfeitos = GetComponent<AudioSource>();
+
         if (audioSourceEfeitos == null)
         {
             Debug.LogWarning("AudioSource não encontrado no UIManager. Adicionando um...");
@@ -101,6 +110,11 @@ public class UIManager : MonoBehaviour
             instrucoesAtivas = false;
             Time.timeScale = 0f;
             StartCoroutine(RotinaContagemRegressiva());
+        }
+
+        if (audioSourceMusicaFundo != null)
+        {
+            audioSourceMusicaFundo.pitch = pitchNormalMusica;
         }
     }
 
@@ -147,9 +161,38 @@ public class UIManager : MonoBehaviour
             AtualizarTempoUI();
             AtualizarLatasUI();
         }
+
+        if (jogoPausado || instrucoesAtivas ||  fimDeJogoAtivo ) { return; }
+
+        
+        AtualizarPitchMusica();
+        AtualizarVelocidadeUI();
+        AtualizarTempoUI();
+        AtualizarLatasUI();
     }
 
-    
+    void AtualizarPitchMusica()
+    {
+        
+        if (audioSourceMusicaFundo == null) return;
+
+        
+        if (Input.GetKey(teclaBoost))
+        {
+            audioSourceMusicaFundo.pitch = pitchBoostMusica;
+        }
+        else if (Input.GetKey(teclaFreio))
+        {
+            
+            audioSourceMusicaFundo.pitch = pitchFreioMusica;
+        }
+        else
+        {
+            audioSourceMusicaFundo.pitch = pitchNormalMusica;
+        }
+    }
+
+
     IEnumerator RotinaContagemRegressiva()
     {
         EsconderUIDaCorrida();
@@ -165,17 +208,17 @@ public class UIManager : MonoBehaviour
 
         
         if (textoContagemRegressiva != null) textoContagemRegressiva.text = "2";
-        TocarSom(somContagem);
-        yield return new WaitForSecondsRealtime(tempoEntreNumeros);
+        
+        yield return new WaitForSecondsRealtime(tempoEntreNumeros + 1.0f);
 
         
         if (textoContagemRegressiva != null) textoContagemRegressiva.text = "1";
-        TocarSom(somContagem);
-        yield return new WaitForSecondsRealtime(tempoEntreNumeros);
+        
+        yield return new WaitForSecondsRealtime(tempoEntreNumeros + 0.7f);
 
         
         if (textoContagemRegressiva != null) textoContagemRegressiva.text = "GO!";
-        TocarSom(somGo);
+        
 
         
         Time.timeScale = 1f;
@@ -313,6 +356,9 @@ public class UIManager : MonoBehaviour
         EsconderUIDaCorrida();
         if (painelGameOver != null) painelGameOver.SetActive(false);
         if (painelPause != null) painelPause.SetActive(false);
+
+        TocarSom(somVitoria);
+
         if (painelPontuacaoFinal != null && textoPontuacaoFinal != null)
         {
             textoPontuacaoFinal.text = $"VOCÊ VENCEU!\nPontuação: {pontuacaoMapeada} / 20";

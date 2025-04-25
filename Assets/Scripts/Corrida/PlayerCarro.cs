@@ -12,13 +12,17 @@ public class PlayerCarro : MonoBehaviour
     public static int pontuacaoAtual = 0;
     public static int latasColetadas = 0;
 
-    
+    [Header("Configurações de Jogo")]
     public float tempoExibicaoGameOver = 4.0f;
-    
+
+
     public static bool LinhaDeChegadaPassou = false;
 
     private UIManager uiManager;
     private bool jogoTerminou = false;
+
+    [Header("Sons")]
+    public AudioClip somBatida;
 
     void Start()
     {
@@ -29,6 +33,7 @@ public class PlayerCarro : MonoBehaviour
         LinhaDeChegadaPassou = false;
 
         uiManager = FindObjectOfType<UIManager>();
+
         if (uiManager == null)
         {
             Debug.LogError("UIManager não encontrado na cena! Verifique se o GameObject está ativo e com o script anexado.");
@@ -62,7 +67,7 @@ public class PlayerCarro : MonoBehaviour
     {
         if (!jogoTerminou)
         {
-            if (other.CompareTag("Inimigo"))
+            if (!jogoTerminou && other.CompareTag("Inimigo"))
             {
                 IniciarGameOver();
             }
@@ -77,7 +82,14 @@ public class PlayerCarro : MonoBehaviour
 
         Debug.Log("Colisão! Fim de Jogo! Pontuação Final: " + pontuacaoAtual);
 
-        
+        if (somBatida != null)
+        {
+
+            AudioSource.PlayClipAtPoint(somBatida, transform.position);
+            
+        }
+
+
         if (uiManager != null)
         {
             uiManager.MostrarGameOver(pontuacaoAtual);
@@ -89,6 +101,8 @@ public class PlayerCarro : MonoBehaviour
         
         StartCoroutine(ReiniciarAposDelay(tempoExibicaoGameOver));
     }
+
+    
 
     IEnumerator ReiniciarAposDelay(float delay)
     {
@@ -111,7 +125,7 @@ public class PlayerCarro : MonoBehaviour
         {
             float tempoFinal = uiManager.GetTempoFinal();
             int pontuacaoOriginal = CalcularPontuacaoFinal(tempoFinal, latasColetadas);
-            const int maxScoreOriginalEstimado = 7000;
+            const int maxScoreOriginalEstimado = 2000;
             int pontuacaoFinalMapeada = 0;
             if (maxScoreOriginalEstimado > 0)
             {
