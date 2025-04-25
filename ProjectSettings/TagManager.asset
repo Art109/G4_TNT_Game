@@ -11,17 +11,22 @@ TagManager:
   - Mango
   - Death
   - Cauldron
+  - finger
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - StartButton
   - Water
   - UI
   - Ground
   - GroundNoWallJump
   - 
   - 
+  - RedTNT
+  - BluTNT
+  - PrpTNT
+  - ExitButton
   - 
   - 
   - 
