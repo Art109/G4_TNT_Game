@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ShakeAndRainbowText : MonoBehaviour
 {
     [Header("Text")]
     [SerializeField]
     private TextMeshProUGUI text;
+
+    [Header("Image")]
+    [SerializeField]
+    private Image image;
 
     [Header("Rainbow")]
     [SerializeField]
