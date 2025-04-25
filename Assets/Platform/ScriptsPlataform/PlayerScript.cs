@@ -242,19 +242,18 @@ public class PlayerScript : MonoBehaviour
         rb.gravityScale = 2f;
         rb.velocity = new Vector2(0, rb.velocity.y);
 
-        timeRemaining.text = timerText.text;
-        fruitsRemaining.text = $"{fruitsCount}/4";
-
-
-        if (playerInput.actions["Return"].WasPressedThisFrame())
+        if (playerInput.actions["Return"].WasPressedThisFrame() && endMenu.activeInHierarchy)
         {
             ReturnMenu();
         }
-        else if (playerInput.actions["Reset"].WasPressedThisFrame())
+        else if (playerInput.actions["Reset"].WasPressedThisFrame() && endMenu.activeInHierarchy)
         {
             ResetLevel();
         }
 
+
+        timeRemaining.text = timerText.text;
+        fruitsRemaining.text = $"{fruitsCount}/4";
         if (fruitsCount >= 4)
         {
             tntUI.SetActive(true);
