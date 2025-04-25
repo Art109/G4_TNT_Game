@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @Input: IInputActionCollection2, IDisposable
+public partial class @InputPlatforma: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Input()
+    public @InputPlatforma()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Input"",
@@ -305,10 +305,10 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_UI_UnPause = m_UI.FindAction("UnPause", throwIfNotFound: true);
     }
 
-    ~@Input()
+    ~@InputPlatforma()
     {
-        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Input.Player.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, Input.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputPlatforma.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputPlatforma.UI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -376,8 +376,8 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
-        private @Input m_Wrapper;
-        public PlayerActions(@Input wrapper) { m_Wrapper = wrapper; }
+        private @InputPlatforma m_Wrapper;
+        public PlayerActions(@InputPlatforma wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @WallSlide => m_Wrapper.m_Player_WallSlide;
@@ -445,8 +445,8 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_UnPause;
     public struct UIActions
     {
-        private @Input m_Wrapper;
-        public UIActions(@Input wrapper) { m_Wrapper = wrapper; }
+        private @InputPlatforma m_Wrapper;
+        public UIActions(@InputPlatforma wrapper) { m_Wrapper = wrapper; }
         public InputAction @Return => m_Wrapper.m_UI_Return;
         public InputAction @Reset => m_Wrapper.m_UI_Reset;
         public InputAction @UnPause => m_Wrapper.m_UI_UnPause;
