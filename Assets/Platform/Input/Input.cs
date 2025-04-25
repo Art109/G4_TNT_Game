@@ -57,7 +57,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
-                    ""id"": ""d2c05103-5625-4036-95cd-76101ac222ec"",
+                    ""id"": ""161fad1d-0401-42f8-9beb-c6c022f835b0"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -177,7 +177,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""221e6a63-0694-4d04-a2a6-b7514ff442c9"",
+                    ""id"": ""2d48078b-d283-4047-999e-aa5e4d00be7a"",
                     ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -188,7 +188,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5a57d70a-ecaf-4b7a-8a7f-624c31984e95"",
+                    ""id"": ""7dbed3e5-c57d-4385-8c31-08e5c1642540"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -199,7 +199,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bdc7d2b9-2372-48a7-9c39-e9acca6df0a1"",
+                    ""id"": ""0c6c0f1e-299e-4e59-a039-5eb3cc08f950"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",

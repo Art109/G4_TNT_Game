@@ -140,7 +140,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Audios")]
     [SerializeField]
-    private AudioSource jump, dropFruit, magicExplosion, hurt, roll, whooshClothes;
+    private AudioSource jump, dropFruit, magicExplosion, hurt, roll, whooshClothes, grabItem;
     [SerializeField]
     private AudioSource[] footsteps;
 
@@ -469,7 +469,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (playerInput.actions["Jump"].WasPressedThisFrame())
+        if (playerInput.actions["Jump"].WasPressedThisFrame() && !paused)
         {
             if (isGrounded || isGroundedNoWallJump)
             {
@@ -627,6 +627,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (col.CompareTag("Apple") || col.CompareTag("Guava") || col.CompareTag("Pineapple") || col.CompareTag("Mango"))
         {
+            grabItem.Play();
             StartCoroutine(ChangeFace());
             impulseSource.GenerateImpulse();
             fruitsCount += 1;
