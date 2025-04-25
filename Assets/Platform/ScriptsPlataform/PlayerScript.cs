@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -140,7 +141,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Audios")]
     [SerializeField]
-    private AudioSource jump, dropFruit, magicExplosion, hurt, roll, whooshClothes, grabItem;
+    private AudioSource jump, dropFruit, magicExplosion, hurt, roll, whooshClothes, grabItem, background, bonfire, water;
     [SerializeField]
     private AudioSource[] footsteps;
 
@@ -150,6 +151,7 @@ public class PlayerScript : MonoBehaviour
     private int lastFootstepIndex = -1;
 
     private PlayerInput playerInput;
+
 
     void Start()
     {
@@ -162,10 +164,13 @@ public class PlayerScript : MonoBehaviour
         animator = GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         playerInput = GetComponent<PlayerInput>();
+        playerInput.SwitchCurrentActionMap("Player");
+        Time.timeScale = 1f;
     }
 
     void Update()
     {
+        
         isGrounded = Physics2D.OverlapCircle(footTransform.position, 0.2f, layerGround);
 
         isGroundedNoWallJump = Physics2D.OverlapCircle(footTransform.position, 0.2f, groundNoWallJumpLayer);
@@ -174,32 +179,52 @@ public class PlayerScript : MonoBehaviour
 
         if (contactCauldron)
         {
+            playerInput.SwitchCurrentActionMap("UI");
             Victory();
             return;
         }
 
         if (isDead)
         {
+            playerInput.SwitchCurrentActionMap("UI");
             Dead();
             return;
         }
 
         if (timerIsOver)
         {
+            playerInput.SwitchCurrentActionMap("UI");
             TimeIsOver();
             return;
         }
 
-        if (playerInput.actions["Pause"].WasPressedThisFrame())
+        if (playerInput.actions["Pause"].WasPressedThisFrame() || playerInput.actions["UnPause"].WasPressedThisFrame())
         {
             if (paused)
             {
+                playerInput.SwitchCurrentActionMap("Player");
+                water.UnPause();
+                bonfire.UnPause();
+                background.UnPause();
                 Resume();
             }
             else
             {
+                playerInput.SwitchCurrentActionMap("UI");
+                water.Pause();
+                bonfire.Pause();
+                background.Pause();
                 Pause();
             }
+        }
+
+        if (paused && playerInput.actions["Return"].WasPressedThisFrame())
+        {
+            ReturnMenu();
+        }
+        if(paused && playerInput.actions["Reset"].WasPressedThisFrame())
+        {
+            ResetLevel();
         }
 
         Timer();
@@ -219,6 +244,16 @@ public class PlayerScript : MonoBehaviour
 
         timeRemaining.text = timerText.text;
         fruitsRemaining.text = $"{fruitsCount}/4";
+
+
+        if (playerInput.actions["Return"].WasPressedThisFrame())
+        {
+            ReturnMenu();
+        }
+        else if (playerInput.actions["Reset"].WasPressedThisFrame())
+        {
+            ResetLevel();
+        }
 
         if (fruitsCount >= 4)
         {
@@ -240,8 +275,6 @@ public class PlayerScript : MonoBehaviour
             timerObject.SetActive(false);
             faceField.sprite = facesUI[2];
             endMenu.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
             animator.Play("angry");
             imageField.sprite = facesUI[2];
       
@@ -306,17 +339,14 @@ public class PlayerScript : MonoBehaviour
         tntObject.SetActive(true);
 
         timerObject.SetActive(false);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         endMenu.SetActive(true);
     }
 
     void Dead()
     {
+
         imageField.sprite = facesUI[3];
         deadObject.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         cameraFollowOffsetScript.zooming = true;
         cameraFollowOffsetScript.targetZoom = 5f;
         cameraFollowOffsetScript.offsetX = 0f;
@@ -325,6 +355,15 @@ public class PlayerScript : MonoBehaviour
         {
             isDecomposing = true;
             StartCoroutine(Decomposing());
+        }
+
+        if (isDead && playerInput.actions["Return"].WasPressedThisFrame())
+        {
+            ReturnMenu();
+        }
+        else if (isDead && playerInput.actions["Reset"].WasPressedThisFrame())
+        {
+            ResetLevel();
         }
     }
 
@@ -364,6 +403,16 @@ public class PlayerScript : MonoBehaviour
         cameraFollowOffsetScript.targetZoom = 5f;
         cameraFollowOffsetScript.zooming = true;
         cameraFollowOffsetScript.offsetX = 0f;
+        playerInput.SwitchCurrentActionMap("UI");
+
+        if (timerIsOver && playerInput.actions["Return"].WasPressedThisFrame())
+        {
+            ReturnMenu();
+        }
+        else if (timerIsOver && playerInput.actions["Reset"].WasPressedThisFrame())
+        {
+            ResetLevel();
+        }
 
         if (isTouchingWall)
         {
@@ -371,9 +420,6 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = Vector3.zero;
             animator.Play("angry");
             imageField.sprite = facesUI[2];
-
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
             timeIsOverObject.SetActive(true);
         }
 
@@ -382,20 +428,13 @@ public class PlayerScript : MonoBehaviour
             imageField.sprite = facesUI[2];
             animator.Play("angry");
             rb.velocity = Vector3.zero;
-
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
             timeIsOverObject.SetActive(true);
         }
-
-
     }
 
     public void Pause()
     {
         paused = true;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         pauseObejct.SetActive(true);
     }
@@ -403,8 +442,6 @@ public class PlayerScript : MonoBehaviour
     public void Resume()
     {
         paused = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         pauseObejct.SetActive(false);
     }
