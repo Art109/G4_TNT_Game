@@ -39,7 +39,7 @@ public class Hand : MonoBehaviour
     public GameObject Popup;
     public GameObject spin;
     private int LataID;
-
+    public GameObject Laugh;
     void Start()
     {
         
@@ -75,19 +75,19 @@ public class Hand : MonoBehaviour
             {
                 Preview1.material.color = Color.red;
                 Preview2.material.color = Color.red;
-                Popup.transform.position = new Vector3(27, -4, 0);
+                Popup.transform.position = new Vector3(26, -3, 0);
             }
             if (Lata == "Nutrition")
             {
                 Preview1.material.color = Color.cyan;
                 Preview2.material.color = Color.cyan;
-                Popup.transform.position = new Vector3(27, -4, 0);
+                Popup.transform.position = new Vector3(26, -3, 0);
             }
             if (Lata == "Focus")
             {
                 Preview1.material.color = new Color(0.6745098f, 0.02352941f, 0.7686275f, 1f);
                 Preview2.material.color = new Color(0.6745098f, 0.02352941f, 0.7686275f, 1f);
-                Popup.transform.position = new Vector3(27, -4, 0);
+                Popup.transform.position = new Vector3(26, -3, 0);
             }
         }
         inButtonE = Physics2D.OverlapCircle(Finger.position, 0f, EndButton);
@@ -191,6 +191,7 @@ public class Hand : MonoBehaviour
     }
     IEnumerator Wait()
     {
+        Laugh.SetActive(true);
         yield return new WaitForSeconds(0.8f);
         SceneManager.LoadScene(LataID);
     }

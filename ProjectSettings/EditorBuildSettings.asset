@@ -17,4 +17,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestNutrition.unity
     guid: 94a7548fc7bee1142b213afad27bb986
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 5db42d4a5970741448736ba65e6d6780, type: 2}
