@@ -10848,7 +10848,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6910798519511924209, guid: d7aa1e7b89d48cc4a9cc3586935a0d7a, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8527200031772292183, guid: d7aa1e7b89d48cc4a9cc3586935a0d7a, type: 3}
       propertyPath: m_Size.x
@@ -19650,10 +19650,10 @@ MonoBehaviour:
   footTransform: {fileID: 1895414764}
   layerGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   groundNoWallJumpLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   wallCheckTransform: {fileID: 1230197861}
   wallCheckRadius: 0.68
   wallJumpXForce: 6
@@ -19673,10 +19673,10 @@ MonoBehaviour:
   timeIsOverObject: {fileID: 354509788}
   imageField: {fileID: 1099100708}
   facesUI:
-  - {fileID: 21300000, guid: e05a770620a55064d9a13e20f14c5e1c, type: 3}
-  - {fileID: 21300000, guid: a6c55e5bd97cea047abcfe8ce463d66d, type: 3}
-  - {fileID: 21300000, guid: 2846ac52fc062e845b587947c8b96a99, type: 3}
-  - {fileID: 21300000, guid: 0c9609fc240fe1240aede69650de737a, type: 3}
+  - {fileID: 21300000, guid: 7f9ba3ecb1e3e404693a5f48d4025469, type: 3}
+  - {fileID: 21300000, guid: 292bdaaf6051dad459b9f0ed9995537b, type: 3}
+  - {fileID: 21300000, guid: 72a05379a2a790f4784e36cd8664f894, type: 3}
+  - {fileID: 21300000, guid: fa18a54e849a8604b995145aeeef21b8, type: 3}
   cauldronTransfrom: {fileID: 1888595188}
   fruitsPrefab:
   - {fileID: 5987547396540497982, guid: 7877cb983c2fcd745bfb88bdc1c1712c, type: 3}
