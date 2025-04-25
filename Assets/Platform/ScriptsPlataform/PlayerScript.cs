@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Cinemachine;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerScript : MonoBehaviour
@@ -147,6 +149,7 @@ public class PlayerScript : MonoBehaviour
     private float timeSinceLastStep = 0f; 
     private int lastFootstepIndex = -1;
 
+    private PlayerInput playerInput;
 
     void Start()
     {
@@ -158,6 +161,7 @@ public class PlayerScript : MonoBehaviour
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     void Update()
@@ -186,7 +190,7 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (playerInput.actions["Pause"].WasPressedThisFrame())
         {
             if (paused)
             {
@@ -215,11 +219,6 @@ public class PlayerScript : MonoBehaviour
 
         timeRemaining.text = timerText.text;
         fruitsRemaining.text = $"{fruitsCount}/4";
-
-        if (endMenu.activeInHierarchy && Input.GetKeyDown(KeyCode.E))
-        {
-            SceneManager.LoadScene(0);
-        }
 
         if (fruitsCount >= 4)
         {
@@ -470,7 +469,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
+        if (playerInput.actions["Jump"].WasPressedThisFrame())
         {
             if (isGrounded || isGroundedNoWallJump)
             {
@@ -505,12 +504,14 @@ public class PlayerScript : MonoBehaviour
             isWallSliding = true;
             rb.velocity = new Vector2(0, -wallSlideSpeed);
 
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            if (playerInput.actions["WallSlide"].IsPressed())
             {
-                wallSlideSpeed = 3.00f;
+                rb.velocity = new Vector2(0, Mathf.Max(rb.velocity.y, -wallSlideSpeed)); 
+                wallSlideSpeed = Mathf.Lerp(wallSlideSpeed, 3.00f, Time.deltaTime * 8f);
             }
             else
             {
+                rb.velocity = new Vector2(0, Mathf.Max(rb.velocity.y, -0.20f));
                 wallSlideSpeed = 0.20f;
             }
 
@@ -550,7 +551,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Dash()
     {
-        bool dashInput = Input.GetKeyDown(KeyCode.LeftShift);
+        bool dashInput = playerInput.actions["Dash"].WasPressedThisFrame();
 
         if (dashInput && canDash && !isTouchingWall && !paused)
         {

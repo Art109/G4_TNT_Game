@@ -19772,6 +19772,7 @@ GameObject:
   - component: {fileID: 1503770154}
   - component: {fileID: 1503770155}
   - component: {fileID: 1503770156}
+  - component: {fileID: 1503770157}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -20179,6 +20180,52 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1503770157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503770148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: c99810682fc30ee4f85d556b541c4135, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f0ab1cd9-4158-44cc-9ad6-d5939528548c
+    m_ActionName: Player/Jump[/DualShock4GamepadHID/buttonSouth,/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e57f047f-9c69-4d88-8822-ca17a313377d
+    m_ActionName: Player/Dash[/DualShock4GamepadHID/buttonWest,/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 63853406-4e04-48c0-bbc8-b0a01d40a269
+    m_ActionName: Player/WallSlide[/DualShock4GamepadHID/dpad/down,/Keyboard/s,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d2c05103-5625-4036-95cd-76101ac222ec
+    m_ActionName: Player/Pause[/Keyboard/p,/Keyboard/escape,/DualShock4GamepadHID/start]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1508661685
 GameObject:
   m_ObjectHideFlags: 0
@@ -24790,7 +24837,6 @@ SceneRoots:
   - {fileID: 558849694}
   - {fileID: 1017492573}
   - {fileID: 2123828307}
-  - {fileID: 991808600}
   - {fileID: 298194865}
   - {fileID: 2012834391}
   - {fileID: 268906753}
@@ -24802,3 +24848,4 @@ SceneRoots:
   - {fileID: 1093096743}
   - {fileID: 1725754987}
   - {fileID: 1689584703}
+  - {fileID: 991808600}
