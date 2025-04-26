@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class NoteObject : MonoBehaviour
+public class NoteObjectUp : MonoBehaviour
 {
     public bool missed = false;
     public bool canBePressed;

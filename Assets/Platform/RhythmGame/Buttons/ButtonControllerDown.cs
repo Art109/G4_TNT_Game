@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour
+public class ButtonControllerDown : MonoBehaviour
 {
     private SpriteRenderer SR;
     public Sprite defaultImage;
@@ -10,7 +10,13 @@ public class ButtonController : MonoBehaviour
     public GameObject buttons;
 
     public KeyCode keyToPress;
+    GamepadInput GamepadInputComponent;
 
+
+    private void Awake()
+    {
+        GamepadInputComponent = FindObjectOfType<GamepadInput>();
+    }
     void Start()
     {
         SR = GetComponent<SpriteRenderer>();
@@ -22,8 +28,8 @@ public class ButtonController : MonoBehaviour
         if (GameManager.instance.startplaying && GameManager.instance.menuPause == false)
         {
             buttons.SetActive(true);
-   
 
+            // KeyBoard
             if (Input.GetKeyDown(keyToPress))
             {
                 SR.sprite = pressedImage;
@@ -32,7 +38,18 @@ public class ButtonController : MonoBehaviour
             {
                 SR.sprite = defaultImage;
             }
-        }
-    }
 
+            // GamePad
+            if (GamepadInputComponent.onButtonDown["DownArrow"])
+            {
+                SR.sprite = pressedImage;
+            }
+            if (GamepadInputComponent.onButtonUp["DownArrow"])
+            {
+                SR.sprite = defaultImage;
+            }
+
+
+            }
+    }
 }

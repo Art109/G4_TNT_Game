@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class NoteObject : MonoBehaviour
+public class NoteObjectLeft : MonoBehaviour
 {
     public bool missed = false;
     public bool canBePressed;
@@ -40,7 +40,7 @@ public class NoteObject : MonoBehaviour
                     Debug.Log("Hit");
                     Instantiate(goodHitEffect, goodHitEffect.transform.position, goodHitEffect.transform.rotation);
                 }
-                else 
+                else
                 {
                     GameManager.instance.PerfectHit();
                     Debug.Log("Perfect");
@@ -50,7 +50,7 @@ public class NoteObject : MonoBehaviour
         }
 
         // GamePad
-        if (GamepadInputComponent.onButtonDown["UpArrow"])
+        if (GamepadInputComponent.onButtonDown["LeftArrow"])
         {
             if (canBePressed)
             {

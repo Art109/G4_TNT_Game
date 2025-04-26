@@ -5,11 +5,12 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 
+    private GamepadInput GamepadInputComponent;
+    public Animator keyboardAnimator;
 
-    public Animator animator;
-    void Start()
+    private void Awake()
     {
-        
+        GamepadInputComponent = FindObjectOfType<GamepadInput>();
     }
 
 
@@ -17,6 +18,8 @@ public class Character : MonoBehaviour
     {
         if (GameManager.instance.startplaying && GameManager.instance.menuPause == false)
         {
+
+            // KeyBoard
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 PlayAnimation("Up");
@@ -33,16 +36,38 @@ public class Character : MonoBehaviour
             {
                 PlayAnimation("Right");
             }
-            if(GameManager.instance.missed)
+            if (GameManager.instance.missed)
             {
                 PlayAnimation("Hurt");
                 GameManager.instance.missed = false;
             }
-        }
 
-    }
-    void PlayAnimation(string animationName)
-    {
-        animator.Play(animationName, 0, 0f); // Força a animação a reiniciar imediatamente
+            // GamePad
+            if (GamepadInputComponent.onButtonDown["UpArrow"])
+            {
+                PlayAnimation("Up");
+            }
+            if (GamepadInputComponent.onButtonDown["DownArrow"])
+            {
+                PlayAnimation("Down");
+            }
+            if (GamepadInputComponent.onButtonDown["LeftArrow"])
+            {
+                PlayAnimation("Left");
+            }
+            if (GamepadInputComponent.onButtonDown["RightArrow"])
+            {
+                PlayAnimation("Right");
+            }
+
+
+        }
+        void PlayAnimation(string animationName)
+        {
+            // Força a animação a reiniciar imediatamente
+
+            keyboardAnimator.Play(animationName, 0, 0f);
+          ; 
+        }
     }
 }
