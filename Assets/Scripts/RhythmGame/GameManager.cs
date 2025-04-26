@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
 
     // Results
     public float totalNotes;
+    public float totalNotesLeft;
+    public float totalNotesRight;
+    public float totalNotesUp;
+    public float totalNotesDown; 
     public float totalBadHits;
     public float totalGoodHits;
     public float totalPerfectHits;
@@ -83,9 +87,12 @@ public class GameManager : MonoBehaviour
         multiplier = 1;
         healthBar.maxValue = maxPlayerHealth;
         healthBar.value = playerHealth;
-        totalNotes = FindObjectsOfType<NoteObject>().Length;
+        totalNotesLeft = FindObjectsOfType<NoteObjectLeft>().Length;
+        totalNotesDown = FindObjectsOfType<NoteObjectDown>().Length;
+        totalNotesUp = FindObjectsOfType<NoteObjectUp>().Length;
+        totalNotesRight = FindObjectsOfType<NoteObjectRight>().Length;
         Time.timeScale = 0f;
-
+        totalNotes = totalNotesDown + totalNotesUp + totalNotesRight + totalNotesLeft;
     }
 
 
