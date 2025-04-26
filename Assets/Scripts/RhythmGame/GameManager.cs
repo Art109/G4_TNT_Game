@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool menuPause = false;
     public bool finalContinue = false;
+    GamepadInput GamepadInputComponent;
 
 
     // Scores
@@ -70,7 +71,10 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject L2, L1, R1, R2;
 
-
+    private void Awake()
+    {
+        GamepadInputComponent = FindObjectOfType<GamepadInput>();
+    }
     void Start()
     {
         instance = this;
@@ -91,6 +95,28 @@ public class GameManager : MonoBehaviour
 
         if (!startplaying)
         {
+            // START SCREEN
+
+            // GamePad
+            if (GamepadInputComponent.onButtonDown["ActionButton"])
+            {
+                Tutorial.SetActive(false);
+                winSrc.Play();
+                audSrc.Play();
+                startplaying = true;
+                noteScroll.hasStarted = true;
+                Time.timeScale = 1f;
+                L2.gameObject.SetActive(true);
+                L1.gameObject.SetActive(true);
+                R1.gameObject.SetActive(true);
+                R2.gameObject.SetActive(true);
+            }
+            if (GamepadInputComponent.onButtonDown["BackButton"])
+            {
+                SceneManager.LoadScene(0);
+            }
+
+            // KeyBoard
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Tutorial.SetActive(false);
@@ -167,23 +193,50 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && menuPause == false)
-        {
+            // PAUSE MENU
 
+
+            // GamePad
+            if (GamepadInputComponent.onButtonDown["Start"] && menuPause == false)
+            {
+            menuPause = true;
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+            audSrc.Pause();
+            }
+    
+            if (GamepadInputComponent.onButtonDown["Start"] && menuPause == true)
+            {
+                menuPause = false;
+               Time.timeScale = 1f;
+               audSrc.Play();
+               pauseMenu.SetActive(false);
+            }
+
+
+            // KeyBoard
+            if (Input.GetKeyDown(KeyCode.Escape) && menuPause == false)
+            {
+        
             menuPause = true;
             Time.timeScale = 0f;
             pauseMenu.SetActive(true);
             audSrc.Pause();
 
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && menuPause == true)
-        {
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && menuPause == true)
+            {
             menuPause = false;
             Time.timeScale = 1f;
             audSrc.Play();
             pauseMenu.SetActive(false);
-        }
-        if (canContinue == true && Input.GetKeyDown(KeyCode.Space))
+            }
+
+
+        // AFTER RESULTS
+
+        // GamePad
+        if (GamepadInputComponent.onButtonDown["ActionButton"] && canContinue == true)
         {
             finSrc.Play();
             continueCanva.SetActive(true);
@@ -191,21 +244,43 @@ public class GameManager : MonoBehaviour
             isContinuing = true;
             canContinue = false;
             StartCoroutine(ContinueAfterDelay());
-
         }
         if (finalContinue == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (GamepadInputComponent.onButtonDown["ActionButton"])
             {
-
                 SceneManager.LoadScene(4);
             }
-
-            if (Input.GetKeyDown(KeyCode.R))
+            if (GamepadInputComponent.onButtonDown["BackButton"])
             {
                 SceneManager.LoadScene(0);
             }
         }
+
+        // KeyBoard
+        if (canContinue == true && Input.GetKeyDown(KeyCode.Space))
+           {
+            finSrc.Play();
+            continueCanva.SetActive(true);
+            resultScreen.SetActive(false);
+            isContinuing = true;
+            canContinue = false;
+            StartCoroutine(ContinueAfterDelay());
+            
+           }
+           if (finalContinue == true)
+           {
+             if (Input.GetKeyDown(KeyCode.Space))
+             {
+ 
+                 SceneManager.LoadScene(4);
+             }
+
+             if (Input.GetKeyDown(KeyCode.R))
+             {
+                 SceneManager.LoadScene(0);
+             }
+           }
     
 
 
