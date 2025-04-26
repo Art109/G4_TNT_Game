@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class MenuManager : MonoBehaviour
 {
@@ -91,6 +93,17 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Button FocusInteract;
 
+    [Header("Credits")]
+    [SerializeField]
+    private GameObject canvasCredits;
+    [SerializeField]
+    private bool inCredits = false;
+
+    [Header("Input")]
+    [SerializeField]
+    private PlayerInput inputMenu;
+
+
 
     private void Start()
     {
@@ -104,6 +117,12 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
+        if (inMenu && inputMenu.actions["ExitCredits"].WasPressedThisFrame())
+        {
+            selectAudio.Play();
+            canvasCredits.SetActive(false);
+        }
+
         HoverButton();
         if(EventSystem.current.currentSelectedGameObject == null)
             SetInitialSelection();
@@ -247,6 +266,42 @@ public class MenuManager : MonoBehaviour
         
     }
 
+    public void Energy()
+    {
+        StartCoroutine(EnergyCoroutine());
+    }
+
+    IEnumerator EnergyCoroutine()
+    {
+        selectAudio.Play();
+        yield return new WaitForSeconds(0.15f);
+        Debug.Log("ENERGY SELECIONADO");
+    }
+
+    public void Mango()
+    {
+        StartCoroutine(MangoCoroutine());
+    }
+
+    IEnumerator MangoCoroutine()
+    {
+        selectAudio.Play();
+        yield return new WaitForSeconds(0.15f);
+        Debug.Log("MANGO SELECIONADO");
+    }
+
+    public void Focus()
+    {
+        StartCoroutine(FocusCoroutine());
+    }
+
+    IEnumerator FocusCoroutine()
+    {
+        selectAudio.Play();
+        yield return new WaitForSeconds(0.15f);
+        Debug.Log("FOCUS SELECIONADO");
+    }
+
     public void Quit()
     {
         StartCoroutine(QuitCoroutine());
@@ -259,4 +314,16 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void OpenCredits()
+    {
+        inCredits = true;
+        StartCoroutine(OpenCreditsCoroutine());
+    }
+
+    IEnumerator OpenCreditsCoroutine()
+    {
+        selectAudio.Play();
+        yield return new WaitForSeconds(0.15f);
+        canvasCredits.SetActive(true);
+    }
 }
