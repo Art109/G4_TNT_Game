@@ -20784,10 +20784,10 @@ MonoBehaviour:
   footTransform: {fileID: 1895414764}
   layerGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   groundNoWallJumpLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   wallCheckTransform: {fileID: 1230197861}
   wallCheckRadius: 0.68
   wallJumpXForce: 6
