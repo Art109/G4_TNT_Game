@@ -9,7 +9,9 @@ public class MenuManager : MonoBehaviour
     [Header("Play Button")]
     [SerializeField]
     [Tooltip("A câmera se movimentará para essa posição")]
-    private Transform targetPosition;
+    private Transform targetPositionFrigobar;
+    [SerializeField]
+    private Transform targetPositionMenu;
     [SerializeField]
     private float moveSpeed = 2f;
     [SerializeField]
@@ -17,7 +19,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private bool isMoving = false;
     private bool inMenu = true;
-    private bool isFocusApplied = false;
 
     [Header("Buttons Objects Menu")]
     [SerializeField]
@@ -52,53 +53,86 @@ public class MenuManager : MonoBehaviour
     private GameObject TNTMangoButton;
     [SerializeField]
     private GameObject TNTFocusButton;
+    [SerializeField]
+    private GameObject BackMenuButton;
 
     [Header("Canvas Carregamento")]
     [SerializeField]
     private GameObject canvasLoading;
 
-    [Header("Mage")]
+    [Header("Characters")]
     [SerializeField]
     private Animator mageAnimator;
+    [SerializeField]
+    private Animator witchAnimator;
 
     [Header("Sound")]
     [SerializeField]
     private AudioSource selectAudio;
-    private bool isSoundPlayed = false;
     private GameObject lastSelectedButton = null;
+
+    private bool goingToFrigobar = false;
+    private bool returningToMenu = false;
+
+    [Header("Botões Interação")]
+    [SerializeField]
+    private Button PlayInteract;
+    [SerializeField]
+    private Button CreditsInteract;
+    [SerializeField]
+    private Button QuitInteract;
+
+    [SerializeField]
+    private Button BackInteract;
+    [SerializeField]
+    private Button EnergyInteract;
+    [SerializeField]
+    private Button MangoInteract;
+    [SerializeField]
+    private Button FocusInteract;
+
 
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         originalScale = buttonPlayTransform.localScale;
+
+        ActiveDesactiveMenu(true);
+        ActiveDesactiveLata(false);
     }
 
     private void Update()
     {
         HoverButton();
-
-
-        if (EventSystem.current.currentSelectedGameObject == null)
-        {
+        if(EventSystem.current.currentSelectedGameObject == null)
             SetInitialSelection();
+
+        if (goingToFrigobar)
+        {
+            mainCamera.position = Vector3.Lerp(mainCamera.position, targetPositionFrigobar.position, moveSpeed * Time.deltaTime);
+            EventSystem.current.SetSelectedGameObject(TNTEnergyButton);
+            ActiveDesactiveMenu(false);
+            if (Vector3.Distance(mainCamera.position, targetPositionFrigobar.position) < 0.01f)
+            {
+                ActiveDesactiveLata(true);
+                StartCoroutine(SetFocusOnNewMenuButton());
+                mainCamera.position = targetPositionFrigobar.position;
+                goingToFrigobar = false;
+            }
         }
 
-        if (isMoving && inMenu)
+        if (returningToMenu)
         {
-            mainCamera.position = Vector3.Lerp(mainCamera.position, targetPosition.position, moveSpeed * Time.deltaTime);
-            EventSystem.current.SetSelectedGameObject(TNTEnergyButton);
-     
+            mainCamera.position = Vector3.Lerp(mainCamera.position, targetPositionMenu.position, moveSpeed * Time.deltaTime);
 
-
-
-
-            if (Vector3.Distance(mainCamera.position, targetPosition.position) < 0.01f)
+            EventSystem.current.SetSelectedGameObject(buttonPlay);
+            ActiveDesactiveLata(false);
+            if (Vector3.Distance(mainCamera.position, targetPositionMenu.position) < 0.01f)
             {
-                mainCamera.position = targetPosition.position;
-                isMoving = false;
-                inMenu = false;
-               
+                ActiveDesactiveMenu(true);
+                mainCamera.position = targetPositionMenu.position;
+                returningToMenu = false;
             }
         }
     }
@@ -146,36 +180,49 @@ public class MenuManager : MonoBehaviour
             buttonQuitTransform.localScale = hoverScale;
             buttonImageQuit.color = Color.Lerp(buttonImageQuit.color, new Color(0.5f, 0.5f, 0.5f), Time.deltaTime * 5f); // Cor mais clara
             mageAnimator.Play("angry");
+            witchAnimator.Play("fly");
         }
         else
         {
             buttonQuitTransform.localScale = originalScale;
             buttonImageQuit.color = Color.Lerp(buttonImageQuit.color, new Color(0f, 0f, 0f), Time.deltaTime * 5f); // Cor preta
             mageAnimator.Play("idle");
+            witchAnimator.Play("idle");
         }
     }
 
     public void StartMoving()
     {
-        ToggleMenu();
-        StartCoroutine(SetFocusOnNewMenuButton());
-        isMoving = true;
+        goingToFrigobar = true;
+        inMenu = false;
     }
-        
-    void ToggleMenu()
+
+    public void ReturnMenu()
     {
-        buttonPlay.SetActive(false);
-        buttonCredits.SetActive(false);
-        buttonQuit.SetActive(false);
+        returningToMenu = true;
+        inMenu = true;
+    }
 
-
-        TNTEnergyButton.SetActive(true);
-        TNTMangoButton.SetActive(true);
-        TNTFocusButton.SetActive(true);
+    public void ActiveDesactiveMenu(bool status)
+    {
+        PlayInteract.interactable = status;
+        CreditsInteract.interactable = status;
+        QuitInteract.interactable = status;
+    }
+    
+    void ActiveDesactiveLata(bool status)
+    {
+        BackInteract.interactable = status;
+        EnergyInteract.interactable = status;
+        MangoInteract.interactable = status;
+        FocusInteract.interactable = status;
     }
 
     private void SetInitialSelection()
     {
+        if (goingToFrigobar || returningToMenu)
+            return;
+
         if (inMenu)
         {
             EventSystem.current.SetSelectedGameObject(buttonPlay);
@@ -210,7 +257,6 @@ public class MenuManager : MonoBehaviour
         selectAudio.Play();
         yield return new WaitForSeconds(0.15f);
         Application.Quit();
-        Debug.Log("SAIU");
     }
 
 }
