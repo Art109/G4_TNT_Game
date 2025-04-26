@@ -3,23 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Wall
-  - Apple
-  - Guava
-  - Pineapple
-  - Mango
-  - Death
-  - Cauldron
-<<<<<<< HEAD
-  - Obstacle
-  - Inimigo
-  - Coletavel
-  - finger
-  - Activator
-=======
-  - finger
->>>>>>> 244c2f0a3bf80d56b2bc6f188b50528e16d4ae2a
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -27,21 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-<<<<<<< HEAD
-  - GroundWallJump
-  - GroundNoWallJump
   - 
   - 
-=======
-  - Ground
-  - GroundNoWallJump
   - 
   - 
-  - RedTNT
-  - BluTNT
-  - PrpTNT
-  - ExitButton
->>>>>>> 244c2f0a3bf80d56b2bc6f188b50528e16d4ae2a
   - 
   - 
   - 

@@ -1029,7 +1029,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1133,12 +1133,12 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
-  somColeta: {fileID: 482350392}
+  somColeta: {fileID: 519830485}
 --- !u!70 &482350394
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1194,7 +1194,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1271,7 +1271,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1375,7 +1375,7 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
@@ -1436,7 +1436,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1522,6 +1522,7 @@ MonoBehaviour:
   posicaoRespawnYBase: 10
   posicoesXDasFaixas:
   - -1.1
+  - 0
   - 1.1
   espacamentoMinimoY: 4
   tagOutroInimigo: Inimigo
@@ -1545,7 +1546,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1865,6 +1866,7 @@ GameObject:
   - component: {fileID: 703634369}
   - component: {fileID: 703634368}
   - component: {fileID: 703634367}
+  - component: {fileID: 703634370}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1946,6 +1948,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703634370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703634366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &736043477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,6 +2031,7 @@ MonoBehaviour:
   posicaoRespawnYBase: 10
   posicoesXDasFaixas:
   - -1.1
+  - 0
   - 1.1
   espacamentoMinimoY: 4
   tagOutroInimigo: Inimigo
@@ -2008,7 +2055,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2285,7 +2332,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2389,12 +2436,12 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
-  somColeta: {fileID: 817345750}
+  somColeta: {fileID: 519830485}
 --- !u!70 &817345752
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2450,7 +2497,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2527,7 +2574,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2631,12 +2678,12 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
-  somColeta: {fileID: 915060779}
+  somColeta: {fileID: 519830485}
 --- !u!70 &915060781
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2692,7 +2739,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2991,7 +3038,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3126,6 +3173,7 @@ MonoBehaviour:
   limiteEsquerdoX: -1.2
   limiteDireitoX: 1.2
   tempoExibicaoGameOver: 4
+  somBatida: {fileID: 8300000, guid: 08546a53b02b05e4984bb06a6915240c, type: 3}
 --- !u!95 &972657543
 Animator:
   serializedVersion: 5
@@ -4578,7 +4626,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4682,12 +4730,12 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
-  somColeta: {fileID: 1139945279}
+  somColeta: {fileID: 519830485}
 --- !u!70 &1139945281
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4743,7 +4791,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4820,7 +4868,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4924,12 +4972,12 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
-  somColeta: {fileID: 1198322577}
+  somColeta: {fileID: 519830485}
 --- !u!70 &1198322579
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4985,7 +5033,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5107,7 +5155,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5211,12 +5259,12 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
-  somColeta: {fileID: 1279278065}
+  somColeta: {fileID: 519830485}
 --- !u!70 &1279278067
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5272,7 +5320,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5349,7 +5397,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5453,12 +5501,12 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
-  somColeta: {fileID: 1285837856}
+  somColeta: {fileID: 519830485}
 --- !u!70 &1285837858
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5514,7 +5562,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5600,6 +5648,7 @@ MonoBehaviour:
   posicaoRespawnYBase: 10
   posicoesXDasFaixas:
   - -1.1
+  - 0
   - 1.1
   espacamentoMinimoY: 4
   tagOutroInimigo: Inimigo
@@ -5623,7 +5672,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6065,7 +6114,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8951,9 +9000,13 @@ MonoBehaviour:
   teclaVoltarMenu: 13
   textoContagemRegressiva: {fileID: 1694992303}
   somContagem: {fileID: 8300000, guid: 72b589c01f18458408a956d05070b5a8, type: 3}
-  somGo: {fileID: 0}
   delayInicialContagem: 0.5
   tempoEntreNumeros: 1
+  somVitoria: {fileID: 8300000, guid: d1f5633bf7614fe4383fc14ecfbaa780, type: 3}
+  audioSourceMusicaFundo: {fileID: 2016400470}
+  pitchNormalMusica: 1
+  pitchBoostMusica: 1.5
+  pitchFreioMusica: 0.7
 --- !u!82 &1633816684
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9080,7 +9133,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 289d5d80600e33a49b19a56637121750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca9eebc9e57d9ba47b34246e1a8f3c43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -9184,12 +9237,12 @@ MonoBehaviour:
   limiteInferiorY: -10
   posicaoRespawnYBase: 10
   posicoesXDasFaixasLatas:
-  - -1.1
+  - -0.5
   - 0.6
   espacamentoMinimoYLatas: 2
   tagOutraLata: Coletavel
   pontosPorColeta: 10
-  somColeta: {fileID: 1684907028}
+  somColeta: {fileID: 519830485}
 --- !u!70 &1684907030
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -9245,7 +9298,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9426,6 +9479,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694992301}
   m_CullTransparentMesh: 1
+--- !u!1 &1831850847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831850848}
+  - component: {fileID: 1831850849}
+  m_Layer: 0
+  m_Name: PosProcessing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1831850848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831850847}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8765869, y: -3.531242, z: -0.021925973}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831850849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831850847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 553e11f45569fc74ca7c0459b3fe5735, type: 2}
 --- !u!1 &1944542114
 GameObject:
   m_ObjectHideFlags: 0
@@ -9464,7 +9566,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9649,7 +9751,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 35dfce366f2142a4ea9fcecdea46dd71, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6051573f78603cd4497eb858aeb242e4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -9851,7 +9953,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10019,3 +10121,4 @@ SceneRoots:
   - {fileID: 432184908}
   - {fileID: 283031148}
   - {fileID: 2016400469}
+  - {fileID: 1831850848}
