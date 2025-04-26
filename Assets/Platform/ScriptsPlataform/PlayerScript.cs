@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Windows;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 public class PlayerScript : MonoBehaviour
 {
