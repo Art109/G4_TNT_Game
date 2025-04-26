@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -117,8 +118,19 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (inMenu && inputMenu.actions["ExitCredits"].WasPressedThisFrame())
+        if (inCredits)
         {
+            PlayInteract.interactable = false;
+            CreditsInteract.interactable = false;
+            QuitInteract.interactable = false;
+        }
+
+        if (inCredits && inputMenu.actions["ExitCredits"].WasPressedThisFrame())
+        {
+            inCredits = false;
+            PlayInteract.interactable = true;
+            CreditsInteract.interactable = true;
+            QuitInteract.interactable = true;
             selectAudio.Play();
             canvasCredits.SetActive(false);
         }
@@ -159,15 +171,17 @@ public class MenuManager : MonoBehaviour
     public void HoverButton()
     {
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
-
-        if (currentSelected != lastSelectedButton)
+        if (!inCredits)
         {
-            if (currentSelected == buttonPlay || currentSelected == buttonCredits || currentSelected == buttonQuit)
+            if (currentSelected != lastSelectedButton)
             {
-                selectAudio.Play(); 
-            }
+                if (currentSelected == buttonPlay || currentSelected == buttonCredits || currentSelected == buttonQuit)
+                {
+                    selectAudio.Play();
+                }
 
-            lastSelectedButton = currentSelected; 
+                lastSelectedButton = currentSelected;
+            }
         }
 
         if (EventSystem.current.currentSelectedGameObject == buttonPlay)
@@ -212,8 +226,11 @@ public class MenuManager : MonoBehaviour
 
     public void StartMoving()
     {
-        goingToFrigobar = true;
-        inMenu = false;
+        if (!inCredits)
+        {
+            goingToFrigobar = true;
+            inMenu = false;
+        }
     }
 
     public void ReturnMenu()
@@ -304,7 +321,10 @@ public class MenuManager : MonoBehaviour
 
     public void Quit()
     {
-        StartCoroutine(QuitCoroutine());
+        if (!inMenu)
+        {
+            StartCoroutine(QuitCoroutine());
+        }
     }
 
     IEnumerator QuitCoroutine()
