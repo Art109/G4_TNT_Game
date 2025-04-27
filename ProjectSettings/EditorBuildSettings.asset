@@ -6,9 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/LobbyScene.unity
+    guid: 322646152a36d234c914e303308c7071
+  - enabled: 1
+    path: Assets/Scenes/Corrida.unity
+    guid: db4ca46f5e8304c48ac195413dc25aee
+  - enabled: 1
+    path: Assets/Scenes/PlataformaControles.unity
+    guid: 687a4edd108f9184484244e964584857
+  - enabled: 1
+    path: Assets/Scenes/RhythmGame.unity
+    guid: a7efac3f0da73e7439004acd29203987
   - enabled: 1
     path: Assets/Scenes/PlataformaPrototipo.unity
     guid: f864248029ffebf4fbcb78e1e32279f0
+  - enabled: 1
+    path: Assets/Scenes/Fail.unity
+    guid: 19d360a59975e4c419c9994da3919a59
   m_configObjects: {}
