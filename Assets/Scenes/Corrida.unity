@@ -6608,7 +6608,7 @@ GameObject:
   - component: {fileID: 1430697490}
   - component: {fileID: 1430697489}
   m_Layer: 5
-  m_Name: buttonX
+  m_Name: buttonTriangulo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6653,7 +6653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0465d09ef8f11514886cc93ac7251c17, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f436a41e275c75645aa0131cfaeae4e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
