@@ -112,6 +112,7 @@ public class MenuManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         originalScale = buttonPlayTransform.localScale;
+        Time.timeScale = 1;
 
         ActiveDesactiveMenu(true);
         ActiveDesactiveLata(false);

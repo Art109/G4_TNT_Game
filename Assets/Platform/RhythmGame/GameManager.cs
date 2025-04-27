@@ -96,15 +96,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    bool backToMenu = false;
-    void ReturnMenu()
-    {
-        if (!backToMenu)
-        {
-            backToMenu = true;
-            SceneManager.LoadScene(0);
-        }
-    }
 
     void Update()
     {
@@ -128,11 +119,10 @@ public class GameManager : MonoBehaviour
                 R1.gameObject.SetActive(true);
                 R2.gameObject.SetActive(true);
             }
-            /*
             if (GamepadInputComponent.onButtonDown["BackButton"])
             {
-                ReturnMenu();
-            }*/
+                SceneManager.LoadScene(0);
+            }
 
             // KeyBoard
             if (Input.GetKeyDown(KeyCode.Space))
@@ -148,11 +138,10 @@ public class GameManager : MonoBehaviour
                 R1.gameObject.SetActive(true);
                 R2.gameObject.SetActive(true);
             }
-            /*
             if (Input.GetKeyDown(KeyCode.R))
             {
-                ReturnMenu();
-            }*/
+                SceneManager.LoadScene(0);
+            }
 
             return;
         }
