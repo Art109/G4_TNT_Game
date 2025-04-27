@@ -153,23 +153,28 @@ public class UIManager : MonoBehaviour
         EstaAcelerando = controles.Gameplay.Acelerar.IsPressed();
         EstaFreando = controles.Gameplay.Frear.IsPressed();
 
-        
+       
         if (!instrucoesAtivas)
         {
             VerificarInputPause();
         }
 
         
-        if (jogoPausado) { return; }
+        if (jogoPausado)
+        {
+            return;
+        }
 
         
         if (instrucoesAtivas)
         {
+            
             if (controles.Gameplay.IniciarJogo.WasPressedThisFrame())
             {
                 FecharInstrucoesEIniciarContagem();
             }
-            else if (controles.Gameplay.VoltarMenuInstrucoes.WasPressedThisFrame())
+            
+            else if (controles.Gameplay.VoltarMenuVitoria.WasPressedThisFrame()) 
             {
                 VoltarAoMenuPrincipal();
             }
@@ -177,17 +182,40 @@ public class UIManager : MonoBehaviour
         }
 
         
-        bool fimDeJogoAtivo = (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf) ||
-                              (painelGameOver != null && painelGameOver.activeSelf);
-        if (fimDeJogoAtivo)
+        bool vitoriaAtiva = painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf;
+        bool gameOverAtivo = painelGameOver != null && painelGameOver.activeSelf;
+
+        if (vitoriaAtiva)
         {
-            if (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf && controles.Gameplay.VoltarMenuVitoria.WasPressedThisFrame())
+            
+            if (controles.Gameplay.VoltarMenuVitoria.WasPressedThisFrame())
             {
-                if (sceneLoader != null) { Time.timeScale = 1f; sceneLoader.CarregarCenaPorIndice(0); }
-                else { Debug.LogError("SceneLoader não encontrado!"); }
+                VoltarAoMenuPrincipal();
             }
-            return; 
+            
+            else if (controles.Gameplay.Reiniciar.WasPressedThisFrame())
+            {
+                ReiniciarJogo();
+            }
+            
+            return;
         }
+        else if (gameOverAtivo) 
+        {
+            
+            if (controles.Gameplay.Reiniciar.WasPressedThisFrame())
+            {
+                ReiniciarJogo(); 
+            }
+            
+            else if (controles.Gameplay.VoltarMenuVitoria.WasPressedThisFrame())
+            {
+                VoltarAoMenuPrincipal();
+            }
+            return;
+        }
+        
+
 
         
         if (jogoRealmenteIniciado)
@@ -201,7 +229,7 @@ public class UIManager : MonoBehaviour
 
 
 
-    
+
     IEnumerator RotinaContagemRegressiva()
     {
         contagemEmAndamento = true;
@@ -431,4 +459,17 @@ public class UIManager : MonoBehaviour
         if (textoTempo != null) textoTempo.gameObject.SetActive(true);
         if (textoLatas != null) textoLatas.gameObject.SetActive(true);
     }
+
+   
+    void ReiniciarJogo()
+    {
+        Time.timeScale = 1f;
+        jogoPausado = false;
+        jogoRealmenteIniciado = false;
+        
+
+        Debug.Log("Reiniciando a cena...");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    
 }

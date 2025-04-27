@@ -89,6 +89,15 @@ public partial class @ControlesJogador: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reiniciar"",
+                    ""type"": ""Button"",
+                    ""id"": ""acb51a91-77db-4dbe-b41a-9dbc1ecd7509"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -348,11 +357,33 @@ public partial class @ControlesJogador: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""19450698-66f0-428a-87a9-4b07384d4e3b"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""IniciarJogo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f06641e-10e5-485c-b332-fc2fef5fef2f"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reiniciar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e423cfd-0038-49c5-b802-31d557feaaad"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reiniciar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -370,6 +401,7 @@ public partial class @ControlesJogador: IInputActionCollection2, IDisposable
         m_Gameplay_VoltarMenuInstrucoes = m_Gameplay.FindAction("VoltarMenuInstrucoes", throwIfNotFound: true);
         m_Gameplay_VoltarMenuVitoria = m_Gameplay.FindAction("VoltarMenuVitoria", throwIfNotFound: true);
         m_Gameplay_IniciarJogo = m_Gameplay.FindAction("IniciarJogo", throwIfNotFound: true);
+        m_Gameplay_Reiniciar = m_Gameplay.FindAction("Reiniciar", throwIfNotFound: true);
     }
 
     ~@ControlesJogador()
@@ -443,6 +475,7 @@ public partial class @ControlesJogador: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_VoltarMenuInstrucoes;
     private readonly InputAction m_Gameplay_VoltarMenuVitoria;
     private readonly InputAction m_Gameplay_IniciarJogo;
+    private readonly InputAction m_Gameplay_Reiniciar;
     public struct GameplayActions
     {
         private @ControlesJogador m_Wrapper;
@@ -454,6 +487,7 @@ public partial class @ControlesJogador: IInputActionCollection2, IDisposable
         public InputAction @VoltarMenuInstrucoes => m_Wrapper.m_Gameplay_VoltarMenuInstrucoes;
         public InputAction @VoltarMenuVitoria => m_Wrapper.m_Gameplay_VoltarMenuVitoria;
         public InputAction @IniciarJogo => m_Wrapper.m_Gameplay_IniciarJogo;
+        public InputAction @Reiniciar => m_Wrapper.m_Gameplay_Reiniciar;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -484,6 +518,9 @@ public partial class @ControlesJogador: IInputActionCollection2, IDisposable
             @IniciarJogo.started += instance.OnIniciarJogo;
             @IniciarJogo.performed += instance.OnIniciarJogo;
             @IniciarJogo.canceled += instance.OnIniciarJogo;
+            @Reiniciar.started += instance.OnReiniciar;
+            @Reiniciar.performed += instance.OnReiniciar;
+            @Reiniciar.canceled += instance.OnReiniciar;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -509,6 +546,9 @@ public partial class @ControlesJogador: IInputActionCollection2, IDisposable
             @IniciarJogo.started -= instance.OnIniciarJogo;
             @IniciarJogo.performed -= instance.OnIniciarJogo;
             @IniciarJogo.canceled -= instance.OnIniciarJogo;
+            @Reiniciar.started -= instance.OnReiniciar;
+            @Reiniciar.performed -= instance.OnReiniciar;
+            @Reiniciar.canceled -= instance.OnReiniciar;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -535,5 +575,6 @@ public partial class @ControlesJogador: IInputActionCollection2, IDisposable
         void OnVoltarMenuInstrucoes(InputAction.CallbackContext context);
         void OnVoltarMenuVitoria(InputAction.CallbackContext context);
         void OnIniciarJogo(InputAction.CallbackContext context);
+        void OnReiniciar(InputAction.CallbackContext context);
     }
 }
