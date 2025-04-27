@@ -1,0 +1,76 @@
+{
+    "name": "InputsRaceController",
+    "maps": [
+        {
+            "name": "Car",
+            "id": "3241249f-f3e4-4238-a310-c8c41cc22097",
+            "actions": [
+                {
+                    "name": "Acelerar",
+                    "type": "Button",
+                    "id": "4e2ad320-eed8-4b8e-9ea5-ac00bc0001b1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Freiar",
+                    "type": "Button",
+                    "id": "36dd9360-7486-488f-b3e7-0ae4b78c22a0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "efe066ae-6030-456e-8992-f6cd91c02b90",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Acelerar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2346cc3-7a86-4b17-bc04-0045f5382048",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Acelerar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ac72d675-169b-4938-afa1-bfef84ecaf84",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Freiar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd2c9b1c-947a-473f-b1ec-c566ea0a71a1",
+                    "path": "<DualShockGamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Freiar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

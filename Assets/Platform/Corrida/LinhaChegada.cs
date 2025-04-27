@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LinhaChegada : MonoBehaviour
 {
@@ -12,8 +13,12 @@ public class LinhaChegada : MonoBehaviour
 
     private bool jaCruzou = false;
 
+    private PlayerInput carInput;
+
+
     void Start()
     {
+        carInput = GetComponent<PlayerInput>();
         scriptJogador = FindObjectOfType<PlayerCarro>();
         if (scriptJogador == null)
         {
@@ -36,11 +41,11 @@ public class LinhaChegada : MonoBehaviour
     {
         float velocidadeAtual;
 
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (carInput.actions["Freiar"].IsPressed())
         {
             velocidadeAtual = velocidadeFreio;
         }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (carInput.actions["Acelerar"].IsPressed())
         {
             velocidadeAtual = velocidadeBoost;
         }

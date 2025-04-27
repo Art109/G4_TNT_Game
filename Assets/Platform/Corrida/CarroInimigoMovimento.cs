@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class CarroInimigoMovimento : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class CarroInimigoMovimento : MonoBehaviour
 
     private float raioVerificacaoY;
 
+    private PlayerInput carInput;
+
+    private void Start()
+    {
+        carInput = GetComponent<PlayerInput>();
+    }
+
     void Awake()
     {
         raioVerificacaoY = espacamentoMinimoY * 1.1f;
@@ -27,8 +35,8 @@ public class CarroInimigoMovimento : MonoBehaviour
         if (Time.timeScale == 0f) return;
 
         float velocidadeAtual;
-        if (Input.GetKey(KeyCode.LeftControl)) { velocidadeAtual = velocidadeFreio; }
-        else if (Input.GetKey(KeyCode.LeftShift)) { velocidadeAtual = velocidadeBoost; }
+        if (carInput.actions["Freiar"].IsPressed()) { velocidadeAtual = velocidadeFreio; }
+        else if (carInput.actions["Acelerar"].IsPressed()) { velocidadeAtual = velocidadeBoost; }
         else { velocidadeAtual = velocidadeNormal; }
 
         transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);

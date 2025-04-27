@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class ColetavelPonto : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class ColetavelPonto : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Collider2D colisor;
+    private PlayerInput carInput;
+
+    private void Start()
+    {
+        carInput = GetComponent<PlayerInput>();
+    }
 
     void Awake()
     {
@@ -41,8 +48,8 @@ public class ColetavelPonto : MonoBehaviour
     void MoverColetavel()
     {
         float velocidadeAtual;
-        if (Input.GetKey(KeyCode.LeftControl)) { velocidadeAtual = velocidadeFreio; }
-        else if (Input.GetKey(KeyCode.LeftShift)) { velocidadeAtual = velocidadeBoost; }
+        if (carInput.actions["Freiar"].IsPressed()) { velocidadeAtual = velocidadeFreio; }
+        else if (carInput.actions["Acelerar"].IsPressed()) { velocidadeAtual = velocidadeBoost; }
         else { velocidadeAtual = velocidadeNormal; }
         transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
     }

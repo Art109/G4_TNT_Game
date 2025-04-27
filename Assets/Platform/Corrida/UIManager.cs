@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
@@ -60,9 +61,11 @@ public class UIManager : MonoBehaviour
 
     private SceneLoader sceneLoader;
 
-    
+    private PlayerInput carInput;
+
     void Awake()
     {
+        
         audioSourceEfeitos = GetComponent<AudioSource>();
         if (audioSourceEfeitos == null)
         {
@@ -76,6 +79,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        carInput = GetComponent<PlayerInput>();
         sceneLoader = FindObjectOfType<SceneLoader>();
         
 
@@ -250,11 +254,11 @@ public class UIManager : MonoBehaviour
     {
         if (audioSourceMusicaFundo == null) return;
 
-        if (Input.GetKey(teclaBoost))
+        if (carInput.actions["Acelerar"].IsPressed())
         {
             audioSourceMusicaFundo.pitch = pitchBoostMusica;
         }
-        else if (Input.GetKey(teclaFreio))
+        else if (carInput.actions["Freiar"].IsPressed())
         {
             audioSourceMusicaFundo.pitch = pitchFreioMusica;
         }
@@ -336,12 +340,12 @@ public class UIManager : MonoBehaviour
         float velocidadeAtualExibida = 80;
         Color corAtual = corVelocidadeNormal;
 
-        if (Input.GetKey(teclaFreio))
+        if (carInput.actions["Freiar"].IsPressed())
         {
             velocidadeAtualExibida = 20;
             corAtual = corVelocidadeFreio;
         }
-        else if (Input.GetKey(teclaBoost))
+        else if (carInput.actions["Acelerar"].IsPressed())
         {
             velocidadeAtualExibida = 120;
             corAtual = corVelocidadeBoost;

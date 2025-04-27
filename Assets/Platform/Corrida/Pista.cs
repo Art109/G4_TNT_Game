@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Pista : MonoBehaviour
 {
@@ -14,6 +15,13 @@ public class Pista : MonoBehaviour
     
     public KeyCode teclaFreio = KeyCode.LeftControl;
     public KeyCode teclaBoost = KeyCode.LeftShift;
+
+    private PlayerInput carInput;
+
+    private void Start()
+    {
+        carInput = GetComponent<PlayerInput>();
+    }
 
     void Update()
     {
@@ -34,11 +42,11 @@ public class Pista : MonoBehaviour
     
     float CalcularVelocidadeAtual()
     {
-        if (Input.GetKey(teclaFreio))
+        if (carInput.actions["Freiar"].IsPressed())
         {
             return velocidadeFreio;
         }
-        else if (Input.GetKey(teclaBoost))
+        else if (carInput.actions["Acelerar"].IsPressed())
         {
             return velocidadeBoost;
         }
