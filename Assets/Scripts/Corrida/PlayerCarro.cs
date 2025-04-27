@@ -23,6 +23,7 @@ public class PlayerCarro : MonoBehaviour
 
     [Header("Sons")]
     public AudioClip somBatida;
+    private AudioSource audioSourceMusicaFundo;
 
     void Start()
     {
@@ -38,8 +39,14 @@ public class PlayerCarro : MonoBehaviour
         {
             Debug.LogError("UIManager não encontrado na cena! Verifique se o GameObject está ativo e com o script anexado.");
         }
-        // Opcional: Chamar reset do UIManager aqui se necessário
-        // if (uiManager != null) uiManager.ResetUI();
+        if (uiManager != null && uiManager.audioSourceMusicaFundo != null)
+        {
+            audioSourceMusicaFundo = uiManager.audioSourceMusicaFundo;
+        }
+        else if (uiManager != null)
+        {
+            Debug.LogWarning("UIManager encontrado, mas AudioSource da música não está conectado nele.");
+        }
     }
 
     void Update()
@@ -80,7 +87,10 @@ public class PlayerCarro : MonoBehaviour
         jogoTerminou = true;
         Time.timeScale = 0f;
 
-        Debug.Log("Colisão! Fim de Jogo! Pontuação Final: " + pontuacaoAtual);
+        if (audioSourceMusicaFundo != null && audioSourceMusicaFundo.isPlaying)
+        {
+            audioSourceMusicaFundo.Stop();
+        }
 
         if (somBatida != null)
         {
@@ -121,16 +131,22 @@ public class PlayerCarro : MonoBehaviour
         jogoTerminou = true;
         Time.timeScale = 0f;
 
+        if (audioSourceMusicaFundo != null && audioSourceMusicaFundo.isPlaying)
+        {
+            audioSourceMusicaFundo.Stop();
+        }
+
         if (uiManager != null)
         {
             float tempoFinal = uiManager.GetTempoFinal();
             int pontuacaoOriginal = CalcularPontuacaoFinal(tempoFinal, latasColetadas);
-            const int maxScoreOriginalEstimado = 2000;
+            const int maxScoreOriginalEstimado = 4500;
             int pontuacaoFinalMapeada = 0;
             if (maxScoreOriginalEstimado > 0)
             {
                 float proporcao = Mathf.Clamp01((float)Mathf.Max(0, pontuacaoOriginal) / maxScoreOriginalEstimado);
-                pontuacaoFinalMapeada = Mathf.RoundToInt(proporcao * 20f);
+                float proporcaoAjustada = Mathf.Sqrt(proporcao);
+                pontuacaoFinalMapeada = Mathf.RoundToInt(proporcaoAjustada * 20f);
             }
             
             uiManager.MostrarPontuacaoFinal(pontuacaoFinalMapeada);
@@ -139,16 +155,18 @@ public class PlayerCarro : MonoBehaviour
         {
             Debug.LogError("Não foi possível mostrar pontuação final, UIManager não encontrado!");
         }
+
+        int CalcularPontuacaoFinal(float tempo, int latas)
+        {
+            int pontosBasePorLata = 100;
+            float fatorTempo = 10000f;
+            int bonusBase = 500;
+            if (tempo < 0.1f) tempo = 0.1f;
+            int pontuacao = bonusBase + (latas * pontosBasePorLata) + (int)(fatorTempo / tempo);
+            return Mathf.Max(0, pontuacao);
+        }
     }
 
     
-    int CalcularPontuacaoFinal(float tempo, int latas)
-    {
-        int pontosBasePorLata = 100;
-        float fatorTempo = 10000f;
-        int bonusBase = 500;
-        if (tempo < 0.1f) tempo = 0.1f;
-        int pontuacao = bonusBase + (latas * pontosBasePorLata) + (int)(fatorTempo / tempo);
-        return Mathf.Max(0, pontuacao);
-    }
+    
 }

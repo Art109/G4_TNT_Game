@@ -46,13 +46,12 @@ public class UIManager : MonoBehaviour
     public AudioSource audioSourceMusicaFundo;
     private AudioSource audioSourceEfeitos;
 
-
     [Header("Configurações de Pitch")]
     public float pitchNormalMusica = 1.0f;
     public float pitchBoostMusica = 1.2f;
     public float pitchFreioMusica = 0.8f;
 
-
+    
     private float tempoDecorrido = 0f;
     private bool cronometroAtivo = false;
     private bool instrucoesAtivas = false;
@@ -64,16 +63,15 @@ public class UIManager : MonoBehaviour
     
     void Awake()
     {
-        
         audioSourceEfeitos = GetComponent<AudioSource>();
-
         if (audioSourceEfeitos == null)
         {
-            Debug.LogWarning("AudioSource não encontrado no UIManager. Adicionando um...");
+            
             audioSourceEfeitos = gameObject.AddComponent<AudioSource>();
             audioSourceEfeitos.playOnAwake = false;
             audioSourceEfeitos.spatialBlend = 0f;
         }
+        
     }
 
     void Start()
@@ -81,17 +79,14 @@ public class UIManager : MonoBehaviour
         sceneLoader = FindObjectOfType<SceneLoader>();
         
 
-        
         if (painelPontuacaoFinal != null) painelPontuacaoFinal.SetActive(false);
         if (painelGameOver != null) painelGameOver.SetActive(false);
         if (painelPause != null) painelPause.SetActive(false);
 
-        
         jogoRealmenteIniciado = false;
         jogoPausado = false;
         instrucoesAtivas = false;
 
-        
         EsconderUIDaCorrida();
         if (textoContagemRegressiva != null)
         {
@@ -99,7 +94,6 @@ public class UIManager : MonoBehaviour
             textoContagemRegressiva.gameObject.SetActive(false);
         }
 
-        
         if (painelInstrucoes != null && painelInstrucoes.activeSelf)
         {
             instrucoesAtivas = true;
@@ -112,9 +106,15 @@ public class UIManager : MonoBehaviour
             StartCoroutine(RotinaContagemRegressiva());
         }
 
+        
         if (audioSourceMusicaFundo != null)
         {
             audioSourceMusicaFundo.pitch = pitchNormalMusica;
+            
+            if (audioSourceMusicaFundo.playOnAwake && !audioSourceMusicaFundo.isPlaying)
+            {
+                audioSourceMusicaFundo.Play();
+            }
         }
     }
 
@@ -122,13 +122,16 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
-        if (jogoRealmenteIniciado && Time.timeScale != 0f)
+        if (!instrucoesAtivas)
         {
             VerificarInputPause();
         }
 
         
-        if (jogoPausado) { return; }
+        if (jogoPausado)
+        {
+            return;
+        }
 
         
         if (instrucoesAtivas)
@@ -137,6 +140,11 @@ public class UIManager : MonoBehaviour
             {
                 FecharInstrucoesEIniciarContagem();
             }
+            else if (Input.GetKeyDown(teclaVoltarMenu))
+            {
+                VoltarAoMenuPrincipal();
+            }
+
             return;
         }
 
@@ -145,6 +153,7 @@ public class UIManager : MonoBehaviour
                               (painelGameOver != null && painelGameOver.activeSelf);
         if (fimDeJogoAtivo)
         {
+            
             if (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf && Input.GetKeyDown(teclaVoltarMenu))
             {
                 if (sceneLoader != null) { Time.timeScale = 1f; sceneLoader.CarregarCenaPorIndice(0); }
@@ -157,86 +166,76 @@ public class UIManager : MonoBehaviour
         
         if (jogoRealmenteIniciado)
         {
+            
+            AtualizarPitchMusica();
             AtualizarVelocidadeUI();
             AtualizarTempoUI();
             AtualizarLatasUI();
         }
-
-        if (jogoPausado || instrucoesAtivas ||  fimDeJogoAtivo ) { return; }
-
         
-        AtualizarPitchMusica();
-        AtualizarVelocidadeUI();
-        AtualizarTempoUI();
-        AtualizarLatasUI();
     }
 
-    void AtualizarPitchMusica()
+    void VoltarAoMenuPrincipal()
     {
-        
-        if (audioSourceMusicaFundo == null) return;
-
-        
-        if (Input.GetKey(teclaBoost))
+        Time.timeScale = 1f;
+        if (sceneLoader != null)
         {
-            audioSourceMusicaFundo.pitch = pitchBoostMusica;
-        }
-        else if (Input.GetKey(teclaFreio))
-        {
-            
-            audioSourceMusicaFundo.pitch = pitchFreioMusica;
+            sceneLoader.CarregarCenaPorIndice(0);
         }
         else
         {
-            audioSourceMusicaFundo.pitch = pitchNormalMusica;
+            Debug.LogError("SceneLoader não encontrado, não é possível voltar ao menu!");
         }
     }
+
 
 
     IEnumerator RotinaContagemRegressiva()
     {
+        
         EsconderUIDaCorrida();
         if (textoContagemRegressiva != null) textoContagemRegressiva.gameObject.SetActive(true);
 
-        
         yield return new WaitForSecondsRealtime(delayInicialContagem);
 
         
         if (textoContagemRegressiva != null) textoContagemRegressiva.text = "3";
         TocarSom(somContagem);
         yield return new WaitForSecondsRealtime(tempoEntreNumeros);
-
         
         if (textoContagemRegressiva != null) textoContagemRegressiva.text = "2";
-        
         yield return new WaitForSecondsRealtime(tempoEntreNumeros + 1.0f);
-
         
         if (textoContagemRegressiva != null) textoContagemRegressiva.text = "1";
-        
         yield return new WaitForSecondsRealtime(tempoEntreNumeros + 0.7f);
-
         
         if (textoContagemRegressiva != null) textoContagemRegressiva.text = "GO!";
         
 
+        yield return new WaitForSecondsRealtime(0.5f);
+        if (textoContagemRegressiva != null) textoContagemRegressiva.gameObject.SetActive(false);
+
         
         Time.timeScale = 1f;
+
+        
+        if (audioSourceMusicaFundo != null && !audioSourceMusicaFundo.isPlaying)
+        {
+            audioSourceMusicaFundo.Play();
+        }
+
         IniciarJogoDeVerdade();
 
         
-        yield return new WaitForSecondsRealtime(0.7f);
-        if (textoContagemRegressiva != null) textoContagemRegressiva.gameObject.SetActive(false);
     }
 
     
     void IniciarJogoDeVerdade()
     {
         jogoRealmenteIniciado = true;
-        
         MostrarUIDaCorrida();
         IniciarCronometro();
-        Debug.Log("Jogo Iniciado!");
+        
     }
 
     void TocarSom(AudioClip clip)
@@ -247,48 +246,90 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void AtualizarPitchMusica()
+    {
+        if (audioSourceMusicaFundo == null) return;
+
+        if (Input.GetKey(teclaBoost))
+        {
+            audioSourceMusicaFundo.pitch = pitchBoostMusica;
+        }
+        else if (Input.GetKey(teclaFreio))
+        {
+            audioSourceMusicaFundo.pitch = pitchFreioMusica;
+        }
+        else
+        {
+            audioSourceMusicaFundo.pitch = pitchNormalMusica;
+        }
+    }
+
+    
     void VerificarInputPause()
     {
         
+        bool fimDeJogoAtivo = (painelPontuacaoFinal != null && painelPontuacaoFinal.activeSelf) ||
+                              (painelGameOver != null && painelGameOver.activeSelf);
+        if (fimDeJogoAtivo) return;
+
         if (Input.GetKeyDown(teclaPause))
         {
-            
-            if (jogoPausado) { DespausarJogo(); }
-            else if (Time.timeScale > 0f)
+            Debug.Log("Escape Pressionado. Estado atual jogoPausado = " + jogoPausado);
+
+            if (jogoPausado)
             {
+                Debug.Log("-> Chamando DespausarJogo()");
+                DespausarJogo();
+            }
+            
+            else if (Time.timeScale > 0f && jogoRealmenteIniciado)
+            {
+                Debug.Log("-> Chamando PausarJogo()");
                 PausarJogo();
+            }
+            else
+            {
+                Debug.Log("-> Tentou pausar, mas TimeScale=" + Time.timeScale + " ou jogoRealmenteIniciado=" + jogoRealmenteIniciado);
             }
         }
     }
 
     void PausarJogo()
     {
-        jogoPausado = true;
         Time.timeScale = 0f;
+        if (audioSourceMusicaFundo != null && audioSourceMusicaFundo.isPlaying) { audioSourceMusicaFundo.Pause(); }
         if (painelPause != null) painelPause.SetActive(true);
-        Debug.Log("Jogo Pausado");
+        jogoPausado = true;
+        Debug.Log("Jogo Pausado. jogoPausado = " + jogoPausado + ", Time.timeScale = " + Time.timeScale);
     }
 
     void DespausarJogo()
     {
+        
         jogoPausado = false;
         Time.timeScale = 1f;
+        if (audioSourceMusicaFundo != null && !audioSourceMusicaFundo.isPlaying)
+        {
+            audioSourceMusicaFundo.UnPause();
+        }
         if (painelPause != null) painelPause.SetActive(false);
-        Debug.Log("Jogo Despausado");
+        Debug.Log("Jogo Despausado. jogoPausado = " + jogoPausado + ", Time.timeScale = " + Time.timeScale);
     }
+    
 
+
+    
     void FecharInstrucoesEIniciarContagem()
     {
         if (painelInstrucoes != null) { painelInstrucoes.SetActive(false); }
         instrucoesAtivas = false;
-        
         Time.timeScale = 0f;
         EsconderUIDaCorrida();
         StartCoroutine(RotinaContagemRegressiva());
     }
 
 
-    
+
     void AtualizarVelocidadeUI()
     {
         if (textoVelocidade == null) return;
