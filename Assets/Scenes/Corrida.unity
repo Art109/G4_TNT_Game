@@ -771,7 +771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00022316, y: -83.651375}
+  m_AnchoredPosition: {x: 6.9, y: -83.651375}
   m_SizeDelta: {x: 981.57, y: 393.8271}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320656442
@@ -3149,7 +3149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &953117881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3365,6 +3365,7 @@ GameObject:
   - component: {fileID: 972657539}
   - component: {fileID: 972657542}
   - component: {fileID: 972657543}
+  - component: {fileID: 972657544}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3549,6 +3550,84 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &972657544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972657535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: aa61eb02c641a51469fb02acf3a532bd, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972657542}
+        m_TargetAssemblyTypeName: PlayerCarro, Assembly-CSharp
+        m_MethodName: MoverJogador
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2d34c093-f4ce-4d1e-a291-8001e6c7815c
+    m_ActionName: Player/Mover[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 90899b6a-ddac-455e-a3f9-f2c9cc4f6e2c
+    m_ActionName: Player/Acelerar[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3044f2d6-7584-476b-a2c1-0d4029640974
+    m_ActionName: Player/Frear[/Keyboard/leftCtrl]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3f09d758-c00c-4474-a741-c81b3b6affc9
+    m_ActionName: Player/Pausar[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 90f9f5f4-8b9b-46b4-8336-edd49a2ba65f
+    m_ActionName: Player/MenuPrincipal[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aced6474-4e08-47b4-8bd5-9c49d6645878
+    m_ActionName: Player/IniciarJogo[/Keyboard/space]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &998152341
 GameObject:
   m_ObjectHideFlags: 0
@@ -9703,7 +9782,7 @@ MonoBehaviour:
   teclaFreio: 306
   teclaBoost: 304
   teclaIniciarJogo: 32
-  teclaPause: 27
+  teclaPause: 112
   teclaVoltarMenu: 13
   textoContagemRegressiva: {fileID: 1694992303}
   somContagem: {fileID: 8300000, guid: 72b589c01f18458408a956d05070b5a8, type: 3}
@@ -10916,6 +10995,7 @@ GameObject:
   - component: {fileID: 2100356674}
   - component: {fileID: 2100356673}
   - component: {fileID: 2100356675}
+  - component: {fileID: 2100356676}
   m_Layer: 0
   m_Name: Pista_A
   m_TagString: Untagged
@@ -11010,6 +11090,36 @@ MonoBehaviour:
   limiteInferiorY: -15
   teclaFreio: 306
   teclaBoost: 304
+--- !u!114 &2100356676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100356672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: 0}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2102773517
 GameObject:
   m_ObjectHideFlags: 0
@@ -11102,7 +11212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2139339585
 RectTransform:
   m_ObjectHideFlags: 0

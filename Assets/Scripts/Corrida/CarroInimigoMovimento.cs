@@ -14,6 +14,7 @@ public class CarroInimigoMovimento : MonoBehaviour
 
     public float espacamentoMinimoY = 4.0f;
     public string tagOutroInimigo = "Inimigo";
+    public LayerMask layerCarros; 
 
     private float raioVerificacaoY;
 
@@ -24,15 +25,18 @@ public class CarroInimigoMovimento : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0f) return;
+        if (Time.timeScale == 0f) { return; }
 
-        float velocidadeAtual;
-        if (Input.GetKey(KeyCode.LeftControl)) { velocidadeAtual = velocidadeFreio; }
-        else if (Input.GetKey(KeyCode.LeftShift)) { velocidadeAtual = velocidadeBoost; }
-        else { velocidadeAtual = velocidadeNormal; }
+        
+        if (PlayerCarro.LinhaDeChegadaPassou)
+        {
+            if (transform.position.y > limiteInferiorY) { MoverInimigo(); }
+            else { if (gameObject.activeSelf) gameObject.SetActive(false); }
+            return;
+        }
 
-        transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
-
+        
+        MoverInimigo();
         if (transform.position.y < limiteInferiorY)
         {
             Respawn();
@@ -40,48 +44,56 @@ public class CarroInimigoMovimento : MonoBehaviour
     }
 
     
+    void MoverInimigo()
+    {
+        float velocidadeAtual;
+
+        
+        if (UIManager.EstaFreando)
+        {
+            velocidadeAtual = velocidadeFreio;
+        }
+        else if (UIManager.EstaAcelerando)
+        {
+            velocidadeAtual = velocidadeBoost;
+        }
+        else
+        {
+            velocidadeAtual = velocidadeNormal;
+        }
+
+        
+        transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
+    }
+
+    
     void Respawn()
     {
-
-        if (posicoesXDasFaixas == null || posicoesXDasFaixas.Count == 0)
+        if (PlayerCarro.LinhaDeChegadaPassou)
         {
-            Debug.LogError("Lista 'posicoesXDasFaixas' não configurada para " + gameObject.name);
             gameObject.SetActive(false);
             return;
         }
 
+        if (posicoesXDasFaixas == null || posicoesXDasFaixas.Count == 0) { /*...*/ gameObject.SetActive(false); return; }
         int indiceAleatorio = Random.Range(0, posicoesXDasFaixas.Count);
         float novaPosicaoX = posicoesXDasFaixas[indiceAleatorio];
         float tentativaNovaPosicaoY = posicaoRespawnYBase;
-
-        
         Collider2D[] colisoresProximos = Physics2D.OverlapCircleAll(
                                             new Vector2(novaPosicaoX, tentativaNovaPosicaoY),
                                             raioVerificacaoY,
-                                            LayerMask.GetMask("Default")
-                                        );
-
+                                            layerCarros);
         float yMaisAltoOcupado = -Mathf.Infinity;
         foreach (Collider2D col in colisoresProximos)
         {
-            
             if (col.gameObject != this.gameObject && col.CompareTag(tagOutroInimigo))
             {
                 yMaisAltoOcupado = Mathf.Max(yMaisAltoOcupado, col.transform.position.y);
             }
         }
-
-        if (yMaisAltoOcupado > -Mathf.Infinity)
-        {
-            tentativaNovaPosicaoY = yMaisAltoOcupado + espacamentoMinimoY;
-        }
-
+        if (yMaisAltoOcupado > -Mathf.Infinity) { tentativaNovaPosicaoY = yMaisAltoOcupado + espacamentoMinimoY; }
         float novaPosicaoY = Mathf.Max(posicaoRespawnYBase, tentativaNovaPosicaoY);
         transform.position = new Vector3(novaPosicaoX, novaPosicaoY, transform.position.z);
-
-        if (!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-        }
+        if (!gameObject.activeSelf) { gameObject.SetActive(true); }
     }
 }
