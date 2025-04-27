@@ -420,7 +420,7 @@ public class UIManager : MonoBehaviour
             if (textoGameOverMensagem != null)
             {
                 
-                textoGameOverMensagem.text = "VOCÊ BATEU!\nTENTE NOVAMENTE.\nPontuação: " + pontuacaoFinal;
+                textoGameOverMensagem.text = "Game Over!\nPontuação: " + pontuacaoFinal;
             }
             else { /* Log Erro */ }
             painelGameOver.SetActive(true);
