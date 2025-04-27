@@ -4,43 +4,63 @@ public class LinhaChegada : MonoBehaviour
 {
     public float velocidadeNormal = 5f;
     public float velocidadeBoost = 10f;
-    public float velocidadeFreio = 2f;
+    public float velocidadeFreio = 2f; 
 
-    public float pontoDeVitoriaY = -5f;
+    public float pontoDeVitoriaY = -5f; 
 
-    private PlayerCarro scriptJogador;
+    
+    public float pontoYParaPararRespawn = 0f;
+    private bool respawnParado = false; 
 
-    private bool jaCruzou = false;
+    private PlayerCarro scriptJogador; 
+    private bool jaCruzou = false;     
 
     void Start()
     {
         scriptJogador = FindObjectOfType<PlayerCarro>();
-        if (scriptJogador == null)
-        {
-            Debug.LogError("ERRO: Script PlayerCarro não encontrado na cena!");
-        }
+        if (scriptJogador == null) { /* Log Erro */ }
+        jaCruzou = false;
+        respawnParado = false;
     }
 
     void Update()
     {
         if (Time.timeScale == 0f) return;
 
-        if (!jaCruzou && scriptJogador != null)
+        
+        if (scriptJogador != null)
         {
-            MoverLinhaChegada();
-            VerificarCruzamento();
+            
+            if (!jaCruzou)
+            {
+                MoverLinhaChegada();
+
+                
+                if (!respawnParado && transform.position.y < pontoYParaPararRespawn)
+                {
+                    PararRespawnsGlobal();
+                }
+
+                
+                if (transform.position.y < pontoDeVitoriaY)
+                {
+                    DeclararVitoria();
+                }
+            }
         }
     }
 
+    
     void MoverLinhaChegada()
     {
         float velocidadeAtual;
 
-        if (Input.GetKey(KeyCode.LeftControl))
+        
+        if (UIManager.EstaFreando)
         {
             velocidadeAtual = velocidadeFreio;
         }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (UIManager.EstaAcelerando)
         {
             velocidadeAtual = velocidadeBoost;
         }
@@ -49,12 +69,31 @@ public class LinhaChegada : MonoBehaviour
             velocidadeAtual = velocidadeNormal;
         }
 
+        
         transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
     }
 
-    void VerificarCruzamento()
+    
+    void VerificarCruzamento() 
     {
-        if (transform.position.y < pontoDeVitoriaY)
+        
+    }
+
+    
+    void PararRespawnsGlobal()
+    {
+        if (!respawnParado)
+        {
+            respawnParado = true;
+            PlayerCarro.LinhaDeChegadaPassou = true; 
+            Debug.LogWarning("!!! SETANDO PlayerCarro.LinhaDeChegadaPassou = TRUE em Y=" + transform.position.y + " !!!");
+        }
+    }
+
+    
+    void DeclararVitoria()
+    {
+        if (!jaCruzou)
         {
             jaCruzou = true;
             scriptJogador.IniciarVitoria();

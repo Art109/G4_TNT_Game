@@ -1,25 +1,32 @@
 using UnityEngine;
 
-public class Pista : MonoBehaviour
+public class Pista : MonoBehaviour 
 {
-    [Header("Velocidades")]
     public float velocidadeNormal = 5f;
     public float velocidadeBoost = 10f;
-    public float velocidadeFreio = 2f;
-
-    [Header("Reposição")]
+    public float velocidadeFreio = 2f; 
     public float alturaSegmento = 20f;
-    public float limiteInferiorY = -15f;
-
-    
-    public KeyCode teclaFreio = KeyCode.LeftControl;
-    public KeyCode teclaBoost = KeyCode.LeftShift;
+    public float limiteInferiorY = -10f;
 
     void Update()
     {
         if (Time.timeScale == 0f) return;
 
-        float velocidadeAtual = CalcularVelocidadeAtual();
+        float velocidadeAtual;
+
+        
+        if (UIManager.EstaFreando)
+        {
+            velocidadeAtual = velocidadeFreio;
+        }
+        else if (UIManager.EstaAcelerando)
+        {
+            velocidadeAtual = velocidadeBoost;
+        }
+        else
+        {
+            velocidadeAtual = velocidadeNormal;
+        }
 
         
         transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
@@ -31,33 +38,13 @@ public class Pista : MonoBehaviour
         }
     }
 
-    
-    float CalcularVelocidadeAtual()
-    {
-        if (Input.GetKey(teclaFreio))
-        {
-            return velocidadeFreio;
-        }
-        else if (Input.GetKey(teclaBoost))
-        {
-            return velocidadeBoost;
-        }
-        else
-        {
-            return velocidadeNormal;
-        }
-    }
-
-    
     void Reposicionar()
     {
-        
         float distanciaSalto = alturaSegmento * 2f;
         transform.position = new Vector3(
             transform.position.x,
             transform.position.y + distanciaSalto,
             transform.position.z
         );
-        
     }
 }

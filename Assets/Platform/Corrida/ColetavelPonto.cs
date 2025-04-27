@@ -14,6 +14,8 @@ public class ColetavelPonto : MonoBehaviour
 
     public float espacamentoMinimoYLatas = 1.0f;
     public string tagOutraLata = "Coletavel";
+    public LayerMask layerLatas; 
+
     private float raioVerificacaoYLatas;
 
     public int pontosPorColeta = 10;
@@ -31,22 +33,45 @@ public class ColetavelPonto : MonoBehaviour
 
     void Update()
     {
-
         if (Time.timeScale == 0f) return;
 
+        
+        if (PlayerCarro.LinhaDeChegadaPassou)
+        {
+            if (transform.position.y > limiteInferiorY) { MoverColetavel(); }
+            else { if (gameObject.activeSelf) gameObject.SetActive(false); }
+            return;
+        }
+
+        
         MoverColetavel();
         VerificarSaidaDaTela();
     }
 
+    
     void MoverColetavel()
     {
         float velocidadeAtual;
-        if (Input.GetKey(KeyCode.LeftControl)) { velocidadeAtual = velocidadeFreio; }
-        else if (Input.GetKey(KeyCode.LeftShift)) { velocidadeAtual = velocidadeBoost; }
-        else { velocidadeAtual = velocidadeNormal; }
+
+        
+        if (UIManager.EstaFreando)
+        {
+            velocidadeAtual = velocidadeFreio;
+        }
+        else if (UIManager.EstaAcelerando)
+        {
+            velocidadeAtual = velocidadeBoost;
+        }
+        else
+        {
+            velocidadeAtual = velocidadeNormal;
+        }
+
+        
         transform.Translate(Vector3.down * velocidadeAtual * Time.deltaTime, Space.World);
     }
 
+    
     void VerificarSaidaDaTela()
     {
         if (transform.position.y < limiteInferiorY)
@@ -55,6 +80,7 @@ public class ColetavelPonto : MonoBehaviour
         }
     }
 
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (Time.timeScale != 0f && other.CompareTag("Player"))
@@ -63,63 +89,39 @@ public class ColetavelPonto : MonoBehaviour
         }
     }
 
+    
     void Coletar()
     {
         PlayerCarro.pontuacaoAtual += pontosPorColeta;
-        PlayerCarro.latasColetadas++;
-        // Debug.Log($"Coletou! Latas: {PlayerCarro.latasColetadas}, Pontos Atuais: {PlayerCarro.pontuacaoAtual}");
-
-        if (somColeta != null && somColeta.clip != null)
-        {
-            AudioSource.PlayClipAtPoint(somColeta.clip, transform.position, somColeta.volume);
-        }
+        PlayerCarro.latasColetadas++; 
+        if (somColeta != null && somColeta.clip != null) { AudioSource.PlayClipAtPoint(somColeta.clip, transform.position, somColeta.volume > 0 ? somColeta.volume : 1f); }
         gameObject.SetActive(false);
     }
 
     
     void Respawn()
     {
-
-        if (posicoesXDasFaixasLatas == null || posicoesXDasFaixasLatas.Count == 0)
+        if (PlayerCarro.LinhaDeChegadaPassou) 
         {
-            Debug.LogError("Lista 'posicoesXDasFaixasLatas' não configurada para " + gameObject.name);
             gameObject.SetActive(false);
             return;
         }
 
+        if (posicoesXDasFaixasLatas == null || posicoesXDasFaixasLatas.Count == 0) { /*...*/ gameObject.SetActive(false); return; }
         int indiceAleatorio = Random.Range(0, posicoesXDasFaixasLatas.Count);
         float novaPosicaoX = posicoesXDasFaixasLatas[indiceAleatorio];
         float tentativaNovaPosicaoY = posicaoRespawnYBase;
-
-        
         Collider2D[] colisoresProximos = Physics2D.OverlapCircleAll(
                                             new Vector2(novaPosicaoX, tentativaNovaPosicaoY),
                                             raioVerificacaoYLatas,
-                                            LayerMask.GetMask("Coletaveis"));
-
+                                            layerLatas);
         float yMaisAltoOcupado = -Mathf.Infinity;
-        foreach (Collider2D col in colisoresProximos)
-        {
-            
-            if (col.gameObject != this.gameObject && col.CompareTag(tagOutraLata))
-            {
-                yMaisAltoOcupado = Mathf.Max(yMaisAltoOcupado, col.transform.position.y);
-            }
-        }
-
-        if (yMaisAltoOcupado > -Mathf.Infinity)
-        {
-            tentativaNovaPosicaoY = yMaisAltoOcupado + espacamentoMinimoYLatas;
-        }
-
+        foreach (Collider2D col in colisoresProximos) { /*...*/ }
+        if (yMaisAltoOcupado > -Mathf.Infinity) { /*...*/ }
         float novaPosicaoY = Mathf.Max(posicaoRespawnYBase, tentativaNovaPosicaoY);
         transform.position = new Vector3(novaPosicaoX, novaPosicaoY, transform.position.z);
-
         spriteRenderer.enabled = true;
         colisor.enabled = true;
-        if (!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-        }
+        if (!gameObject.activeSelf) { gameObject.SetActive(true); }
     }
 }
