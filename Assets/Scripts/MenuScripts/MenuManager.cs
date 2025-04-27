@@ -321,7 +321,7 @@ public class MenuManager : MonoBehaviour
 
     public void Quit()
     {
-        if (!inMenu)
+        if (inMenu)
         {
             StartCoroutine(QuitCoroutine());
         }
