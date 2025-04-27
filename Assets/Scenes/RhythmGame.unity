@@ -539,9 +539,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &31225708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,8 +1189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.65882355}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_Color: {r: 0.18182339, g: 0.0028034835, b: 0.1981132, a: 0.19215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1302,7 +1302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1784,9 +1784,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &98209047
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,7 +2385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -2461,7 +2461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -3131,7 +3131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -3747,7 +3747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -4418,7 +4418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -4928,7 +4928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -5007,7 +5007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -5454,9 +5454,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &319992489
 GameObject:
   m_ObjectHideFlags: 0
@@ -5647,7 +5647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -5902,8 +5902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6156863}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_Color: {r: 0.18039216, g: 0.003921569, b: 0.2, a: 0.19215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5998,7 +5998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -6074,7 +6074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -6290,7 +6290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -6628,9 +6628,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &386259603
 GameObject:
   m_ObjectHideFlags: 0
@@ -6680,7 +6680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 0.2216981, g: 0.41867882, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -7075,7 +7075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -7715,9 +7715,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &468124096
 GameObject:
   m_ObjectHideFlags: 0
@@ -8047,7 +8047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -8786,7 +8786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -8970,9 +8970,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &562563258
 GameObject:
   m_ObjectHideFlags: 0
@@ -9023,7 +9023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -9099,7 +9099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -9174,7 +9174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -9275,7 +9275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -9619,7 +9619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -9888,9 +9888,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &631828605
 GameObject:
   m_ObjectHideFlags: 0
@@ -10361,7 +10361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -10436,7 +10436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -10512,7 +10512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -10587,7 +10587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -10666,7 +10666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -10920,7 +10920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 0, g: 0.54958963, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -11139,7 +11139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -11872,9 +11872,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &758713207
 GameObject:
   m_ObjectHideFlags: 0
@@ -11994,7 +11994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -12091,7 +12091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -12910,7 +12910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -13597,9 +13597,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &873080802
 GameObject:
   m_ObjectHideFlags: 0
@@ -13789,7 +13789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 0.07075471, g: 0.5832943, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -14224,9 +14224,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &913801972
 GameObject:
   m_ObjectHideFlags: 0
@@ -14473,7 +14473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -14892,7 +14892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -15006,7 +15006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -15086,7 +15086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -15714,7 +15714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -15929,7 +15929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 0.5415317, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16096,9 +16096,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1040780570
 GameObject:
   m_ObjectHideFlags: 0
@@ -16148,7 +16148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16230,7 +16230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16748,9 +16748,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1099908119
 GameObject:
   m_ObjectHideFlags: 0
@@ -16800,7 +16800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16879,7 +16879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 0.4647347, g: 1, b: 0.2235294, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -17693,7 +17693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -17860,9 +17860,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1176364643
 GameObject:
   m_ObjectHideFlags: 0
@@ -18300,7 +18300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -19017,7 +19017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -19236,7 +19236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -19964,9 +19964,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1329270222
 GameObject:
   m_ObjectHideFlags: 0
@@ -21116,7 +21116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -21192,7 +21192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -21268,7 +21268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -21624,7 +21624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -22015,7 +22015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -22178,9 +22178,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1491617178
 GameObject:
   m_ObjectHideFlags: 0
@@ -23103,9 +23103,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1541829518
 GameObject:
   m_ObjectHideFlags: 0
@@ -23435,7 +23435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -24096,7 +24096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -24207,7 +24207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -24646,7 +24646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -25146,7 +25146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -25344,9 +25344,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1665987925
 GameObject:
   m_ObjectHideFlags: 0
@@ -25484,8 +25484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.3529412}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_Color: {r: 0.18039216, g: 0.003921569, b: 0.2, a: 0.19215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -25668,9 +25668,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1672132992
 GameObject:
   m_ObjectHideFlags: 0
@@ -25720,7 +25720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -26170,7 +26170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -26245,7 +26245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -26612,8 +26612,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_Color: {r: 0.18039216, g: 0.003921569, b: 0.2, a: 0.19215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -26804,7 +26804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -26883,7 +26883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 0.4263562, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -27050,9 +27050,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1752767849
 GameObject:
   m_ObjectHideFlags: 0
@@ -27225,9 +27225,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1768022415
 GameObject:
   m_ObjectHideFlags: 0
@@ -27278,7 +27278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -27529,7 +27529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -27727,9 +27727,9 @@ MonoBehaviour:
   canBePressed: 0
   keyToBePressed: 276
   hitEffect: {fileID: 8755680697792448738, guid: 343ec15d945dd374aaecce4093dc913c, type: 3}
-  goodHitEffect: {fileID: 0}
-  perfectHitEffect: {fileID: 0}
-  missHitEffect: {fileID: 0}
+  goodHitEffect: {fileID: 2293102308140406057, guid: 7159ea9b149ae6a429e76e29bd716b84, type: 3}
+  perfectHitEffect: {fileID: 3600505313064015038, guid: 2f614a31c10a94948ab3a16cf255ab28, type: 3}
+  missHitEffect: {fileID: 5881786109522760234, guid: 9dd12cba5f3ece24196b5038e2e43382, type: 3}
 --- !u!1 &1822469233
 GameObject:
   m_ObjectHideFlags: 0
@@ -27919,7 +27919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -28139,7 +28139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -28195,7 +28195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -28434,7 +28434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -28789,7 +28789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 0.87030816, b: 0.2235294, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -28913,7 +28913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -29272,7 +29272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -29579,7 +29579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -30165,7 +30165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -30240,7 +30240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -30587,7 +30587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -31187,7 +31187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -31542,7 +31542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 0.2235294, b: 0.25362405, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -31749,7 +31749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 141ea03d3a73cca48aaf8123ea2cd84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -32375,7 +32375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f4747ecb718736a4a993a68a00fa0ed5, type: 3}
   m_Color: {r: 1, g: 0.86307746, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -32630,7 +32630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
