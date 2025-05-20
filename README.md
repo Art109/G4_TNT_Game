@@ -98,5 +98,4 @@ Felipe Costa
 
 ### 🎵 Minigame: Rhythm  
 ![Rhythm](images/Rhytm.png)
-```markdown
-![Screenshot 1](imagens/screenshot1.png)
+
