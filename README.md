@@ -87,7 +87,16 @@ Felipe Costa
 
 ## 🖼️ Capturas de Tela
 
-*Adicione aqui algumas imagens do jogo para ilustrar os minigames ou menus, utilizando o comando abaixo:*
+### 🎮 Menu Principal  
+![Menu](images/Menu.png)
 
+### 🕹️ Minigame: Platform  
+![Platform](images/Plataform.png)
+
+### 🏁 Minigame: Race  
+![Race](images/Race.png)
+
+### 🎵 Minigame: Rhythm  
+![Rhythm](images/Rhytm.png)
 ```markdown
 ![Screenshot 1](imagens/screenshot1.png)
