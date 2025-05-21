@@ -89,5 +89,5 @@ Felipe Costa
 
 | 🎮 Menu Principal | 🕹️ Platform | 🏁 Race | 🎵 Rhythm |
 |------------------|-------------|---------|------------|
-| ![Menu](images/Menu.png) | ![Platform](images/Platform.png) | ![Race](images/Race.png) | ![Rhythm](images/Rhytm.png) |
+| ![Menu](images/Menu.png) | ![Platform](images/Plataform.png) | ![Race](images/Race.png) | ![Rhythm](images/Rhytm.png) |
 
