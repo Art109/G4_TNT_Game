@@ -87,15 +87,22 @@ Felipe Costa
 
 ## 🖼️ Capturas de Tela
 
-### 🎮 Menu Principal  
-![Menu](images/Menu.png)
-
-### 🕹️ Minigame: Platform  
-![Platform](images/Plataform.png)
-
-### 🏁 Minigame: Race  
-![Race](images/Race.png)
-
-### 🎵 Minigame: Rhythm  
-![Rhythm](images/Rhytm.png)
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+  <div>
+    <p><strong>🎮 Menu Principal</strong></p>
+    <img src="images/menu.png" alt="Menu" width="200"/>
+  </div>
+  <div>
+    <p><strong>🕹️ Minigame: Platform</strong></p>
+    <img src="images/platform.png" alt="Platform" width="200"/>
+  </div>
+  <div>
+    <p><strong>🏁 Minigame: Race</strong></p>
+    <img src="images/race.png" alt="Race" width="200"/>
+  </div>
+  <div>
+    <p><strong>🎵 Minigame: Rhythm</strong></p>
+    <img src="images/rhytm.png" alt="Rhythm" width="200"/>
+  </div>
+</div>
 
